@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { Order, Product } from "@/lib/types"
-import { getProducts } from "@/lib/store"
-import { getZones, getProvinces, updateZoneRate } from "@/lib/provinces"
 import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
@@ -41,14 +39,29 @@ export default function AdzakiPage() {
   const { lang } = useLang()
   const dir = getDir(lang)
 
+  const loadData = async () => {
+    try {
+      const [productsRes, provincesRes] = await Promise.all([
+        fetch("/api/products"),
+        fetch("/api/provinces"),
+      ])
+      if (productsRes.ok) {
+        const data = await productsRes.json()
+        setProducts(data)
+      }
+      if (provincesRes.ok) {
+        const data = await provincesRes.json()
+        setZones(data.zones)
+        setProvinces(data.provinces)
+        const rates: Record<string, number> = {}
+        data.zones.forEach((zone: Zone) => { rates[zone.id] = zone.rate })
+        setZoneRates(rates)
+      }
+    } catch {}
+  }
+
   useEffect(() => {
-    setProducts(getProducts())
-    const z = getZones()
-    setZones(z)
-    setProvinces(getProvinces())
-    const rates: Record<string, number> = {}
-    z.forEach((zone) => { rates[zone.id] = zone.rate })
-    setZoneRates(rates)
+    loadData()
   }, [refreshKey])
 
   useEffect(() => {

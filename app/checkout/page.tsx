@@ -6,7 +6,7 @@ import { useCart } from "@/components/CartContext"
 import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
-import { getDeliveryRate, getProvinceById, getProvinces, getZones } from "@/lib/provinces"
+
 import Link from "next/link"
 
 interface Province {
@@ -45,18 +45,24 @@ export default function CheckoutPage() {
   })
 
   useEffect(() => {
-    setProvinces(getProvinces())
-    setZones(getZones())
+    fetch("/api/provinces")
+      .then((r) => r.json())
+      .then((data) => {
+        setProvinces(data.provinces || [])
+        setZones(data.zones || [])
+      })
+      .catch(() => {})
   }, [])
 
   useEffect(() => {
     if (form.province) {
-      const rate = getDeliveryRate(form.province)
-      setDeliveryRate(rate)
+      const prov = provinces.find((p) => p.id === form.province)
+      const zone = zones.find((z) => z.id === prov?.zone)
+      setDeliveryRate(zone?.rate ?? 0)
     } else {
       setDeliveryRate(0)
     }
-  }, [form.province])
+  }, [form.province, provinces, zones])
 
   if (items.length === 0) {
     return (
