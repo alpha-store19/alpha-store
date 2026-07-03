@@ -47,13 +47,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <a href="https://wa.me/213550000000" target="_blank" rel="noopener noreferrer" className="block hover:text-cyber transition-colors">
                           WhatsApp: +213 550 00 00 00
                         </a>
-                        <p>Email: contact@alphastore.dz</p>
                       </div>
                     </div>
                     <div className="text-center md:text-right">
                       <h4 className="text-white font-semibold mb-3">Info</h4>
                       <div className="space-y-2 text-sm text-gray-400">
-                        <p>Free shipping over 50,000 DZD</p>
                         <p>Secure checkout</p>
                         <p>24/7 Customer support</p>
                       </div>

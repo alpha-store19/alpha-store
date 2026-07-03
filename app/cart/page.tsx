@@ -105,16 +105,8 @@ export default function CartPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">{t("cart.shipping", lang)}</span>
-              <span className="font-medium text-cyber">
-                {totalPrice >= 50000 ? t("cart.shipping.free", lang) : "500 DZD"}
-              </span>
+              <span className="font-medium text-cyber">500 DZD</span>
             </div>
-            {totalPrice < 50000 && totalPrice > 0 && (
-              <div className="bg-cyber/5 border border-cyber/10 rounded-lg p-2 text-xs text-center">
-                <span className="text-cyber">{formatPrice(50000 - totalPrice, lang)}</span>
-                <span className="text-gray-400"> away from free shipping</span>
-              </div>
-            )}
           </div>
           <div className="flex justify-between mb-6">
             <span className="font-bold text-white">{t("cart.total", lang)}</span>

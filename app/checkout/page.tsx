@@ -16,7 +16,7 @@ export default function CheckoutPage() {
   const { items, clearCart, totalPrice } = useCart()
   const { lang } = useLang()
   const dir = getDir(lang)
-  const [step, setStep] = useState<"form" | "confirm">("form")
+  const [step, setStep] = useState<"form" | "confirm" | "success">("form")
   const [form, setForm] = useState(emptyForm)
   const [submitting, setSubmitting] = useState(false)
   const [provinces, setProvinces] = useState<Province[]>([])
@@ -92,7 +92,8 @@ export default function CheckoutPage() {
 
       if (orderRes.ok) {
         clearCart()
-        router.push("/?order=success")
+        setStep("success")
+        setTimeout(() => router.push("/"), 4000)
       }
     } catch {
       alert("Something went wrong. Please try again.")
@@ -103,6 +104,22 @@ export default function CheckoutPage() {
 
   const inputClass = "input-cyber w-full"
   const labelClass = "block text-sm font-medium text-gray-400 mb-1.5"
+
+  if (step === "success") {
+    return (
+      <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" dir={dir}>
+        <div className="animate-scale-in">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 border-2 border-green-400 flex items-center justify-center">
+            <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-4">{t("checkout.success", lang)}</h1>
+          <p className="text-gray-400 mb-8">You will be redirected shortly.</p>
+        </div>
+      </div>
+    )
+  }
 
   if (step === "confirm") {
     return (
