@@ -351,11 +351,27 @@ export default function AdzakiPage() {
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
                 <div className="flex gap-3 items-start">
                   {editForm.image && <img src={editForm.image} alt="" className="w-16 h-16 object-cover rounded-xl shrink-0" />}
-                  <input value={editForm.image || ""} onChange={(e) => updateField("image", e.target.value)}
-                    placeholder="https://..." className={inputClass} />
+                  <div className="flex-1 space-y-2">
+                    <input value={editForm.image || ""} onChange={(e) => updateField("image", e.target.value)}
+                      placeholder="Image URL..." className={inputClass} />
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-400">or</span>
+                      <label className="cursor-pointer text-xs text-[#e94560] hover:text-[#ff6b81] font-medium underline">
+                        Upload from device
+                        <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (!file) return
+                          if (file.size > 2 * 1024 * 1024) { alert("Image must be under 2MB"); return }
+                          const reader = new FileReader()
+                          reader.onload = () => updateField("image", reader.result as string)
+                          reader.readAsDataURL(file)
+                        }} />
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div>
