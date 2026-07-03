@@ -121,18 +121,11 @@ export default function CheckoutPage() {
         deliveryRate,
       }
 
-      const [orderRes] = await Promise.all([
-        fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: orderData.items, customer: customerData }),
-        }),
-        fetch("/api/send-order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ order: orderData, customer: customerData }),
-        }),
-      ])
+      const orderRes = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: orderData.items, customer: customerData, subtotal: orderData.subtotal, total: orderData.total, deliveryRate: orderData.deliveryRate }),
+      })
 
       if (orderRes.ok) {
         clearCart()
