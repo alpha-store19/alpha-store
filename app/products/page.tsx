@@ -1,18 +1,31 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProductCard from "@/components/ProductCard"
-import { getProducts, getCategories } from "@/lib/store"
+import { Product } from "@/lib/types"
 import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 
-const products = getProducts()
-const categories = getCategories()
-
 export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<string[]>([])
   const [activeCategory, setActiveCategory] = useState<string>("All")
+  const [loaded, setLoaded] = useState(false)
   const { lang } = useLang()
   const dir = getDir(lang)
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data) => {
+        const prods: Product[] = Array.isArray(data) ? data : []
+        setProducts(prods)
+        const cats: string[] = Array.from(new Set(prods.map((p) => p.category)))
+        setCategories(cats)
+        setLoaded(true)
+      })
+      .catch(() => setLoaded(true))
+  }, [])
 
   const filtered =
     activeCategory === "All"

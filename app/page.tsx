@@ -1,16 +1,30 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import ProductCard from "@/components/ProductCard"
-import { getFeaturedProducts, getProducts } from "@/lib/store"
+import { Product } from "@/lib/types"
 import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 
 export default function HomePage() {
-  const featured = getFeaturedProducts()
-  const all = getProducts()
+  const [featured, setFeatured] = useState<Product[]>([])
+  const [all, setAll] = useState<Product[]>([])
+  const [loaded, setLoaded] = useState(false)
   const { lang } = useLang()
   const dir = getDir(lang)
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data) => {
+        const products: Product[] = Array.isArray(data) ? data : []
+        setAll(products)
+        setFeatured(products.filter((p) => p.featured))
+        setLoaded(true)
+      })
+      .catch(() => setLoaded(true))
+  }, [])
 
   return (
     <div dir={dir}>

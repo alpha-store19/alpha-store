@@ -1,8 +1,8 @@
 "use client"
 
-import { useParams, notFound, useRouter } from "next/navigation"
-import { useState } from "react"
-import { getProductById } from "@/lib/store"
+import { useEffect, useState } from "react"
+import { useParams, useRouter } from "next/navigation"
+import { Product } from "@/lib/types"
 import { useCart } from "@/components/CartContext"
 import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
@@ -17,11 +17,40 @@ export default function ProductDetailPage() {
   const dir = getDir(lang)
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
 
-  const product = getProductById(params.id as string)
+  useEffect(() => {
+    fetch(`/api/products?id=${params.id}`)
+      .then((r) => {
+        if (!r.ok) throw new Error("Not found")
+        return r.json()
+      })
+      .then((data) => {
+        setProduct(data)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [params.id])
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" dir={dir}>
+        <div className="animate-pulse text-gray-300 text-lg">Loading...</div>
+      </div>
+    )
+  }
 
   if (!product) {
-    notFound()
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" dir={dir}>
+        <div className="text-6xl mb-6">🔍</div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Product not found</h1>
+        <Link href="/products" className="text-[#e94560] hover:text-[#ff6b81] font-semibold">
+          Browse products
+        </Link>
+      </div>
+    )
   }
 
   const handleAdd = () => {
