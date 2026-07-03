@@ -26,7 +26,7 @@ export interface Order {
   subtotal?: number
   deliveryRate?: number
   customer: CustomerInfo
-  status: "pending" | "confirmed" | "shipped" | "delivered"
+  status: "pending" | "confirmed" | "shipped" | "delivered" | "cancelled"
   createdAt: string
 }
 
