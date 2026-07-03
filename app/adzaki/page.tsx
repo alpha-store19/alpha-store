@@ -271,7 +271,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
 
   const handleBulkStatus = async () => {
     if (!bulkStatus || selectedOrders.size === 0) return
-    for (const id of selectedOrders) await handleStatusChange(id, bulkStatus)
+    const ids = Array.from(selectedOrders); for (let i = 0; i < ids.length; i++) { await handleStatusChange(ids[i], bulkStatus) }
     setSelectedOrders(new Set()); setBulkStatus(""); showToast(`${selectedOrders.size} orders updated`)
   }
 
