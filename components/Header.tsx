@@ -29,6 +29,10 @@ export default function Header() {
               {t("nav.products", lang)}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyber transition-all duration-300 group-hover:w-full" />
             </Link>
+            <Link href="/dashboard" className="text-gray-400 hover:text-cyber transition-colors duration-300 relative group">
+              {t("nav.dashboard", lang)}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyber transition-all duration-300 group-hover:w-full" />
+            </Link>
           </nav>
 
           <div className="flex items-center gap-3">

@@ -5,6 +5,7 @@ import { CartProvider } from "@/components/CartContext"
 import { LanguageProvider } from "@/lib/language-context"
 import Header from "@/components/Header"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import TrackingPixels from "@/components/TrackingPixels"
 
 export const dynamic = "force-dynamic"
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="min-h-screen flex flex-col">
               <Header />
               <main className="flex-1">{children}</main>
+              <TrackingPixels />
               <WhatsAppButton />
               <footer className="relative glass border-t border-white/[0.04] py-12 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 to-transparent pointer-events-none" />
