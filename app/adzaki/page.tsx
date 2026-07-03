@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react"
 import { Order, Product } from "@/lib/types"
 import { useLang } from "@/lib/language-context"
-import { t, getDir } from "@/lib/translations"
+import { t, getDir, Lang } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
 
 interface Zone { id: string; name: string; nameAr: string; nameFr: string; rate: number }
@@ -76,7 +76,7 @@ const sidebarTabs = [
   { key: "settings", label: "Settings", labelAr: "Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª", labelFr: "ParamÃ¨tres", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
 ]
 
-function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: string) => void; lang: string; dir: string }) {
+function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: string) => void; lang: Lang; dir: string }) {
   const [orders, setOrders] = useState<Order[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [zones, setZones] = useState<Zone[]>([])
