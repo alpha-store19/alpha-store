@@ -1,68 +1,440 @@
 {
   "zones": [
-    { "id": "zone1", "name": "Zone 1 - Centre", "nameAr": "المنطقة 1 - الوسط", "nameFr": "Zone 1 - Centre", "rate": 300 },
-    { "id": "zone2", "name": "Zone 2 - Nord", "nameAr": "المنطقة 2 - الشمال", "nameFr": "Zone 2 - Nord", "rate": 500 },
-    { "id": "zone3", "name": "Zone 3 - Hauts Plateaux", "nameAr": "المنطقة 3 - الهضاب العليا", "nameFr": "Zone 3 - Hauts Plateaux", "rate": 700 },
-    { "id": "zone4", "name": "Zone 4 - Sud", "nameAr": "المنطقة 4 - الجنوب", "nameFr": "Zone 4 - Sud", "rate": 1000 }
+    {
+      "id": "zone1",
+      "name": "Zone 1 - Centre",
+      "nameAr": "المنطقة 1 - الوسط",
+      "nameFr": "Zone 1 - Centre",
+      "rate": 300
+    },
+    {
+      "id": "zone2",
+      "name": "Zone 2 - Nord",
+      "nameAr": "المنطقة 2 - الشمال",
+      "nameFr": "Zone 2 - Nord",
+      "rate": 500
+    },
+    {
+      "id": "zone3",
+      "name": "Zone 3 - Hauts Plateaux",
+      "nameAr": "المنطقة 3 - الهضاب العليا",
+      "nameFr": "Zone 3 - Hauts Plateaux",
+      "rate": 700
+    },
+    {
+      "id": "zone4",
+      "name": "Zone 4 - Sud",
+      "nameAr": "المنطقة 4 - الجنوب",
+      "nameFr": "Zone 4 - Sud",
+      "rate": 1000
+    }
   ],
   "provinces": [
-    { "id": "16", "name": "Alger", "nameAr": "الجزائر", "nameFr": "Alger", "zone": "zone1" },
-    { "id": "1", "name": "Adrar", "nameAr": "أدرار", "nameFr": "Adrar", "zone": "zone4" },
-    { "id": "44", "name": "Aïn Defla", "nameAr": "عين الدفلى", "nameFr": "Aïn Defla", "zone": "zone1" },
-    { "id": "46", "name": "Aïn Témouchent", "nameAr": "عين تموشنت", "nameFr": "Aïn Témouchent", "zone": "zone2" },
-    { "id": "5", "name": "Batna", "nameAr": "باتنة", "nameFr": "Batna", "zone": "zone3" },
-    { "id": "7", "name": "Biskra", "nameAr": "بسكرة", "nameFr": "Biskra", "zone": "zone3" },
-    { "id": "9", "name": "Blida", "nameAr": "البليدة", "nameFr": "Blida", "zone": "zone1" },
-    { "id": "34", "name": "Bordj Bou Arreridj", "nameAr": "برج بوعريريج", "nameFr": "Bordj Bou Arreridj", "zone": "zone3" },
-    { "id": "10", "name": "Bouira", "nameAr": "البويرة", "nameFr": "Bouira", "zone": "zone1" },
-    { "id": "35", "name": "Boumerdès", "nameAr": "بومرداس", "nameFr": "Boumerdès", "zone": "zone1" },
-    { "id": "8", "name": "Béchar", "nameAr": "بشار", "nameFr": "Béchar", "zone": "zone4" },
-    { "id": "6", "name": "Béjaïa", "nameAr": "بجاية", "nameFr": "Béjaïa", "zone": "zone2" },
-    { "id": "12", "name": "Tébessa", "nameAr": "تبسة", "nameFr": "Tébessa", "zone": "zone3" },
-    { "id": "14", "name": "Tizi Ouzou", "nameAr": "تيزي وزو", "nameFr": "Tizi Ouzou", "zone": "zone1" },
-    { "id": "15", "name": "Tlemcen", "nameAr": "تلمسان", "nameFr": "Tlemcen", "zone": "zone2" },
-    { "id": "42", "name": "Tiaret", "nameAr": "تيارت", "nameFr": "Tiaret", "zone": "zone3" },
-    { "id": "38", "name": "Tindouf", "nameAr": "تندوف", "nameFr": "Tindouf", "zone": "zone4" },
-    { "id": "37", "name": "Tissemsilt", "nameAr": "تسمسيلت", "nameFr": "Tissemsilt", "zone": "zone3" },
-    { "id": "41", "name": "Tizi-Ouzou", "nameAr": "تيزي وزو", "nameFr": "Tizi-Ouzou", "zone": "zone1" },
-    { "id": "11", "name": "Tamanrasset", "nameAr": "تمنراست", "nameFr": "Tamanrasset", "zone": "zone4" },
-    { "id": "13", "name": "Tébessa", "nameAr": "تبسة", "nameFr": "Tébessa", "zone": "zone3" },
-    { "id": "23", "name": "Annaba", "nameAr": "عنابة", "nameFr": "Annaba", "zone": "zone2" },
-    { "id": "4", "name": "Oum El Bouaghi", "nameAr": "أم البواقي", "nameFr": "Oum El Bouaghi", "zone": "zone3" },
-    { "id": "29", "name": "Ghardaïa", "nameAr": "غرداية", "nameFr": "Ghardaïa", "zone": "zone4" },
-    { "id": "47", "name": "Guelma", "nameAr": "قالمة", "nameFr": "Guelma", "zone": "zone2" },
-    { "id": "25", "name": "Jijel", "nameAr": "جيجل", "nameFr": "Jijel", "zone": "zone2" },
-    { "id": "18", "name": "Djelfa", "nameAr": "الجلفة", "nameFr": "Djelfa", "zone": "zone3" },
-    { "id": "19", "name": "Sétif", "nameAr": "سطيف", "nameFr": "Sétif", "zone": "zone3" },
-    { "id": "20", "name": "Saïda", "nameAr": "سعيدة", "nameFr": "Saïda", "zone": "zone3" },
-    { "id": "21", "name": "Skikda", "nameAr": "سكيكدة", "nameFr": "Skikda", "zone": "zone2" },
-    { "id": "22", "name": "Sidi Bel Abbès", "nameAr": "سيدي بلعباس", "nameFr": "Sidi Bel Abbès", "zone": "zone2" },
-    { "id": "24", "name": "Annaba", "nameAr": "عنابة", "nameFr": "Annaba", "zone": "zone2" },
-    { "id": "26", "name": "Médéa", "nameAr": "المدية", "nameFr": "Médéa", "zone": "zone1" },
-    { "id": "27", "name": "Mostaganem", "nameAr": "مستغانم", "nameFr": "Mostaganem", "zone": "zone2" },
-    { "id": "28", "name": "Msila", "nameAr": "المسيلة", "nameFr": "Msila", "zone": "zone3" },
-    { "id": "29", "name": "Mascara", "nameAr": "معسكر", "nameFr": "Mascara", "zone": "zone2" },
-    { "id": "30", "name": "Ouargla", "nameAr": "ورقلة", "nameFr": "Ouargla", "zone": "zone4" },
-    { "id": "31", "name": "Oran", "nameAr": "وهران", "nameFr": "Oran", "zone": "zone2" },
-    { "id": "32", "name": "El Bayadh", "nameAr": "البيض", "nameFr": "El Bayadh", "zone": "zone3" },
-    { "id": "33", "name": "Illizi", "nameAr": "إليزي", "nameFr": "Illizi", "zone": "zone4" },
-    { "id": "34", "name": "Bordj Bou Arreridj", "nameAr": "برج بوعريريج", "nameFr": "Bordj Bou Arreridj", "zone": "zone3" },
-    { "id": "35", "name": "Boumerdès", "nameAr": "بومرداس", "nameFr": "Boumerdès", "zone": "zone1" },
-    { "id": "36", "name": "El Tarf", "nameAr": "الطارف", "nameFr": "El Tarf", "zone": "zone2" },
-    { "id": "37", "name": "Tindouf", "nameAr": "تندوف", "nameFr": "Tindouf", "zone": "zone4" },
-    { "id": "38", "name": "Tissemsilt", "nameAr": "تسمسيلت", "nameFr": "Tissemsilt", "zone": "zone3" },
-    { "id": "39", "name": "El Oued", "nameAr": "الوادي", "nameFr": "El Oued", "zone": "zone4" },
-    { "id": "40", "name": "Khenchela", "nameAr": "خنشلة", "nameFr": "Khenchela", "zone": "zone3" },
-    { "id": "41", "name": "Souk Ahras", "nameAr": "سوق أهراس", "nameFr": "Souk Ahras", "zone": "zone2" },
-    { "id": "42", "name": "Tipaza", "nameAr": "تيبازة", "nameFr": "Tipaza", "zone": "zone1" },
-    { "id": "43", "name": "Mila", "nameAr": "ميلة", "nameFr": "Mila", "zone": "zone2" },
-    { "id": "44", "name": "Aïn Defla", "nameAr": "عين الدفلى", "nameFr": "Aïn Defla", "zone": "zone1" },
-    { "id": "45", "name": "Naama", "nameAr": "النعامة", "nameFr": "Naama", "zone": "zone3" },
-    { "id": "46", "name": "Aïn Témouchent", "nameAr": "عين تموشنت", "nameFr": "Aïn Témouchent", "zone": "zone2" },
-    { "id": "47", "name": "Guelma", "nameAr": "قالمة", "nameFr": "Guelma", "zone": "zone2" },
-    { "id": "48", "name": "Relizane", "nameAr": "غليزان", "nameFr": "Relizane", "zone": "zone2" },
-    { "id": "49", "name": "Timimoun", "nameAr": "تيميمون", "nameFr": "Timimoun", "zone": "zone4" },
-    { "id": "50", "name": "Bordj Badji Mokhtar", "nameAr": "برج باجي مختار", "nameFr": "Bordj Badji Mokhtar", "zone": "zone4" },
-    { "id": "51", "name": "Beni Abbes", "nameAr": "بني عباس", "nameFr": "Beni Abbès", "zone": "zone4" }
+    {
+      "id": "16",
+      "name": "Alger",
+      "nameAr": "الجزائر",
+      "nameFr": "Alger",
+      "zone": "zone1"
+    },
+    {
+      "id": "1",
+      "name": "Adrar",
+      "nameAr": "أدرار",
+      "nameFr": "Adrar",
+      "zone": "zone4"
+    },
+    {
+      "id": "44",
+      "name": "Aïn Defla",
+      "nameAr": "عين الدفلى",
+      "nameFr": "Aïn Defla",
+      "zone": "zone1"
+    },
+    {
+      "id": "46",
+      "name": "Aïn Témouchent",
+      "nameAr": "عين تموشنت",
+      "nameFr": "Aïn Témouchent",
+      "zone": "zone2"
+    },
+    {
+      "id": "5",
+      "name": "Batna",
+      "nameAr": "باتنة",
+      "nameFr": "Batna",
+      "zone": "zone3"
+    },
+    {
+      "id": "7",
+      "name": "Biskra",
+      "nameAr": "بسكرة",
+      "nameFr": "Biskra",
+      "zone": "zone3"
+    },
+    {
+      "id": "9",
+      "name": "Blida",
+      "nameAr": "البليدة",
+      "nameFr": "Blida",
+      "zone": "zone1"
+    },
+    {
+      "id": "34",
+      "name": "Bordj Bou Arreridj",
+      "nameAr": "برج بوعريريج",
+      "nameFr": "Bordj Bou Arreridj",
+      "zone": "zone3"
+    },
+    {
+      "id": "10",
+      "name": "Bouira",
+      "nameAr": "البويرة",
+      "nameFr": "Bouira",
+      "zone": "zone1"
+    },
+    {
+      "id": "35",
+      "name": "Boumerdès",
+      "nameAr": "بومرداس",
+      "nameFr": "Boumerdès",
+      "zone": "zone1"
+    },
+    {
+      "id": "8",
+      "name": "Béchar",
+      "nameAr": "بشار",
+      "nameFr": "Béchar",
+      "zone": "zone4"
+    },
+    {
+      "id": "6",
+      "name": "Béjaïa",
+      "nameAr": "بجاية",
+      "nameFr": "Béjaïa",
+      "zone": "zone2"
+    },
+    {
+      "id": "12",
+      "name": "Tébessa",
+      "nameAr": "تبسة",
+      "nameFr": "Tébessa",
+      "zone": "zone3"
+    },
+    {
+      "id": "14",
+      "name": "Tizi Ouzou",
+      "nameAr": "تيزي وزو",
+      "nameFr": "Tizi Ouzou",
+      "zone": "zone1"
+    },
+    {
+      "id": "15",
+      "name": "Tlemcen",
+      "nameAr": "تلمسان",
+      "nameFr": "Tlemcen",
+      "zone": "zone2"
+    },
+    {
+      "id": "42",
+      "name": "Tiaret",
+      "nameAr": "تيارت",
+      "nameFr": "Tiaret",
+      "zone": "zone3"
+    },
+    {
+      "id": "38",
+      "name": "Tindouf",
+      "nameAr": "تندوف",
+      "nameFr": "Tindouf",
+      "zone": "zone4"
+    },
+    {
+      "id": "37",
+      "name": "Tissemsilt",
+      "nameAr": "تسمسيلت",
+      "nameFr": "Tissemsilt",
+      "zone": "zone3"
+    },
+    {
+      "id": "41",
+      "name": "Tizi-Ouzou",
+      "nameAr": "تيزي وزو",
+      "nameFr": "Tizi-Ouzou",
+      "zone": "zone1"
+    },
+    {
+      "id": "11",
+      "name": "Tamanrasset",
+      "nameAr": "تمنراست",
+      "nameFr": "Tamanrasset",
+      "zone": "zone4"
+    },
+    {
+      "id": "13",
+      "name": "Tébessa",
+      "nameAr": "تبسة",
+      "nameFr": "Tébessa",
+      "zone": "zone3"
+    },
+    {
+      "id": "23",
+      "name": "Annaba",
+      "nameAr": "عنابة",
+      "nameFr": "Annaba",
+      "zone": "zone2"
+    },
+    {
+      "id": "4",
+      "name": "Oum El Bouaghi",
+      "nameAr": "أم البواقي",
+      "nameFr": "Oum El Bouaghi",
+      "zone": "zone3"
+    },
+    {
+      "id": "29",
+      "name": "Ghardaïa",
+      "nameAr": "غرداية",
+      "nameFr": "Ghardaïa",
+      "zone": "zone4"
+    },
+    {
+      "id": "47",
+      "name": "Guelma",
+      "nameAr": "قالمة",
+      "nameFr": "Guelma",
+      "zone": "zone2"
+    },
+    {
+      "id": "25",
+      "name": "Jijel",
+      "nameAr": "جيجل",
+      "nameFr": "Jijel",
+      "zone": "zone2"
+    },
+    {
+      "id": "18",
+      "name": "Djelfa",
+      "nameAr": "الجلفة",
+      "nameFr": "Djelfa",
+      "zone": "zone3"
+    },
+    {
+      "id": "19",
+      "name": "Sétif",
+      "nameAr": "سطيف",
+      "nameFr": "Sétif",
+      "zone": "zone3"
+    },
+    {
+      "id": "20",
+      "name": "Saïda",
+      "nameAr": "سعيدة",
+      "nameFr": "Saïda",
+      "zone": "zone3"
+    },
+    {
+      "id": "21",
+      "name": "Skikda",
+      "nameAr": "سكيكدة",
+      "nameFr": "Skikda",
+      "zone": "zone2"
+    },
+    {
+      "id": "22",
+      "name": "Sidi Bel Abbès",
+      "nameAr": "سيدي بلعباس",
+      "nameFr": "Sidi Bel Abbès",
+      "zone": "zone2"
+    },
+    {
+      "id": "24",
+      "name": "Annaba",
+      "nameAr": "عنابة",
+      "nameFr": "Annaba",
+      "zone": "zone2"
+    },
+    {
+      "id": "26",
+      "name": "Médéa",
+      "nameAr": "المدية",
+      "nameFr": "Médéa",
+      "zone": "zone1"
+    },
+    {
+      "id": "27",
+      "name": "Mostaganem",
+      "nameAr": "مستغانم",
+      "nameFr": "Mostaganem",
+      "zone": "zone2"
+    },
+    {
+      "id": "28",
+      "name": "Msila",
+      "nameAr": "المسيلة",
+      "nameFr": "Msila",
+      "zone": "zone3"
+    },
+    {
+      "id": "29",
+      "name": "Mascara",
+      "nameAr": "معسكر",
+      "nameFr": "Mascara",
+      "zone": "zone2"
+    },
+    {
+      "id": "30",
+      "name": "Ouargla",
+      "nameAr": "ورقلة",
+      "nameFr": "Ouargla",
+      "zone": "zone4"
+    },
+    {
+      "id": "31",
+      "name": "Oran",
+      "nameAr": "وهران",
+      "nameFr": "Oran",
+      "zone": "zone2"
+    },
+    {
+      "id": "32",
+      "name": "El Bayadh",
+      "nameAr": "البيض",
+      "nameFr": "El Bayadh",
+      "zone": "zone3"
+    },
+    {
+      "id": "33",
+      "name": "Illizi",
+      "nameAr": "إليزي",
+      "nameFr": "Illizi",
+      "zone": "zone4"
+    },
+    {
+      "id": "34",
+      "name": "Bordj Bou Arreridj",
+      "nameAr": "برج بوعريريج",
+      "nameFr": "Bordj Bou Arreridj",
+      "zone": "zone3"
+    },
+    {
+      "id": "35",
+      "name": "Boumerdès",
+      "nameAr": "بومرداس",
+      "nameFr": "Boumerdès",
+      "zone": "zone1"
+    },
+    {
+      "id": "36",
+      "name": "El Tarf",
+      "nameAr": "الطارف",
+      "nameFr": "El Tarf",
+      "zone": "zone2"
+    },
+    {
+      "id": "37",
+      "name": "Tindouf",
+      "nameAr": "تندوف",
+      "nameFr": "Tindouf",
+      "zone": "zone4"
+    },
+    {
+      "id": "38",
+      "name": "Tissemsilt",
+      "nameAr": "تسمسيلت",
+      "nameFr": "Tissemsilt",
+      "zone": "zone3"
+    },
+    {
+      "id": "39",
+      "name": "El Oued",
+      "nameAr": "الوادي",
+      "nameFr": "El Oued",
+      "zone": "zone4"
+    },
+    {
+      "id": "40",
+      "name": "Khenchela",
+      "nameAr": "خنشلة",
+      "nameFr": "Khenchela",
+      "zone": "zone3"
+    },
+    {
+      "id": "41",
+      "name": "Souk Ahras",
+      "nameAr": "سوق أهراس",
+      "nameFr": "Souk Ahras",
+      "zone": "zone2"
+    },
+    {
+      "id": "42",
+      "name": "Tipaza",
+      "nameAr": "تيبازة",
+      "nameFr": "Tipaza",
+      "zone": "zone1"
+    },
+    {
+      "id": "43",
+      "name": "Mila",
+      "nameAr": "ميلة",
+      "nameFr": "Mila",
+      "zone": "zone2"
+    },
+    {
+      "id": "44",
+      "name": "Aïn Defla",
+      "nameAr": "عين الدفلى",
+      "nameFr": "Aïn Defla",
+      "zone": "zone1"
+    },
+    {
+      "id": "45",
+      "name": "Naama",
+      "nameAr": "النعامة",
+      "nameFr": "Naama",
+      "zone": "zone3"
+    },
+    {
+      "id": "46",
+      "name": "Aïn Témouchent",
+      "nameAr": "عين تموشنت",
+      "nameFr": "Aïn Témouchent",
+      "zone": "zone2"
+    },
+    {
+      "id": "47",
+      "name": "Guelma",
+      "nameAr": "قالمة",
+      "nameFr": "Guelma",
+      "zone": "zone2"
+    },
+    {
+      "id": "48",
+      "name": "Relizane",
+      "nameAr": "غليزان",
+      "nameFr": "Relizane",
+      "zone": "zone2"
+    },
+    {
+      "id": "49",
+      "name": "Timimoun",
+      "nameAr": "تيميمون",
+      "nameFr": "Timimoun",
+      "zone": "zone4"
+    },
+    {
+      "id": "50",
+      "name": "Bordj Badji Mokhtar",
+      "nameAr": "برج باجي مختار",
+      "nameFr": "Bordj Badji Mokhtar",
+      "zone": "zone4"
+    },
+    {
+      "id": "51",
+      "name": "Beni Abbes",
+      "nameAr": "بني عباس",
+      "nameFr": "Beni Abbès",
+      "zone": "zone4"
+    }
   ]
 }
