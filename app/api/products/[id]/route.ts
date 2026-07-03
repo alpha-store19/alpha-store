@@ -5,26 +5,26 @@ export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const existing = getProductById(params.id)
+  const existing = await getProductById(params.id)
   if (!existing) {
     return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 
   const body = await request.json()
-  const updated = updateProduct(params.id, body)
+  const updated = await updateProduct(params.id, body)
 
-  return NextResponse.json({ updated, products: getProducts() })
+  return NextResponse.json({ updated, products: await getProducts() })
 }
 
 export async function DELETE(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
-  const existing = getProductById(params.id)
+  const existing = await getProductById(params.id)
   if (!existing) {
     return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 
-  deleteProduct(params.id)
-  return NextResponse.json({ products: getProducts() })
+  await deleteProduct(params.id)
+  return NextResponse.json({ products: await getProducts() })
 }

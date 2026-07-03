@@ -4,7 +4,7 @@ import { getZones, getProvinces, updateZoneRate } from "@/lib/provinces"
 export const dynamic = "force-dynamic"
 
 export async function GET() {
-  return NextResponse.json({ zones: getZones(), provinces: getProvinces() })
+  return NextResponse.json({ zones: await getZones(), provinces: await getProvinces() })
 }
 
 export async function PUT(request: Request) {
@@ -13,7 +13,7 @@ export async function PUT(request: Request) {
   if (!zoneId || typeof rate !== "number") {
     return NextResponse.json({ error: "Missing zoneId or rate" }, { status: 400 })
   }
-  const ok = updateZoneRate(zoneId, rate)
+  const ok = await updateZoneRate(zoneId, rate)
   if (!ok) return NextResponse.json({ error: "Zone not found" }, { status: 404 })
   return NextResponse.json({ success: true })
 }

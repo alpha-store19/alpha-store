@@ -1,59 +1,52 @@
-import fs from "fs"
-import path from "path"
 import initialData from "../data/provinces.json"
+import { loadPersisted, savePersisted, initFromGitHub } from "./persist"
 
-const TMP_PATH = path.join("/tmp", "provinces.json")
-const DATA_PATH = path.join(process.cwd(), "data", "provinces.json")
+type Zone = { id: string; name: string; nameAr: string; nameFr: string; rate: number }
+type Province = { id: string; name: string; nameAr: string; nameFr: string; zone: string }
 
-type Zone = (typeof initialData.zones)[number]
-type Province = (typeof initialData.provinces)[number]
+const FILE = "provinces.json"
+const GH_PATH = "data/provinces.json"
 
-function loadData(): { zones: Zone[]; provinces: Province[] } {
-  try {
-    if (fs.existsSync(TMP_PATH)) {
-      const data = fs.readFileSync(TMP_PATH, "utf-8")
-      return JSON.parse(data)
-    }
-  } catch {}
-  return JSON.parse(JSON.stringify(initialData))
+interface ProvincesData { zones: Zone[]; provinces: Province[] }
+
+const fallback: ProvincesData = JSON.parse(JSON.stringify(initialData))
+let state: ProvincesData = loadPersisted<ProvincesData>(FILE, fallback)
+let initialized = false
+
+async function ensureInit() {
+  if (initialized) return
+  initialized = true
+  state = await initFromGitHub<ProvincesData>(FILE, state)
 }
 
-function saveData(data: { zones: Zone[]; provinces: Province[] }) {
-  try {
-    fs.writeFileSync(TMP_PATH, JSON.stringify(data, null, 2))
-  } catch {}
-  try {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2))
-  } catch {}
+export async function getZones() {
+  await ensureInit()
+  return state.zones
 }
 
-const state = loadData()
-let zones: Zone[] = state.zones
-let provinces: Province[] = state.provinces
-
-export function getZones() {
-  return zones
+export async function getProvinces() {
+  await ensureInit()
+  return state.provinces
 }
 
-export function getProvinces() {
-  return provinces
+export async function getProvinceById(id: string) {
+  await ensureInit()
+  return state.provinces.find((p) => p.id === id)
 }
 
-export function getProvinceById(id: string) {
-  return provinces.find((p) => p.id === id)
-}
-
-export function getDeliveryRate(provinceId: string): number {
-  const prov = provinces.find((p) => p.id === provinceId)
+export async function getDeliveryRate(provinceId: string): Promise<number> {
+  await ensureInit()
+  const prov = state.provinces.find((p) => p.id === provinceId)
   if (!prov) return 0
-  const zone = zones.find((z) => z.id === prov.zone)
+  const zone = state.zones.find((z) => z.id === prov.zone)
   return zone?.rate ?? 0
 }
 
-export function updateZoneRate(zoneId: string, rate: number) {
-  const idx = zones.findIndex((z) => z.id === zoneId)
+export async function updateZoneRate(zoneId: string, rate: number): Promise<boolean> {
+  await ensureInit()
+  const idx = state.zones.findIndex((z) => z.id === zoneId)
   if (idx === -1) return false
-  zones[idx] = { ...zones[idx], rate }
-  saveData({ zones, provinces })
+  state.zones[idx] = { ...state.zones[idx], rate }
+  await savePersisted(FILE, GH_PATH, state)
   return true
 }

@@ -8,20 +8,20 @@ export async function GET(request: Request) {
   const category = searchParams.get("category")
 
   if (id) {
-    const product = getProductById(id)
+    const product = await getProductById(id)
     if (!product) return NextResponse.json({ error: "Not found" }, { status: 404 })
     return NextResponse.json(product)
   }
 
   if (category) {
-    return NextResponse.json(getProductsByCategory(category))
+    return NextResponse.json(await getProductsByCategory(category))
   }
 
-  return NextResponse.json(getProducts())
+  return NextResponse.json(await getProducts())
 }
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const product = addProduct(body as Product)
-  return NextResponse.json({ product, products: getProducts() }, { status: 201 })
+  const product = await addProduct(body as Product)
+  return NextResponse.json({ product, products: await getProducts() }, { status: 201 })
 }
