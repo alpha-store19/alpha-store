@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
-const ADMIN_EMAIL = "fscudo8@gmail.com"
+const ADMIN_EMAIL = "alphazaki209@gmail.com"
 
 function buildEmailHtml(order: any, customer: any) {
   const itemsHtml = order.items
@@ -73,13 +73,13 @@ export async function POST(request: Request) {
       secure: false,
       requireTLS: true,
       auth: {
-        user: process.env.GMAIL_USER || "fscudo8@gmail.com",
+        user: process.env.GMAIL_USER || ADMIN_EMAIL,
         pass: process.env.GMAIL_APP_PASSWORD,
       },
     })
 
     const mailOptions = {
-      from: `"Alpha Store" <${process.env.GMAIL_USER || "fscudo8@gmail.com"}>`,
+      from: `"Alpha Store" <${process.env.GMAIL_USER || ADMIN_EMAIL}>`,
       to: ADMIN_EMAIL,
       subject: `New Order #${order.id.slice(0, 8)} — ${customer.firstName} ${customer.lastName}`,
       html: buildEmailHtml(order, customer),
