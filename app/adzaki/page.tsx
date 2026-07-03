@@ -167,7 +167,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
 
   const totalPages = Math.ceil(filteredOrders.length / PER_PAGE)
   const pagedOrders = filteredOrders.slice((orderPage - 1) * PER_PAGE, orderPage * PER_PAGE)
-  const categories = useMemo(() => [...new Set(products.map(p => p.category).filter(Boolean))] as string[], [products])
+  const categories = useMemo(() => Array.from(new Set(products.map(p => p.category).filter(Boolean))) as string[], [products])
   const filteredProducts = useMemo(() => {
     let r = [...products]
     if (categoryFilter !== "all") r = r.filter(p => p.category === categoryFilter)
