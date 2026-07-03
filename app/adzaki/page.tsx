@@ -170,6 +170,8 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: Tab; setTab: (t: Tab)
     } finally { setUpdatingStatus(null) }
   }
 
+  const authHeaders = { "Content-Type": "application/json", authorization: "Bearer alpha123" }
+
   const handleSaveProduct = async () => {
     setSaving(true)
     try {
@@ -177,16 +179,16 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: Tab; setTab: (t: Tab)
       if (imagePreview && imagePreview.startsWith("data:")) payload.image = imagePreview
       const url = creating ? "/api/products" : `/api/products/${editingProduct?.id}`
       const method = creating ? "POST" : "PUT"
-      const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+      const res = await fetch(url, { method, headers: authHeaders, body: JSON.stringify(payload) })
       if (res.ok) { const data = await res.json(); if (data.products) setProducts(data.products); cancelEdit(); triggerRefresh() }
-      else { alert("Failed to save") }
+      else { const data = await res.json(); alert(data.error || "Failed to save") }
     } catch { alert("Failed to save") } finally { setSaving(false) }
   }
 
   const handleDeleteProduct = async (id: string, name: string) => {
     if (!confirm(`Delete "${name}"?`)) return
     try {
-      const res = await fetch(`/api/products/${id}`, { method: "DELETE" })
+      const res = await fetch(`/api/products/${id}`, { method: "DELETE", headers: authHeaders })
       if (res.ok) { const data = await res.json(); if (data.products) setProducts(data.products); triggerRefresh() }
     } catch { alert("Failed to delete") }
   }
@@ -210,7 +212,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: Tab; setTab: (t: Tab)
   const saveRates = async () => {
     setRateSaving(true); setRateSaved(false)
     try {
-      const res = await fetch("/api/provinces", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ zones: zones.map(z => ({ ...z, rate: zoneRates[z.id] ?? z.rate })) }) })
+      const res = await fetch("/api/provinces", { method: "PUT", headers: authHeaders, body: JSON.stringify({ zones: zones.map(z => ({ ...z, rate: zoneRates[z.id] ?? z.rate })) }) })
       if (res.ok) { setRateSaved(true); setTimeout(() => setRateSaved(false), 2000) }
     } finally { setRateSaving(false) }
   }

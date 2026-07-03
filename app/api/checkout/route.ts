@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { addOrder } from "@/lib/orders-store"
+import { rateLimitIP } from "@/lib/rate-limit"
 import nodemailer from "nodemailer"
 
 const ADMIN_EMAIL = "alphazaki209@gmail.com"
@@ -56,8 +57,18 @@ function buildEmailHtml(order: any, customer: any) {
     </html>`
 }
 
+function sanitize(str: string): string {
+  return str.replace(/[<>"'&]/g, "").trim()
+}
+
 export async function POST(request: Request) {
   try {
+    // Rate limit
+    const rl = rateLimitIP(request, 10, 60000)
+    if (!rl.allowed) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+    }
+
     const body = await request.json()
     const { items, customer, subtotal, total, deliveryRate } = body
 
@@ -65,13 +76,45 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing items or customer" }, { status: 400 })
     }
 
+    // Validate items
+    for (const item of items) {
+      if (!item.productId || !item.name || typeof item.price !== "number" || !item.quantity || item.quantity < 1 || item.quantity > 99) {
+        return NextResponse.json({ error: "Invalid item data" }, { status: 400 })
+      }
+      if (item.price < 0 || item.price > 99999999) {
+        return NextResponse.json({ error: "Invalid price" }, { status: 400 })
+      }
+    }
+
+    // Validate and sanitize customer data
+    if (!customer.firstName || !customer.lastName || !customer.phone || !customer.email || !customer.address) {
+      return NextResponse.json({ error: "Missing required customer fields" }, { status: 400 })
+    }
+
+    const safeCustomer = {
+      firstName: sanitize(customer.firstName).slice(0, 50),
+      lastName: sanitize(customer.lastName).slice(0, 50),
+      phone: customer.phone.replace(/[^0-9+\-\s]/g, "").slice(0, 20),
+      email: customer.email.replace(/[^a-zA-Z0-9@._\-]/g, "").slice(0, 100),
+      address: sanitize(customer.address).slice(0, 200),
+      province: sanitize(customer.province || ""),
+      provinceName: sanitize(customer.provinceName || ""),
+      deliveryRate: Math.max(0, Math.min(99999, deliveryRate || 0)),
+    }
+
+    // Validate total
+    const calculatedTotal = items.reduce((s: number, i: { price: number; quantity: number }) => s + i.price * i.quantity, 0)
+    if (Math.abs((total || calculatedTotal) - calculatedTotal) > 10000) {
+      return NextResponse.json({ error: "Invalid total" }, { status: 400 })
+    }
+
     const order = addOrder({
       id: "",
       items,
-      subtotal,
-      total: total || items.reduce((s: number, i: { price: number; quantity: number }) => s + i.price * i.quantity, 0),
-      deliveryRate,
-      customer,
+      subtotal: calculatedTotal,
+      total: calculatedTotal + safeCustomer.deliveryRate,
+      deliveryRate: safeCustomer.deliveryRate,
+      customer: safeCustomer,
       status: "confirmed",
       createdAt: "",
     })
@@ -91,8 +134,8 @@ export async function POST(request: Request) {
         await transporter.sendMail({
           from: `"Alpha Store" <${process.env.GMAIL_USER || ADMIN_EMAIL}>`,
           to: ADMIN_EMAIL,
-          subject: `New Order #${order.id.slice(0, 8)} — ${customer.firstName} ${customer.lastName}`,
-          html: buildEmailHtml({ ...order, items, subtotal, total }, customer),
+          subject: `New Order #${order.id.slice(0, 8)} — ${safeCustomer.firstName} ${safeCustomer.lastName}`,
+          html: buildEmailHtml({ ...order, items, subtotal: calculatedTotal, total: calculatedTotal + safeCustomer.deliveryRate }, safeCustomer),
         })
       }
     } catch (err) {

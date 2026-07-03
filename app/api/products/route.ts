@@ -2,6 +2,36 @@ import { NextResponse } from "next/server"
 import { getProducts, getProductById, getProductsByCategory, addProduct } from "@/lib/store"
 import { Product } from "@/lib/types"
 
+function sanitize(str: string): string {
+  return str.replace(/[<>"'&]/g, "").trim()
+}
+
+function validateProduct(body: any): { valid: boolean; error?: string; data?: Partial<Product> } {
+  if (!body.name || typeof body.name !== "string" || body.name.length > 200) {
+    return { valid: false, error: "Invalid name" }
+  }
+  if (typeof body.price !== "number" || body.price < 0 || body.price > 99999999) {
+    return { valid: false, error: "Invalid price" }
+  }
+  if (body.image && typeof body.image === "string" && body.image.length > 500000) {
+    return { valid: false, error: "Image too large" }
+  }
+
+  return {
+    valid: true,
+    data: {
+      name: sanitize(body.name).slice(0, 200),
+      description: sanitize(body.description || "").slice(0, 2000),
+      price: Math.round(body.price),
+      originalPrice: body.originalPrice ? Math.round(Math.max(0, body.originalPrice)) : undefined,
+      image: typeof body.image === "string" ? body.image.slice(0, 500000) : "",
+      category: sanitize(body.category || "General").slice(0, 50),
+      inStock: body.inStock !== false,
+      featured: body.featured === true,
+    },
+  }
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get("id")
@@ -21,7 +51,15 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const body = await request.json()
-  const product = await addProduct(body as Product)
-  return NextResponse.json({ product, products: await getProducts() }, { status: 201 })
+  try {
+    const body = await request.json()
+    const validation = validateProduct(body)
+    if (!validation.valid) {
+      return NextResponse.json({ error: validation.error }, { status: 400 })
+    }
+    const product = await addProduct(validation.data as Product)
+    return NextResponse.json({ product, products: await getProducts() }, { status: 201 })
+  } catch {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 })
+  }
 }
