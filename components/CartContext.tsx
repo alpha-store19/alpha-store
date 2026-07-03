@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react"
 import { CartItem } from "@/lib/types"
 
 interface CartContextType {
@@ -11,6 +11,7 @@ interface CartContextType {
   clearCart: () => void
   totalItems: number
   totalPrice: number
+  recentlyAdded: string | null
 }
 
 const defaultContext: CartContextType = {
@@ -21,6 +22,7 @@ const defaultContext: CartContextType = {
   clearCart: () => {},
   totalItems: 0,
   totalPrice: 0,
+  recentlyAdded: null,
 }
 
 const CartContext = createContext<CartContextType>(defaultContext)
@@ -28,6 +30,7 @@ const CartContext = createContext<CartContextType>(defaultContext)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [mounted, setMounted] = useState(false)
+  const [recentlyAdded, setRecentlyAdded] = useState<string | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -35,7 +38,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (stored) {
       try {
         setItems(JSON.parse(stored))
-      } catch { /* ignore */ }
+      } catch {}
     }
   }, [])
 
@@ -45,7 +48,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, mounted])
 
-  const addItem = (item: CartItem) => {
+  const addItem = useCallback((item: CartItem) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.productId === item.productId)
       if (existing) {
@@ -55,7 +58,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, item]
     })
-  }
+    setRecentlyAdded(item.productId)
+    setTimeout(() => setRecentlyAdded(null), 1500)
+  }, [])
 
   const removeItem = (productId: string) => {
     setItems((prev) => prev.filter((i) => i.productId !== productId))
@@ -78,7 +83,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, clearCart, totalItems, totalPrice }}
+      value={{ items, addItem, removeItem, updateQuantity, clearCart, totalItems, totalPrice, recentlyAdded }}
     >
       {children}
     </CartContext.Provider>

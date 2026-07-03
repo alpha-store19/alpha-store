@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Product } from "@/lib/types"
 import { useCart } from "./CartContext"
@@ -7,11 +8,33 @@ import { useLang } from "@/lib/language-context"
 import { formatPrice } from "@/lib/currency"
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart()
+  const { addItem, recentlyAdded } = useCart()
   const { lang } = useLang()
+  const [justAdded, setJustAdded] = useState(false)
+  const isAdded = recentlyAdded === product.id || justAdded
+
+  useEffect(() => {
+    if (recentlyAdded === product.id) {
+      setJustAdded(true)
+      const t = setTimeout(() => setJustAdded(false), 1500)
+      return () => clearTimeout(t)
+    }
+  }, [recentlyAdded, product.id])
+
+  const handleAdd = () => {
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+    })
+  }
 
   return (
-    <div className="group glass rounded-2xl overflow-hidden flex flex-col glass-hover animate-fade-in-up">
+    <div className={`group glass rounded-2xl overflow-hidden flex flex-col transition-all duration-500 ${
+      isAdded ? "animate-pulse-glow cyber-border" : "glass-hover"
+    }`}>
       <Link href={`/products/${product.id}`} className="relative overflow-hidden aspect-square">
         <img
           src={product.image}
@@ -23,6 +46,15 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="absolute top-3 left-3 bg-cyber/20 backdrop-blur-md text-cyber text-xs font-bold px-2.5 py-1 rounded-full border border-cyber/30">
             {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
           </span>
+        )}
+        {isAdded && (
+          <div className="absolute inset-0 bg-cyber/10 backdrop-blur-[1px] flex items-center justify-center animate-fade-in-up">
+            <div className="w-16 h-16 rounded-full bg-cyber/20 border-2 border-cyber flex items-center justify-center animate-scale-in">
+              <svg className="w-8 h-8 text-cyber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+          </div>
         )}
       </Link>
 
@@ -42,20 +74,21 @@ export default function ProductCard({ product }: { product: Product }) {
             )}
           </div>
           <button
-            onClick={() =>
-              addItem({
-                productId: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                quantity: 1,
-              })
-            }
-            className="bg-cyber/10 hover:bg-cyber/20 text-cyber p-2.5 rounded-full transition-all hover:shadow-lg hover:shadow-cyber/10 border border-cyber/20 hover:border-cyber/40"
+            onClick={handleAdd}
+            disabled={isAdded}
+            className={`p-2.5 rounded-full transition-all duration-300 ${
+              isAdded
+                ? "bg-green-500/20 text-green-400 border border-green-500/30 scale-110"
+                : "bg-cyber/10 hover:bg-cyber/20 text-cyber hover:shadow-lg hover:shadow-cyber/10 border border-cyber/20 hover:border-cyber/40 hover:scale-105 active:scale-95"
+            }`}
             title="Add to cart"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              {isAdded ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              )}
             </svg>
           </button>
         </div>
