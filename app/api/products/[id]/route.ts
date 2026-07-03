@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getProductById, updateProduct, deleteProduct } from "@/lib/store"
+import { getProductById, updateProduct, deleteProduct, getProducts } from "@/lib/store"
 
 export async function PUT(
   request: Request,
@@ -13,7 +13,7 @@ export async function PUT(
   const body = await request.json()
   const updated = updateProduct(params.id, body)
 
-  return NextResponse.json(updated)
+  return NextResponse.json({ updated, products: getProducts() })
 }
 
 export async function DELETE(
@@ -26,5 +26,5 @@ export async function DELETE(
   }
 
   deleteProduct(params.id)
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ products: getProducts() })
 }

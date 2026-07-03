@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { getProducts, getProductById, getProductsByCategory } from "@/lib/store"
+import { getProducts, getProductById, getProductsByCategory, addProduct } from "@/lib/store"
+import { Product } from "@/lib/types"
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -17,4 +18,10 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.json(getProducts())
+}
+
+export async function POST(request: Request) {
+  const body = await request.json()
+  const product = addProduct(body as Product)
+  return NextResponse.json({ product, products: getProducts() }, { status: 201 })
 }

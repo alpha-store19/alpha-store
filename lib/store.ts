@@ -35,3 +35,9 @@ export function deleteProduct(id: string): boolean {
   products = products.filter((p) => p.id !== id)
   return products.length < len
 }
+
+export function addProduct(product: Product): Product {
+  const newProduct = { ...product, id: crypto.randomUUID?.() || Date.now().toString(36) + Math.random().toString(36).slice(2, 8) }
+  products.unshift(newProduct)
+  return newProduct
+}
