@@ -13,7 +13,6 @@ const tajawal = Tajawal({
   weight: ["400", "500", "700"],
   variable: "--font-tajawal",
 })
-
 export const metadata: Metadata = {
   title: "Alpha Store - Premium Shopping",
   description: "Discover amazing products at Alpha Store. Quality items at unbeatable prices.",
@@ -28,12 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="min-h-screen flex flex-col">
               <Header />
               <main className="flex-1">{children}</main>
-              <footer className="bg-gray-900 text-white/50 py-10 text-center text-sm">
-                <div className="max-w-7xl mx-auto px-4">
-                  <p className="text-xl font-bold text-white mb-1 tracking-tight">
-                    <span className="text-[#e94560]">ALPHA</span> STORE
+              <footer className="relative glass border-t border-white/[0.04] py-12 text-center overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 to-transparent pointer-events-none" />
+                <div className="relative max-w-7xl mx-auto px-4">
+                  <p className="text-2xl font-bold text-white mb-1 tracking-[0.2em] uppercase">
+                    <span className="text-cyber">ALPHA</span> STORE
                   </p>
-                  <p>&copy; {new Date().getFullYear()} Alpha Store. All rights reserved.</p>
+                  <p className="text-gray-500 text-sm">&copy; {new Date().getFullYear()} Alpha Store. All rights reserved.</p>
                 </div>
               </footer>
             </div>

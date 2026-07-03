@@ -13,13 +13,11 @@ const config: Config = {
         arabic: ["var(--font-tajawal)", "system-ui", "sans-serif"],
       },
       colors: {
-        primary: { DEFAULT: "#1a1a2e", light: "#16213e", dark: "#0f3460" },
-        accent: { DEFAULT: "#e94560", light: "#ff6b81" },
+        dark: { DEFAULT: "#0a0a0f", card: "#12121a", border: "#1e1e2a" },
+        cyber: { DEFAULT: "#00f0ff", dark: "#00b4c5", light: "#66f7ff", glow: "rgba(0,240,255,0.3)" },
+        accent: { DEFAULT: "#7c3aed", light: "#a855f7", dark: "#6d28d9" },
       },
-      animation: {
-        "fade-in-up": "fade-in-up 0.4s ease-out",
-        "scale-in": "scale-in 0.2s ease-out",
-      },
+      backdropBlur: { xs: "2px" },
     },
   },
   plugins: [],

@@ -202,19 +202,19 @@ export default function AdzakiPage() {
   const filteredOrders = orderFilter === "all" ? orders : orders.filter((o) => o.status === orderFilter)
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0)
 
-  const inputClass = "w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 outline-none transition-all text-sm"
+  const inputClass = "input-cyber w-full text-sm py-2"
 
   if (!authed) {
     return (
       <div className="max-w-md mx-auto px-4 py-24 text-center" dir={dir}>
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">{t("admin.access", lang)}</h1>
-        <p className="text-gray-500 mb-6">{t("admin.access.desc", lang)}</p>
+        <h1 className="text-3xl font-bold text-white mb-6">{t("admin.access", lang)}</h1>
+        <p className="text-gray-400 mb-6">{t("admin.access.desc", lang)}</p>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleLogin()}
           placeholder={t("admin.password", lang)}
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 outline-none transition-all mb-4 text-center" />
+          className="input-cyber w-full text-center mb-4" />
         <button onClick={handleLogin}
-          className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-full font-semibold transition-all">
+          className="w-full btn-cyber-solid py-3 text-lg">
           {t("admin.login", lang)}
         </button>
       </div>
@@ -223,52 +223,52 @@ export default function AdzakiPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" dir={dir}>
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">{t("admin.title", lang)}</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">{t("admin.title", lang)}</h1>
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-10">
-        <div className="bg-white rounded-2xl shadow-sm p-6 text-center">
-          <p className="text-4xl font-bold text-gray-900">{products.length}</p>
-          <p className="text-gray-500 mt-1">{t("admin.totalProducts", lang)}</p>
+        <div className="glass rounded-2xl p-6 text-center cyber-border">
+          <p className="text-4xl font-bold text-white">{products.length}</p>
+          <p className="text-gray-400 mt-1">{t("admin.totalProducts", lang)}</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-sm p-6 text-center">
-          <p className="text-4xl font-bold text-[#e94560]">{orders.length}</p>
-          <p className="text-gray-500 mt-1">{t("admin.totalOrders", lang)}</p>
+        <div className="glass rounded-2xl p-6 text-center cyber-border">
+          <p className="text-4xl font-bold text-cyber">{orders.length}</p>
+          <p className="text-gray-400 mt-1">{t("admin.totalOrders", lang)}</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-sm p-6 text-center">
-          <p className="text-4xl font-bold text-blue-600">{orders.filter((o) => o.status === "confirmed").length}</p>
-          <p className="text-gray-500 mt-1">Confirmed</p>
+        <div className="glass rounded-2xl p-6 text-center cyber-border">
+          <p className="text-4xl font-bold text-cyber">{orders.filter((o) => o.status === "confirmed").length}</p>
+          <p className="text-gray-400 mt-1">Confirmed</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-sm p-6 text-center">
-          <p className="text-4xl font-bold text-green-600">{formatPrice(totalRevenue, lang)}</p>
-          <p className="text-gray-500 mt-1">{t("admin.totalRevenue", lang)}</p>
+        <div className="glass rounded-2xl p-6 text-center cyber-border">
+          <p className="text-4xl font-bold text-cyber">{formatPrice(totalRevenue, lang)}</p>
+          <p className="text-gray-400 mt-1">{t("admin.totalRevenue", lang)}</p>
         </div>
       </div>
 
       {/* Delivery Rates */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-10">
-        <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900">{t("admin.delivery.title", lang)}</h2>
+      <div className="glass rounded-2xl overflow-hidden mb-10">
+        <div className="p-6 border-b border-white/[0.06]">
+          <h2 className="text-xl font-bold text-white">{t("admin.delivery.title", lang)}</h2>
         </div>
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             {zones.map((zone) => (
-              <div key={zone.id} className="bg-gray-50 rounded-xl p-4">
+              <div key={zone.id} className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.06]">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-semibold text-gray-900">{getZoneName(zone)}</span>
-                  <span className="text-xs text-gray-400">
+                  <span className="font-semibold text-gray-200">{getZoneName(zone)}</span>
+                  <span className="text-xs text-gray-500">
                     {provinces.filter((p) => p.zone === zone.id).length} {t("admin.products.items", lang)}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <input type="number" value={zoneRates[zone.id] ?? zone.rate}
                     onChange={(e) => setZoneRates((prev) => ({ ...prev, [zone.id]: parseInt(e.target.value) || 0 }))}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 outline-none text-sm" />
+                    className="input-cyber w-full text-sm py-2" />
                   <span className="text-sm text-gray-500 font-medium w-12">DZD</span>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1">
                   {provinces.filter((p) => p.zone === zone.id).map((p) => (
-                    <span key={p.id} className="text-xs bg-white px-2 py-0.5 rounded-full border border-gray-200">
+                    <span key={p.id} className="text-xs bg-white/[0.04] text-gray-400 px-2 py-0.5 rounded-full border border-white/[0.06]">
                       {getProvinceName(p)}
                     </span>
                   ))}
@@ -277,20 +277,20 @@ export default function AdzakiPage() {
             ))}
           </div>
           <button onClick={saveRates} disabled={rateSaving}
-            className="bg-[#e94560] hover:bg-[#ff6b81] disabled:bg-gray-400 text-white px-6 py-2 rounded-full font-medium text-sm transition-all">
+            className="btn-cyber-solid px-6 py-2 text-sm disabled:opacity-50">
             {rateSaving ? t("admin.saving", lang) : rateSaved ? t("admin.delivery.saved", lang) : t("admin.delivery.save", lang)}
           </button>
         </div>
       </div>
 
       {/* Products */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-10">
-        <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900">{t("admin.products", lang)}</h2>
+      <div className="glass rounded-2xl overflow-hidden mb-10">
+        <div className="p-6 border-b border-white/[0.06] flex items-center justify-between">
+          <h2 className="text-xl font-bold text-white">{t("admin.products", lang)}</h2>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-400">{products.length} {t("admin.products.items", lang)}</span>
+            <span className="text-sm text-gray-500">{products.length} {t("admin.products.items", lang)}</span>
             <button onClick={startCreate}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all">
+              className="btn-cyber-solid px-4 py-1.5 text-sm">
               + Add Product
             </button>
           </div>
@@ -298,7 +298,7 @@ export default function AdzakiPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-gray-500 uppercase text-xs">
+              <tr className="bg-white/[0.02] text-gray-500 uppercase text-xs">
                 <th className="text-left p-4">{t("admin.products", lang)}</th>
                 <th className="text-left p-4">{t("admin.products.category", lang)}</th>
                 <th className="text-left p-4">{t("admin.products.price", lang)}</th>
@@ -309,28 +309,28 @@ export default function AdzakiPage() {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product.id} className="border-t border-gray-100 hover:bg-gray-50">
+                <tr key={product.id} className="border-t border-white/[0.04] hover:bg-white/[0.02] transition-colors">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <img src={product.image} alt="" className="w-10 h-10 object-cover rounded-lg" />
-                      <span className="font-medium line-clamp-1">{product.name}</span>
+                      <span className="font-medium text-gray-200 line-clamp-1">{product.name}</span>
                     </div>
                   </td>
-                  <td className="p-4 text-gray-500">{product.category}</td>
-                  <td className="p-4 font-bold">{formatPrice(product.price, lang)}</td>
+                  <td className="p-4 text-gray-400">{product.category}</td>
+                  <td className="p-4 font-bold text-cyber">{formatPrice(product.price, lang)}</td>
                   <td className="p-4">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${product.inStock ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${product.inStock ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"}`}>
                       {product.inStock ? t("admin.products.inStock", lang) : t("product.outOfStock", lang)}
                     </span>
                   </td>
                   <td className="p-4">
-                    {product.featured ? <span className="text-yellow-500 text-lg">&#9733;</span> : <span className="text-gray-300 text-lg">&#9733;</span>}
+                    {product.featured ? <span className="text-cyber text-lg">&#9733;</span> : <span className="text-gray-600 text-lg">&#9733;</span>}
                   </td>
                   <td className="p-4 text-right whitespace-nowrap">
                     <button onClick={() => startEdit(product)}
-                      className="text-blue-500 hover:text-blue-600 font-medium mr-3 transition-colors">{t("admin.edit", lang)}</button>
+                      className="text-cyber hover:text-cyber-light font-medium mr-3 transition-colors">{t("admin.edit", lang)}</button>
                     <button onClick={() => handleDelete(product.id, product.name)}
-                      className="text-red-500 hover:text-red-600 font-medium transition-colors">{t("admin.delete", lang)}</button>
+                      className="text-red-400 hover:text-red-300 font-medium transition-colors">{t("admin.delete", lang)}</button>
                   </td>
                 </tr>
               ))}
@@ -341,25 +341,25 @@ export default function AdzakiPage() {
 
       {/* Edit / Create Modal */}
       {(editingProduct || creating) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto animate-scale-in">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-gray-900">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark/80 backdrop-blur-sm">
+          <div className="glass rounded-2xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto animate-scale-in cyber-border">
+            <div className="p-6 border-b border-white/[0.06] flex items-center justify-between">
+              <h3 className="text-xl font-bold text-white">
                 {creating ? "Add Product" : t("admin.products.edit", lang)}
               </h3>
-              <button onClick={cancelEdit} className="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+              <button onClick={cancelEdit} className="text-gray-500 hover:text-white text-2xl leading-none transition-colors">&times;</button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Image</label>
                 <div className="flex gap-3 items-start">
                   {editForm.image && <img src={editForm.image} alt="" className="w-16 h-16 object-cover rounded-xl shrink-0" />}
                   <div className="flex-1 space-y-2">
                     <input value={editForm.image || ""} onChange={(e) => updateField("image", e.target.value)}
                       placeholder="Image URL..." className={inputClass} />
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-400">or</span>
-                      <label className="cursor-pointer text-xs text-[#e94560] hover:text-[#ff6b81] font-medium underline">
+                      <span className="text-xs text-gray-500">or</span>
+                      <label className="cursor-pointer text-xs text-cyber hover:text-cyber-light font-medium underline">
                         Upload from device
                         <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                           const file = e.target.files?.[0]
@@ -375,52 +375,52 @@ export default function AdzakiPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{t("admin.products.name", lang)}</label>
+                <label className="block text-sm font-medium text-gray-400 mb-1">{t("admin.products.name", lang)}</label>
                 <input value={editForm.name || ""} onChange={(e) => updateField("name", e.target.value)} className={inputClass} />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{t("admin.products.description", lang)}</label>
+                <label className="block text-sm font-medium text-gray-400 mb-1">{t("admin.products.description", lang)}</label>
                 <textarea value={editForm.description || ""} onChange={(e) => updateField("description", e.target.value)}
-                  rows={3} className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 outline-none transition-all text-sm resize-none" />
+                  rows={3} className="input-cyber w-full text-sm py-2 resize-none" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{t("admin.products.price", lang)}</label>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">{t("admin.products.price", lang)}</label>
                   <input type="number" value={editForm.price || 0}
                     onChange={(e) => updateField("price", parseFloat(e.target.value) || 0)} className={inputClass} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{t("admin.products.originalPrice", lang)}</label>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">{t("admin.products.originalPrice", lang)}</label>
                   <input type="number" value={editForm.originalPrice ?? ""}
                     onChange={(e) => updateField("originalPrice", e.target.value ? parseFloat(e.target.value) : undefined)} className={inputClass} />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{t("admin.products.category", lang)}</label>
+                <label className="block text-sm font-medium text-gray-400 mb-1">{t("admin.products.category", lang)}</label>
                 <input value={editForm.category || ""} onChange={(e) => updateField("category", e.target.value)} className={inputClass} />
               </div>
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={editForm.inStock ?? true}
                     onChange={(e) => updateField("inStock", e.target.checked)}
-                    className="w-4 h-4 text-[#e94560] rounded border-gray-300 focus:ring-[#e94560]" />
-                  <span className="text-sm text-gray-700">{t("admin.products.inStock", lang)}</span>
+                    className="w-4 h-4 rounded border-white/[0.2] bg-white/[0.05] text-cyber focus:ring-cyber/30" />
+                  <span className="text-sm text-gray-300">{t("admin.products.inStock", lang)}</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={editForm.featured ?? false}
                     onChange={(e) => updateField("featured", e.target.checked)}
-                    className="w-4 h-4 text-[#e94560] rounded border-gray-300 focus:ring-[#e94560]" />
-                  <span className="text-sm text-gray-700">{t("admin.products.featured", lang)}</span>
+                    className="w-4 h-4 rounded border-white/[0.2] bg-white/[0.05] text-cyber focus:ring-cyber/30" />
+                  <span className="text-sm text-gray-300">{t("admin.products.featured", lang)}</span>
                 </label>
               </div>
             </div>
-            <div className="p-6 border-t border-gray-100 flex justify-end gap-3">
+            <div className="p-6 border-t border-white/[0.06] flex justify-end gap-3">
               <button onClick={cancelEdit}
-                className="px-6 py-2 border border-gray-200 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+                className="px-6 py-2 glass glass-hover rounded-full text-sm font-medium text-gray-300 transition-colors">
                 {t("admin.cancel", lang)}
               </button>
               <button onClick={creating ? handleCreate : handleSave} disabled={saving}
-                className="px-6 py-2 bg-[#e94560] hover:bg-[#ff6b81] disabled:bg-gray-400 text-white rounded-full text-sm font-medium transition-all">
+                className="px-6 py-2 btn-cyber-solid text-sm disabled:opacity-50">
                 {saving ? t("admin.saving", lang) : creating ? "Create" : t("admin.save", lang)}
               </button>
             </div>
@@ -429,14 +429,14 @@ export default function AdzakiPage() {
       )}
 
       {/* Orders */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">{t("admin.orders", lang)}</h2>
+      <div className="glass rounded-2xl overflow-hidden">
+        <div className="p-6 border-b border-white/[0.06]">
+          <h2 className="text-xl font-bold text-white mb-4">{t("admin.orders", lang)}</h2>
           <div className="flex flex-wrap gap-2">
             {["all", "confirmed", "pending", "shipped", "delivered", "cancelled"].map((f) => (
               <button key={f} onClick={() => setOrderFilter(f)}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all capitalize ${
-                  orderFilter === f ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  orderFilter === f ? "bg-cyber text-dark" : "glass glass-hover text-gray-400"
                 }`}>
                 {f}
               </button>
@@ -444,15 +444,17 @@ export default function AdzakiPage() {
           </div>
         </div>
         {filteredOrders.length === 0 ? (
-          <div className="p-12 text-center text-gray-400">
-            <p className="text-4xl mb-3">📦</p>
+          <div className="p-12 text-center text-gray-500">
+            <svg className="w-12 h-12 mx-auto mb-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
             <p>{t("admin.noOrders", lang)}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 text-gray-500 uppercase text-xs">
+                <tr className="bg-white/[0.02] text-gray-500 uppercase text-xs">
                   <th className="text-left p-4">ID</th>
                   <th className="text-left p-4">{t("admin.products", lang)}</th>
                   <th className="text-left p-4">{t("cart.summary", lang)}</th>
@@ -465,28 +467,28 @@ export default function AdzakiPage() {
               </thead>
               <tbody>
                 {filteredOrders.map((order) => (
-                  <tr key={order.id} className="border-t border-gray-100 hover:bg-gray-50">
-                    <td className="p-4 font-mono text-xs">#{order.id.slice(0, 8)}</td>
+                  <tr key={order.id} className="border-t border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                    <td className="p-4 font-mono text-xs text-gray-400">#{order.id.slice(0, 8)}</td>
                     <td className="p-4">
-                      <p className="font-medium">{order.customer?.firstName} {order.customer?.lastName}</p>
-                      <p className="text-gray-400 text-xs">{order.customer?.email}</p>
+                      <p className="font-medium text-gray-200">{order.customer?.firstName} {order.customer?.lastName}</p>
+                      <p className="text-gray-500 text-xs">{order.customer?.email}</p>
                     </td>
-                    <td className="p-4">{order.items?.length || 0} item{(order.items?.length || 0) !== 1 ? "s" : ""}</td>
-                    <td className="p-4 font-medium">{order.customer?.phone || "-"}</td>
-                    <td className="p-4">{order.customer?.provinceName || "-"}</td>
-                    <td className="p-4 font-bold">{formatPrice(order.total, lang)}</td>
+                    <td className="p-4 text-gray-400">{order.items?.length || 0} item{(order.items?.length || 0) !== 1 ? "s" : ""}</td>
+                    <td className="p-4 font-medium text-gray-300">{order.customer?.phone || "-"}</td>
+                    <td className="p-4 text-gray-400">{order.customer?.provinceName || "-"}</td>
+                    <td className="p-4 font-bold text-cyber">{formatPrice(order.total, lang)}</td>
                     <td className="p-4">
                       <select value={order.status} onChange={(e) => handleStatusChange(order.id, e.target.value)}
                         disabled={updatingStatus === order.id}
-                        className={`px-2.5 py-1 rounded-full text-xs font-medium border-0 cursor-pointer ${statusColors[order.status] || "bg-gray-100 text-gray-600"}`}>
-                        <option value="confirmed">Confirmed</option>
-                        <option value="pending">Pending</option>
-                        <option value="shipped">Shipped</option>
-                        <option value="delivered">Delivered</option>
-                        <option value="cancelled">Cancelled</option>
+                        className="glass text-xs font-medium px-2.5 py-1 rounded-full border-0 cursor-pointer">
+                        <option value="confirmed" className="bg-dark">Confirmed</option>
+                        <option value="pending" className="bg-dark">Pending</option>
+                        <option value="shipped" className="bg-dark">Shipped</option>
+                        <option value="delivered" className="bg-dark">Delivered</option>
+                        <option value="cancelled" className="bg-dark">Cancelled</option>
                       </select>
                     </td>
-                    <td className="p-4 text-gray-400 text-xs">
+                    <td className="p-4 text-gray-500 text-xs">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </td>
                   </tr>

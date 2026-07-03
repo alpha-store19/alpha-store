@@ -35,8 +35,8 @@ export default function ProductsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" dir={dir}>
       <div className="mb-10 animate-fade-in-up">
-        <h1 className="text-3xl font-bold text-gray-900">{t("products.title", lang)}</h1>
-        <p className="text-gray-500 mt-1">{t("products.subtitle", lang)}</p>
+        <h1 className="text-4xl font-bold text-white">{t("products.title", lang)}</h1>
+        <p className="text-gray-500 mt-2">{t("products.subtitle", lang)}</p>
       </div>
 
       <div className="flex flex-wrap gap-3 mb-10">
@@ -44,10 +44,10 @@ export default function ProductsPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               activeCategory === cat
-                ? "bg-[#e94560] text-white shadow-md shadow-[#e94560]/20"
-                : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-gray-300"
+                ? "bg-cyber text-dark shadow-lg shadow-cyber/20"
+                : "glass glass-hover text-gray-400"
             }`}
           >
             {cat}
@@ -56,8 +56,10 @@ export default function ProductsPage() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-20 text-gray-400">
-          <p className="text-5xl mb-4">🔍</p>
+        <div className="text-center py-20 text-gray-500">
+          <svg className="w-16 h-16 mx-auto mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
           <p className="text-xl">{t("products.empty", lang)}</p>
         </div>
       ) : (

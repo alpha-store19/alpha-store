@@ -11,33 +11,34 @@ export default function ProductCard({ product }: { product: Product }) {
   const { lang } = useLang()
 
   return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col hover:-translate-y-1">
+    <div className="group glass rounded-2xl overflow-hidden flex flex-col glass-hover animate-fade-in-up">
       <Link href={`/products/${product.id}`} className="relative overflow-hidden aspect-square">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         {product.originalPrice && (
-          <span className="absolute top-3 left-3 bg-[#e94560] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+          <span className="absolute top-3 left-3 bg-cyber/20 backdrop-blur-md text-cyber text-xs font-bold px-2.5 py-1 rounded-full border border-cyber/30">
             {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
           </span>
         )}
       </Link>
 
       <div className="p-4 flex flex-col flex-1">
-        <span className="text-xs text-gray-400 uppercase tracking-wider mb-1">{product.category}</span>
+        <span className="text-xs text-gray-500 uppercase tracking-wider mb-1">{product.category}</span>
         <Link href={`/products/${product.id}`}>
-          <h3 className="font-semibold text-gray-800 hover:text-[#e94560] transition-colors mb-2 line-clamp-2">
+          <h3 className="font-semibold text-gray-200 hover:text-cyber transition-colors mb-2 line-clamp-2">
             {product.name}
           </h3>
         </Link>
 
-        <div className="mt-auto flex items-center justify-between">
+        <div className="mt-auto flex items-center justify-between pt-3 border-t border-white/[0.04]">
           <div>
-            <span className="text-lg font-bold text-gray-900">{formatPrice(product.price, lang)}</span>
+            <span className="text-lg font-bold text-cyber">{formatPrice(product.price, lang)}</span>
             {product.originalPrice && (
-              <span className="ml-2 text-sm text-gray-400 line-through">{formatPrice(product.originalPrice, lang)}</span>
+              <span className="ml-2 text-sm text-gray-600 line-through">{formatPrice(product.originalPrice, lang)}</span>
             )}
           </div>
           <button
@@ -50,7 +51,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 quantity: 1,
               })
             }
-            className="bg-[#e94560] hover:bg-[#ff6b81] text-white p-2.5 rounded-full transition-all hover:shadow-md hover:shadow-[#e94560]/30"
+            className="bg-cyber/10 hover:bg-cyber/20 text-cyber p-2.5 rounded-full transition-all hover:shadow-lg hover:shadow-cyber/10 border border-cyber/20 hover:border-cyber/40"
             title="Add to cart"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
