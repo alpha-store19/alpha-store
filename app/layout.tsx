@@ -43,9 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <div className="text-center">
                       <h4 className="text-white font-semibold mb-3">Contact</h4>
                       <div className="space-y-2 text-sm text-gray-400">
-                        <p>Phone: +213 550 00 00 00</p>
-                        <a href="https://wa.me/213550000000" target="_blank" rel="noopener noreferrer" className="block hover:text-cyber transition-colors">
-                          WhatsApp: +213 550 00 00 00
+                        <p>Phone: 0697029434</p>
+                        <a href="https://wa.me/213697029434" target="_blank" rel="noopener noreferrer" className="block hover:text-cyber transition-colors">
+                          WhatsApp: 0697029434
                         </a>
                       </div>
                     </div>
