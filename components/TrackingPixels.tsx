@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePathname } from "next/script"
+import { usePathname } from "next/navigation"
 
 const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID || ""
 const TT_PIXEL_ID = process.env.NEXT_PUBLIC_TT_PIXEL_ID || ""
@@ -12,7 +12,6 @@ export default function TrackingPixels() {
 
   useEffect(() => {
     if (FB_PIXEL_ID) {
-      // Init FB Pixel
       ;(window as any).fbq = function (...args: any[]) {
         ;(window as any).fbq.callMethod ? (window as any).fbq.callMethod.apply(null, args) : (window as any).fbq.queue.push(args)
       }
@@ -54,7 +53,7 @@ export default function TrackingPixels() {
       {FB_PIXEL_ID && (
         <script
           dangerouslySetInnerHTML={{
-            __html: `
+            __html: 
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -63,16 +62,16 @@ export default function TrackingPixels() {
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '${FB_PIXEL_ID}');
+              fbq('init', '');
               fbq('track', 'PageView');
-            `,
+            ,
           }}
         />
       )}
       {TT_PIXEL_ID && (
         <script
           dangerouslySetInnerHTML={{
-            __html: `
+            __html: 
               !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
               ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
               for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
@@ -81,27 +80,27 @@ export default function TrackingPixels() {
               ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};
               var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;
               var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
-              ttq.load('${TT_PIXEL_ID}');
+              ttq.load('');
               ttq.page();
-            `,
+            ,
           }}
         />
       )}
       {GA_ID && (
         <script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          src={https://www.googletagmanager.com/gtag/js?id=}
           async
         />
       )}
       {GA_ID && (
         <script
           dangerouslySetInnerHTML={{
-            __html: `
+            __html: 
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA_ID}');
-            `,
+              gtag('config', '');
+            ,
           }}
         />
       )}
