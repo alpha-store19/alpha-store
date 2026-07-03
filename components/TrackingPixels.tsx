@@ -33,7 +33,7 @@ export default function TrackingPixels() {
 
     if (GA_ID) {
       ;(window as any).dataLayer = (window as any).dataLayer || []
-      function gtag(...args: any[]) { (window as any).dataLayer.push(args) }
+      const gtag = (...args: any[]) => { (window as any).dataLayer.push(args) }
       ;(window as any).gtag = gtag
       gtag("js", new Date())
       gtag("config", GA_ID)
