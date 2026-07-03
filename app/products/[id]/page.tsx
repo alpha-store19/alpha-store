@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" dir={dir}>
-        <div className="animate-pulse text-gray-300 text-lg">Loading...</div>
+        <div className="animate-pulse text-gray-600 text-lg">Loading...</div>
       </div>
     )
   }
@@ -44,9 +44,11 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center" dir={dir}>
-        <div className="text-6xl mb-6">🔍</div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Product not found</h1>
-        <Link href="/products" className="text-[#e94560] hover:text-[#ff6b81] font-semibold">
+        <svg className="w-20 h-20 mx-auto mb-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h1 className="text-3xl font-bold text-white mb-4">Product not found</h1>
+        <Link href="/products" className="text-cyber hover:text-cyber-light font-semibold transition-colors">
           Browse products
         </Link>
       </div>
@@ -67,16 +69,16 @@ export default function ProductDetailPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" dir={dir}>
-      <nav className="text-sm text-gray-400 mb-8">
-        <Link href="/" className="hover:text-[#e94560] transition-colors">{t("nav.home", lang)}</Link>
-        <span className="mx-2">/</span>
-        <Link href="/products" className="hover:text-[#e94560] transition-colors">{t("nav.products", lang)}</Link>
-        <span className="mx-2">/</span>
-        <span className="text-gray-600">{product.name}</span>
+      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-10">
+        <Link href="/" className="hover:text-cyber transition-colors">{t("nav.home", lang)}</Link>
+        <span className="text-gray-600">/</span>
+        <Link href="/products" className="hover:text-cyber transition-colors">{t("nav.products", lang)}</Link>
+        <span className="text-gray-600">/</span>
+        <span className="text-gray-400">{product.name}</span>
       </nav>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-fade-in-up">
-        <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-lg shadow-gray-200/50">
+        <div className="glass rounded-2xl overflow-hidden cyber-border">
           <img
             src={product.image}
             alt={product.name}
@@ -85,32 +87,32 @@ export default function ProductDetailPage() {
         </div>
 
         <div className="flex flex-col justify-center">
-          <span className="text-sm text-[#e94560] uppercase tracking-wider font-semibold mb-2">
+          <span className="text-sm text-cyber uppercase tracking-wider font-semibold mb-2">
             {product.category}
           </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
-          <p className="text-gray-600 leading-relaxed mb-6">{product.description}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">{product.name}</h1>
+          <p className="text-gray-400 leading-relaxed mb-6">{product.description}</p>
 
           <div className="flex items-baseline gap-3 mb-6">
-            <span className="text-3xl font-bold text-gray-900">{formatPrice(product.price, lang)}</span>
+            <span className="text-3xl font-bold text-cyber">{formatPrice(product.price, lang)}</span>
             {product.originalPrice && (
-              <span className="text-xl text-gray-400 line-through">{formatPrice(product.originalPrice, lang)}</span>
+              <span className="text-xl text-gray-600 line-through">{formatPrice(product.originalPrice, lang)}</span>
             )}
           </div>
 
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-gray-600 font-medium">{t("product.quantity", lang)}</span>
-            <div className="flex items-center border border-gray-300 rounded-full overflow-hidden">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-gray-400 font-medium">{t("product.quantity", lang)}</span>
+            <div className="flex items-center glass rounded-full overflow-hidden">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-4 py-2 hover:bg-gray-100 transition-colors text-lg font-medium"
+                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-lg font-medium"
               >
                 -
               </button>
-              <span className="px-4 py-2 font-medium min-w-[3rem] text-center">{quantity}</span>
+              <span className="px-4 py-2 font-medium text-white min-w-[3rem] text-center border-x border-white/[0.06]">{quantity}</span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
-                className="px-4 py-2 hover:bg-gray-100 transition-colors text-lg font-medium"
+                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-lg font-medium"
               >
                 +
               </button>
@@ -120,17 +122,17 @@ export default function ProductDetailPage() {
           <div className="flex gap-4">
             <button
               onClick={handleAdd}
-              className={`flex-1 py-3 rounded-full font-semibold text-lg transition-all ${
+              className={`flex-1 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${
                 added
-                  ? "bg-green-500 text-white"
-                  : "bg-[#e94560] hover:bg-[#ff6b81] text-white hover:shadow-lg hover:shadow-[#e94560]/30"
+                  ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                  : "btn-cyber-solid"
               }`}
             >
               {added ? `✓ ${t("product.added", lang)}` : t("product.addToCart", lang)}
             </button>
             <button
               onClick={() => router.push("/cart")}
-              className="px-6 py-3 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white rounded-full font-semibold transition-all"
+              className="btn-cyber px-6 py-3 text-lg"
             >
               {t("product.viewCart", lang)}
             </button>
