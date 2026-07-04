@@ -1,440 +1,62 @@
 {
-  "zones": [
-    {
-      "id": "zone1",
-      "name": "Zone 1 - Centre",
-      "nameAr": "المنطقة 1 - الوسط",
-      "nameFr": "Zone 1 - Centre",
-      "rate": 300
-    },
-    {
-      "id": "zone2",
-      "name": "Zone 2 - Nord",
-      "nameAr": "المنطقة 2 - الشمال",
-      "nameFr": "Zone 2 - Nord",
-      "rate": 500
-    },
-    {
-      "id": "zone3",
-      "name": "Zone 3 - Hauts Plateaux",
-      "nameAr": "المنطقة 3 - الهضاب العليا",
-      "nameFr": "Zone 3 - Hauts Plateaux",
-      "rate": 700
-    },
-    {
-      "id": "zone4",
-      "name": "Zone 4 - Sud",
-      "nameAr": "المنطقة 4 - الجنوب",
-      "nameFr": "Zone 4 - Sud",
-      "rate": 1000
-    }
-  ],
   "provinces": [
-    {
-      "id": "16",
-      "name": "Alger",
-      "nameAr": "الجزائر",
-      "nameFr": "Alger",
-      "zone": "zone1"
-    },
-    {
-      "id": "1",
-      "name": "Adrar",
-      "nameAr": "أدرار",
-      "nameFr": "Adrar",
-      "zone": "zone4"
-    },
-    {
-      "id": "44",
-      "name": "Aïn Defla",
-      "nameAr": "عين الدفلى",
-      "nameFr": "Aïn Defla",
-      "zone": "zone1"
-    },
-    {
-      "id": "46",
-      "name": "Aïn Témouchent",
-      "nameAr": "عين تموشنت",
-      "nameFr": "Aïn Témouchent",
-      "zone": "zone2"
-    },
-    {
-      "id": "5",
-      "name": "Batna",
-      "nameAr": "باتنة",
-      "nameFr": "Batna",
-      "zone": "zone3"
-    },
-    {
-      "id": "7",
-      "name": "Biskra",
-      "nameAr": "بسكرة",
-      "nameFr": "Biskra",
-      "zone": "zone3"
-    },
-    {
-      "id": "9",
-      "name": "Blida",
-      "nameAr": "البليدة",
-      "nameFr": "Blida",
-      "zone": "zone1"
-    },
-    {
-      "id": "34",
-      "name": "Bordj Bou Arreridj",
-      "nameAr": "برج بوعريريج",
-      "nameFr": "Bordj Bou Arreridj",
-      "zone": "zone3"
-    },
-    {
-      "id": "10",
-      "name": "Bouira",
-      "nameAr": "البويرة",
-      "nameFr": "Bouira",
-      "zone": "zone1"
-    },
-    {
-      "id": "35",
-      "name": "Boumerdès",
-      "nameAr": "بومرداس",
-      "nameFr": "Boumerdès",
-      "zone": "zone1"
-    },
-    {
-      "id": "8",
-      "name": "Béchar",
-      "nameAr": "بشار",
-      "nameFr": "Béchar",
-      "zone": "zone4"
-    },
-    {
-      "id": "6",
-      "name": "Béjaïa",
-      "nameAr": "بجاية",
-      "nameFr": "Béjaïa",
-      "zone": "zone2"
-    },
-    {
-      "id": "12",
-      "name": "Tébessa",
-      "nameAr": "تبسة",
-      "nameFr": "Tébessa",
-      "zone": "zone3"
-    },
-    {
-      "id": "14",
-      "name": "Tizi Ouzou",
-      "nameAr": "تيزي وزو",
-      "nameFr": "Tizi Ouzou",
-      "zone": "zone1"
-    },
-    {
-      "id": "15",
-      "name": "Tlemcen",
-      "nameAr": "تلمسان",
-      "nameFr": "Tlemcen",
-      "zone": "zone2"
-    },
-    {
-      "id": "42",
-      "name": "Tiaret",
-      "nameAr": "تيارت",
-      "nameFr": "Tiaret",
-      "zone": "zone3"
-    },
-    {
-      "id": "38",
-      "name": "Tindouf",
-      "nameAr": "تندوف",
-      "nameFr": "Tindouf",
-      "zone": "zone4"
-    },
-    {
-      "id": "37",
-      "name": "Tissemsilt",
-      "nameAr": "تسمسيلت",
-      "nameFr": "Tissemsilt",
-      "zone": "zone3"
-    },
-    {
-      "id": "41",
-      "name": "Tizi-Ouzou",
-      "nameAr": "تيزي وزو",
-      "nameFr": "Tizi-Ouzou",
-      "zone": "zone1"
-    },
-    {
-      "id": "11",
-      "name": "Tamanrasset",
-      "nameAr": "تمنراست",
-      "nameFr": "Tamanrasset",
-      "zone": "zone4"
-    },
-    {
-      "id": "13",
-      "name": "Tébessa",
-      "nameAr": "تبسة",
-      "nameFr": "Tébessa",
-      "zone": "zone3"
-    },
-    {
-      "id": "23",
-      "name": "Annaba",
-      "nameAr": "عنابة",
-      "nameFr": "Annaba",
-      "zone": "zone2"
-    },
-    {
-      "id": "4",
-      "name": "Oum El Bouaghi",
-      "nameAr": "أم البواقي",
-      "nameFr": "Oum El Bouaghi",
-      "zone": "zone3"
-    },
-    {
-      "id": "29",
-      "name": "Ghardaïa",
-      "nameAr": "غرداية",
-      "nameFr": "Ghardaïa",
-      "zone": "zone4"
-    },
-    {
-      "id": "47",
-      "name": "Guelma",
-      "nameAr": "قالمة",
-      "nameFr": "Guelma",
-      "zone": "zone2"
-    },
-    {
-      "id": "25",
-      "name": "Jijel",
-      "nameAr": "جيجل",
-      "nameFr": "Jijel",
-      "zone": "zone2"
-    },
-    {
-      "id": "18",
-      "name": "Djelfa",
-      "nameAr": "الجلفة",
-      "nameFr": "Djelfa",
-      "zone": "zone3"
-    },
-    {
-      "id": "19",
-      "name": "Sétif",
-      "nameAr": "سطيف",
-      "nameFr": "Sétif",
-      "zone": "zone3"
-    },
-    {
-      "id": "20",
-      "name": "Saïda",
-      "nameAr": "سعيدة",
-      "nameFr": "Saïda",
-      "zone": "zone3"
-    },
-    {
-      "id": "21",
-      "name": "Skikda",
-      "nameAr": "سكيكدة",
-      "nameFr": "Skikda",
-      "zone": "zone2"
-    },
-    {
-      "id": "22",
-      "name": "Sidi Bel Abbès",
-      "nameAr": "سيدي بلعباس",
-      "nameFr": "Sidi Bel Abbès",
-      "zone": "zone2"
-    },
-    {
-      "id": "24",
-      "name": "Annaba",
-      "nameAr": "عنابة",
-      "nameFr": "Annaba",
-      "zone": "zone2"
-    },
-    {
-      "id": "26",
-      "name": "Médéa",
-      "nameAr": "المدية",
-      "nameFr": "Médéa",
-      "zone": "zone1"
-    },
-    {
-      "id": "27",
-      "name": "Mostaganem",
-      "nameAr": "مستغانم",
-      "nameFr": "Mostaganem",
-      "zone": "zone2"
-    },
-    {
-      "id": "28",
-      "name": "Msila",
-      "nameAr": "المسيلة",
-      "nameFr": "Msila",
-      "zone": "zone3"
-    },
-    {
-      "id": "29",
-      "name": "Mascara",
-      "nameAr": "معسكر",
-      "nameFr": "Mascara",
-      "zone": "zone2"
-    },
-    {
-      "id": "30",
-      "name": "Ouargla",
-      "nameAr": "ورقلة",
-      "nameFr": "Ouargla",
-      "zone": "zone4"
-    },
-    {
-      "id": "31",
-      "name": "Oran",
-      "nameAr": "وهران",
-      "nameFr": "Oran",
-      "zone": "zone2"
-    },
-    {
-      "id": "32",
-      "name": "El Bayadh",
-      "nameAr": "البيض",
-      "nameFr": "El Bayadh",
-      "zone": "zone3"
-    },
-    {
-      "id": "33",
-      "name": "Illizi",
-      "nameAr": "إليزي",
-      "nameFr": "Illizi",
-      "zone": "zone4"
-    },
-    {
-      "id": "34",
-      "name": "Bordj Bou Arreridj",
-      "nameAr": "برج بوعريريج",
-      "nameFr": "Bordj Bou Arreridj",
-      "zone": "zone3"
-    },
-    {
-      "id": "35",
-      "name": "Boumerdès",
-      "nameAr": "بومرداس",
-      "nameFr": "Boumerdès",
-      "zone": "zone1"
-    },
-    {
-      "id": "36",
-      "name": "El Tarf",
-      "nameAr": "الطارف",
-      "nameFr": "El Tarf",
-      "zone": "zone2"
-    },
-    {
-      "id": "37",
-      "name": "Tindouf",
-      "nameAr": "تندوف",
-      "nameFr": "Tindouf",
-      "zone": "zone4"
-    },
-    {
-      "id": "38",
-      "name": "Tissemsilt",
-      "nameAr": "تسمسيلت",
-      "nameFr": "Tissemsilt",
-      "zone": "zone3"
-    },
-    {
-      "id": "39",
-      "name": "El Oued",
-      "nameAr": "الوادي",
-      "nameFr": "El Oued",
-      "zone": "zone4"
-    },
-    {
-      "id": "40",
-      "name": "Khenchela",
-      "nameAr": "خنشلة",
-      "nameFr": "Khenchela",
-      "zone": "zone3"
-    },
-    {
-      "id": "41",
-      "name": "Souk Ahras",
-      "nameAr": "سوق أهراس",
-      "nameFr": "Souk Ahras",
-      "zone": "zone2"
-    },
-    {
-      "id": "42",
-      "name": "Tipaza",
-      "nameAr": "تيبازة",
-      "nameFr": "Tipaza",
-      "zone": "zone1"
-    },
-    {
-      "id": "43",
-      "name": "Mila",
-      "nameAr": "ميلة",
-      "nameFr": "Mila",
-      "zone": "zone2"
-    },
-    {
-      "id": "44",
-      "name": "Aïn Defla",
-      "nameAr": "عين الدفلى",
-      "nameFr": "Aïn Defla",
-      "zone": "zone1"
-    },
-    {
-      "id": "45",
-      "name": "Naama",
-      "nameAr": "النعامة",
-      "nameFr": "Naama",
-      "zone": "zone3"
-    },
-    {
-      "id": "46",
-      "name": "Aïn Témouchent",
-      "nameAr": "عين تموشنت",
-      "nameFr": "Aïn Témouchent",
-      "zone": "zone2"
-    },
-    {
-      "id": "47",
-      "name": "Guelma",
-      "nameAr": "قالمة",
-      "nameFr": "Guelma",
-      "zone": "zone2"
-    },
-    {
-      "id": "48",
-      "name": "Relizane",
-      "nameAr": "غليزان",
-      "nameFr": "Relizane",
-      "zone": "zone2"
-    },
-    {
-      "id": "49",
-      "name": "Timimoun",
-      "nameAr": "تيميمون",
-      "nameFr": "Timimoun",
-      "zone": "zone4"
-    },
-    {
-      "id": "50",
-      "name": "Bordj Badji Mokhtar",
-      "nameAr": "برج باجي مختار",
-      "nameFr": "Bordj Badji Mokhtar",
-      "zone": "zone4"
-    },
-    {
-      "id": "51",
-      "name": "Beni Abbes",
-      "nameAr": "بني عباس",
-      "nameFr": "Beni Abbès",
-      "zone": "zone4"
-    }
+    { "id": "16", "name": "Alger", "nameAr": "Ø§Ù„Ø¬Ø²Ø§Ø¦Ø±", "nameFr": "Alger", "rate": 300 },
+    { "id": "1", "name": "Adrar", "nameAr": "Ø£Ø¯Ø±Ø§Ø±", "nameFr": "Adrar", "rate": 1000 },
+    { "id": "44", "name": "AÃ¯n Defla", "nameAr": "Ø¹ÙŠÙ† Ø§Ù„Ø¯ÙÙ„Ù‰", "nameFr": "AÃ¯n Defla", "rate": 300 },
+    { "id": "46", "name": "AÃ¯n TÃ©mouchent", "nameAr": "Ø¹ÙŠÙ† ØªÙ…ÙˆØ´Ù†Øª", "nameFr": "AÃ¯n TÃ©mouchent", "rate": 500 },
+    { "id": "5", "name": "Batna", "nameAr": "Ø¨Ø§ØªÙ†Ø©", "nameFr": "Batna", "rate": 700 },
+    { "id": "7", "name": "Biskra", "nameAr": "Ø¨Ø³ÙƒØ±Ø©", "nameFr": "Biskra", "rate": 700 },
+    { "id": "9", "name": "Blida", "nameAr": "Ø§Ù„Ø¨Ù„ÙŠØ¯Ø©", "nameFr": "Blida", "rate": 300 },
+    { "id": "34", "name": "Bordj Bou Arreridj", "nameAr": "Ø¨Ø±Ø¬ Ø¨ÙˆØ¹Ø±ÙŠØ±ÙŠØ¬", "nameFr": "Bordj Bou Arreridj", "rate": 700 },
+    { "id": "10", "name": "Bouira", "nameAr": "Ø§Ù„Ø¨ÙˆÙŠØ±Ø©", "nameFr": "Bouira", "rate": 300 },
+    { "id": "35", "name": "BoumerdÃ¨s", "nameAr": "Ø¨ÙˆÙ…Ø±Ø¯Ø§Ø³", "nameFr": "BoumerdÃ¨s", "rate": 300 },
+    { "id": "8", "name": "BÃ©char", "nameAr": "Ø¨Ø´Ø§Ø±", "nameFr": "BÃ©char", "rate": 1000 },
+    { "id": "6", "name": "BÃ©jaÃ¯a", "nameAr": "Ø¨Ø¬Ø§ÙŠØ©", "nameFr": "BÃ©jaÃ¯a", "rate": 500 },
+    { "id": "12", "name": "TÃ©bessa", "nameAr": "ØªØ¨Ø³Ø©", "nameFr": "TÃ©bessa", "rate": 700 },
+    { "id": "14", "name": "Tizi Ouzou", "nameAr": "ØªÙŠØ²ÙŠ ÙˆØ²Ùˆ", "nameFr": "Tizi Ouzou", "rate": 300 },
+    { "id": "15", "name": "Tlemcen", "nameAr": "ØªÙ„Ù…Ø³Ø§Ù†", "nameFr": "Tlemcen", "rate": 500 },
+    { "id": "42", "name": "Tiaret", "nameAr": "ØªÙŠØ§Ø±Øª", "nameFr": "Tiaret", "rate": 700 },
+    { "id": "38", "name": "Tindouf", "nameAr": "ØªÙ†Ø¯ÙˆÙ", "nameFr": "Tindouf", "rate": 1000 },
+    { "id": "37", "name": "Tissemsilt", "nameAr": "ØªØ³Ù…Ø³ÙŠÙ„Øª", "nameFr": "Tissemsilt", "rate": 700 },
+    { "id": "41", "name": "Tizi-Ouzou", "nameAr": "ØªÙŠØ²ÙŠ ÙˆØ²Ùˆ", "nameFr": "Tizi-Ouzou", "rate": 300 },
+    { "id": "11", "name": "Tamanrasset", "nameAr": "ØªÙ…Ù†Ø±Ø§Ø³Øª", "nameFr": "Tamanrasset", "rate": 1000 },
+    { "id": "13", "name": "TÃ©bessa", "nameAr": "ØªØ¨Ø³Ø©", "nameFr": "TÃ©bessa", "rate": 700 },
+    { "id": "23", "name": "Annaba", "nameAr": "Ø¹Ù†Ø§Ø¨Ø©", "nameFr": "Annaba", "rate": 500 },
+    { "id": "4", "name": "Oum El Bouaghi", "nameAr": "Ø£Ù… Ø§Ù„Ø¨ÙˆØ§Ù‚ÙŠ", "nameFr": "Oum El Bouaghi", "rate": 700 },
+    { "id": "29", "name": "GhardaÃ¯a", "nameAr": "ØºØ±Ø¯Ø§ÙŠØ©", "nameFr": "GhardaÃ¯a", "rate": 1000 },
+    { "id": "47", "name": "Guelma", "nameAr": "Ù‚Ø§Ù„Ù…Ø©", "nameFr": "Guelma", "rate": 500 },
+    { "id": "25", "name": "Jijel", "nameAr": "Ø¬ÙŠØ¬Ù„", "nameFr": "Jijel", "rate": 500 },
+    { "id": "18", "name": "Djelfa", "nameAr": "Ø§Ù„Ø¬Ù„ÙØ©", "nameFr": "Djelfa", "rate": 700 },
+    { "id": "19", "name": "SÃ©tif", "nameAr": "Ø³Ø·ÙŠÙ", "nameFr": "SÃ©tif", "rate": 700 },
+    { "id": "20", "name": "SaÃ¯da", "nameAr": "Ø³Ø¹ÙŠØ¯Ø©", "nameFr": "SaÃ¯da", "rate": 700 },
+    { "id": "21", "name": "Skikda", "nameAr": "Ø³ÙƒÙŠÙƒØ¯Ø©", "nameFr": "Skikda", "rate": 500 },
+    { "id": "22", "name": "Sidi Bel AbbÃ¨s", "nameAr": "Ø³ÙŠØ¯ÙŠ Ø¨Ù„Ø¹Ø¨Ø§Ø³", "nameFr": "Sidi Bel AbbÃ¨s", "rate": 500 },
+    { "id": "24", "name": "Annaba", "nameAr": "Ø¹Ù†Ø§Ø¨Ø©", "nameFr": "Annaba", "rate": 500 },
+    { "id": "26", "name": "MÃ©dÃ©a", "nameAr": "Ø§Ù„Ù…Ø¯ÙŠØ©", "nameFr": "MÃ©dÃ©a", "rate": 300 },
+    { "id": "27", "name": "Mostaganem", "nameAr": "Ù…Ø³ØªØºØ§Ù†Ù…", "nameFr": "Mostaganem", "rate": 500 },
+    { "id": "28", "name": "Msila", "nameAr": "Ø§Ù„Ù…Ø³ÙŠÙ„Ø©", "nameFr": "Msila", "rate": 700 },
+    { "id": "29", "name": "Mascara", "nameAr": "Ù…Ø¹Ø³ÙƒØ±", "nameFr": "Mascara", "rate": 500 },
+    { "id": "30", "name": "Ouargla", "nameAr": "ÙˆØ±Ù‚Ù„Ø©", "nameFr": "Ouargla", "rate": 1000 },
+    { "id": "31", "name": "Oran", "nameAr": "ÙˆÙ‡Ø±Ø§Ù†", "nameFr": "Oran", "rate": 500 },
+    { "id": "32", "name": "El Bayadh", "nameAr": "Ø§Ù„Ø¨ÙŠØ¶", "nameFr": "El Bayadh", "rate": 700 },
+    { "id": "33", "name": "Illizi", "nameAr": "Ø¥Ù„ÙŠØ²ÙŠ", "nameFr": "Illizi", "rate": 1000 },
+    { "id": "34", "name": "Bordj Bou Arreridj", "nameAr": "Ø¨Ø±Ø¬ Ø¨ÙˆØ¹Ø±ÙŠØ±ÙŠØ¬", "nameFr": "Bordj Bou Arreridj", "rate": 700 },
+    { "id": "35", "name": "BoumerdÃ¨s", "nameAr": "Ø¨ÙˆÙ…Ø±Ø¯Ø§Ø³", "nameFr": "BoumerdÃ¨s", "rate": 300 },
+    { "id": "36", "name": "El Tarf", "nameAr": "Ø§Ù„Ø·Ø§Ø±Ù", "nameFr": "El Tarf", "rate": 500 },
+    { "id": "37", "name": "Tindouf", "nameAr": "ØªÙ†Ø¯ÙˆÙ", "nameFr": "Tindouf", "rate": 1000 },
+    { "id": "38", "name": "Tissemsilt", "nameAr": "ØªØ³Ù…Ø³ÙŠÙ„Øª", "nameFr": "Tissemsilt", "rate": 700 },
+    { "id": "39", "name": "El Oued", "nameAr": "Ø§Ù„ÙˆØ§Ø¯ÙŠ", "nameFr": "El Oued", "rate": 1000 },
+    { "id": "40", "name": "Khenchela", "nameAr": "Ø®Ù†Ø´Ù„Ø©", "nameFr": "Khenchela", "rate": 700 },
+    { "id": "41", "name": "Souk Ahras", "nameAr": "Ø³ÙˆÙ‚ Ø£Ù‡Ø±Ø§Ø³", "nameFr": "Souk Ahras", "rate": 500 },
+    { "id": "42", "name": "Tipaza", "nameAr": "ØªÙŠØ¨Ø§Ø²Ø©", "nameFr": "Tipaza", "rate": 300 },
+    { "id": "43", "name": "Mila", "nameAr": "Ù…ÙŠÙ„Ø©", "nameFr": "Mila", "rate": 500 },
+    { "id": "44", "name": "AÃ¯n Defla", "nameAr": "Ø¹ÙŠÙ† Ø§Ù„Ø¯ÙÙ„Ù‰", "nameFr": "AÃ¯n Defla", "rate": 300 },
+    { "id": "45", "name": "Naama", "nameAr": "Ø§Ù„Ù†Ø¹Ø§Ù…Ø©", "nameFr": "Naama", "rate": 700 },
+    { "id": "46", "name": "AÃ¯n TÃ©mouchent", "nameAr": "Ø¹ÙŠÙ† ØªÙ…ÙˆØ´Ù†Øª", "nameFr": "AÃ¯n TÃ©mouchent", "rate": 500 },
+    { "id": "47", "name": "Guelma", "nameAr": "Ù‚Ø§Ù„Ù…Ø©", "nameFr": "Guelma", "rate": 500 },
+    { "id": "48", "name": "Relizane", "nameAr": "ØºÙ„ÙŠØ²Ø§Ù†", "nameFr": "Relizane", "rate": 500 },
+    { "id": "49", "name": "Timimoun", "nameAr": "ØªÙŠÙ…ÙŠÙ…ÙˆÙ†", "nameFr": "Timimoun", "rate": 1000 },
+    { "id": "50", "name": "Bordj Badji Mokhtar", "nameAr": "Ø¨Ø±Ø¬ Ø¨Ø§Ø¬ÙŠ Ù…Ø®ØªØ§Ø±", "nameFr": "Bordj Badji Mokhtar", "rate": 1000 },
+    { "id": "51", "name": "Beni Abbes", "nameAr": "Ø¨Ù†ÙŠ Ø¹Ø¨Ø§Ø³", "nameFr": "Beni AbbÃ¨s", "rate": 1000 }
   ]
 }
