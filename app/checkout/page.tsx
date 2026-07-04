@@ -7,7 +7,7 @@ import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
 
-interface Province { id: string; name: string; nameAr: string; nameFr: string; zone: string }
+interface Province { id: string; name: string; nameAr: string; nameFr: string; rate: number }
 
 const emptyForm = { firstName: "", lastName: "", phone: "", email: "", address: "", province: "" }
 
@@ -29,20 +29,16 @@ export default function CheckoutPage() {
       .catch(() => {})
   }, [])
 
+  const hasFreeShippingItem = items.some(item => (item as any).freeShipping)
+
   useEffect(() => {
-    if (form.province) {
-      fetch(`/api/provinces`)
-        .then((r) => r.json())
-        .then((data) => {
-          const prov = (data.provinces || []).find((p: Province) => p.id === form.province)
-          if (prov) {
-            const zone = (data.zones || []).find((z: any) => z.id === prov.zone)
-            setDeliveryRate(zone?.rate || 0)
-          }
-        })
-        .catch(() => {})
+    if (form.province && !hasFreeShippingItem) {
+      const prov = provinces.find((p) => p.id === form.province)
+      setDeliveryRate(prov?.rate ?? 0)
+    } else if (hasFreeShippingItem) {
+      setDeliveryRate(0)
     }
-  }, [form.province])
+  }, [form.province, provinces, hasFreeShippingItem])
 
   const grandTotal = totalPrice + deliveryRate
 
@@ -65,6 +61,11 @@ export default function CheckoutPage() {
   const handleSubmit = async () => {
     setSubmitting(true)
     try {
+      const itemsWithFreeShipping = items.map(i => ({
+        ...i,
+        freeShipping: hasFreeShippingItem,
+      }))
+
       const orderData = {
         items: items.map((i) => ({
           productId: i.productId,
@@ -166,7 +167,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">{t("checkout.delivery", lang)}</span>
-                <span className="font-medium text-white">{formatPrice(deliveryRate, lang)}</span>
+                <span className="font-medium text-white">{hasFreeShippingItem ? "FREE" : formatPrice(deliveryRate, lang)}</span>
               </div>
               <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/[0.06]">
                 <span className="text-white">{t("checkout.totalWithDelivery", lang)}</span>
@@ -274,7 +275,7 @@ export default function CheckoutPage() {
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">{t("checkout.delivery", lang)}</span>
                 <span className={`font-medium ${form.province ? "text-white" : "text-gray-600"}`}>
-                  {form.province ? formatPrice(deliveryRate, lang) : "—"}
+                  {hasFreeShippingItem ? "FREE" : form.province ? formatPrice(deliveryRate, lang) : "â€”"}
                 </span>
               </div>
               <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/[0.06]">
