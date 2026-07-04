@@ -244,20 +244,20 @@ export default function CheckoutPage() {
                 <input required value={form.address} onChange={(e) => updateField("address", e.target.value)} className={inputClass} />
               </div>
               <div className="sm:col-span-2">
-                <label className={labelClass}>Delivery type</label>
+                <label className={labelClass}>{t("checkout.deliveryType", lang)}</label>
                 <div className="flex gap-4">
                   <label className={`flex items-center gap-2.5 p-3 rounded-xl cursor-pointer border transition-all flex-1 ${deliveryType === "home" ? "border-cyber/30 bg-cyber/5" : "border-white/[0.06] hover:border-white/[0.12]"}`}>
                     <input type="radio" name="deliveryType" value="home" checked={deliveryType === "home"} onChange={() => setDeliveryType("home")} className="w-4 h-4 text-cyber focus:ring-cyber/30" />
                     <div>
-                      <span className="text-sm text-gray-200 font-medium">Home delivery</span>
-                      <p className="text-[10px] text-gray-500">Deliver to your address</p>
+                      <span className="text-sm text-gray-200 font-medium">{t("checkout.homeDelivery", lang)}</span>
+                      <p className="text-[10px] text-gray-500">{t("checkout.homeDelivery.desc", lang)}</p>
                     </div>
                   </label>
                   <label className={`flex items-center gap-2.5 p-3 rounded-xl cursor-pointer border transition-all flex-1 ${deliveryType === "office" ? "border-cyber/30 bg-cyber/5" : "border-white/[0.06] hover:border-white/[0.12]"}`}>
                     <input type="radio" name="deliveryType" value="office" checked={deliveryType === "office"} onChange={() => setDeliveryType("office")} className="w-4 h-4 text-cyber focus:ring-cyber/30" />
                     <div>
-                      <span className="text-sm text-gray-200 font-medium">Office delivery</span>
-                      <p className="text-[10px] text-gray-500">Deliver to your workplace</p>
+                      <span className="text-sm text-gray-200 font-medium">{t("checkout.officeDelivery", lang)}</span>
+                      <p className="text-[10px] text-gray-500">{t("checkout.officeDelivery.desc", lang)}</p>
                     </div>
                   </label>
                 </div>
