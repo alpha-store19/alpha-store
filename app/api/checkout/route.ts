@@ -35,6 +35,7 @@ function buildEmailHtml(order: any, customer: any) {
           <tr><td style="padding:4px;color:#666">Phone</td><td style="padding:4px;font-weight:bold">${customer.phone}</td></tr>
           <tr><td style="padding:4px;color:#666">Email</td><td style="padding:4px;font-weight:bold">${customer.email}</td></tr>
           <tr><td style="padding:4px;color:#666">Province</td><td style="padding:4px;font-weight:bold">${customer.provinceName}</td></tr>
+          <tr><td style="padding:4px;color:#666">Delivery Type</td><td style="padding:4px;font-weight:bold">${customer.deliveryType === "office" ? "Office" : "Home"}</td></tr>
           <tr><td style="padding:4px;color:#666">Address</td><td style="padding:4px;font-weight:bold">${customer.address}</td></tr>
         </table>
         <h3 style="color:#1a1a2e;font-size:14px;border-bottom:2px solid #00f0ff;padding-bottom:5px;margin-top:16px">Order Items</h3>
@@ -52,7 +53,7 @@ function buildEmailHtml(order: any, customer: any) {
           <span style="font-size:13px;color:#666">Delivery: DZD ${Math.round(customer.deliveryRate).toLocaleString()}</span><br/>
           <span style="font-size:20px;color:#00f0ff">Total: DZD ${Math.round(order.total).toLocaleString()}</span>
         </div>
-        <p style="margin-top:20px;font-size:11px;color:#999;text-align:center">Alpha Store â€” Order Notification</p>
+        <p style="margin-top:20px;font-size:11px;color:#999;text-align:center">Alpha Store — Order Notification</p>
       </div>
     </body>
     </html>`
@@ -112,6 +113,7 @@ export async function POST(request: Request) {
       province: sanitize(customer.province || ""),
       provinceName: sanitize(customer.provinceName || ""),
       deliveryRate: Math.max(0, Math.min(99999, deliveryRate || 0)),
+      deliveryType: (customer.deliveryType === "office" ? "office" : "home") as "home" | "office",
     }
 
     const calculatedTotal = items.reduce((s: number, i: { price: number; quantity: number }) => s + i.price * i.quantity, 0)
@@ -153,7 +155,7 @@ export async function POST(request: Request) {
         await transporter.sendMail({
           from: `"Alpha Store" <${process.env.GMAIL_USER || ADMIN_EMAIL}>`,
           to: ADMIN_EMAIL,
-          subject: `New Order #${order.id.slice(0, 8)} â€” ${safeCustomer.firstName} ${safeCustomer.lastName}`,
+          subject: `New Order #${order.id.slice(0, 8)} — ${safeCustomer.firstName} ${safeCustomer.lastName}`,
           html: buildEmailHtml({ ...order, items, subtotal: calculatedTotal, total: calculatedTotal + safeCustomer.deliveryRate }, safeCustomer),
         })
       }
