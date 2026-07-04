@@ -1,7 +1,7 @@
 import initialData from "../data/provinces.json"
 import { loadPersisted, savePersisted, initFromGitHub } from "./persist"
 
-type Province = { id: string; name: string; nameAr: string; nameFr: string; rate: number }
+type Province = { id: string; name: string; nameAr: string; nameFr: string; rateHome: number; rateOffice: number }
 
 const FILE = "provinces.json"
 
@@ -27,17 +27,18 @@ export async function getProvinceById(id: string) {
   return state.provinces.find((p) => p.id === id)
 }
 
-export async function getDeliveryRate(provinceId: string): Promise<number> {
+export async function getDeliveryRate(provinceId: string, type: "home" | "office" = "home"): Promise<number> {
   await ensureInit()
   const prov = state.provinces.find((p) => p.id === provinceId)
-  return prov?.rate ?? 0
+  if (!prov) return 0
+  return type === "office" ? prov.rateOffice : prov.rateHome
 }
 
-export async function updateProvinceRate(provinceId: string, rate: number): Promise<boolean> {
+export async function updateProvinceRate(provinceId: string, rateHome: number, rateOffice: number): Promise<boolean> {
   await ensureInit()
   const idx = state.provinces.findIndex((p) => p.id === provinceId)
   if (idx === -1) return false
-  state.provinces[idx] = { ...state.provinces[idx], rate }
+  state.provinces[idx] = { ...state.provinces[idx], rateHome, rateOffice }
   await savePersisted(FILE, "data/provinces.json", state)
   return true
 }
