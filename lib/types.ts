@@ -6,8 +6,9 @@ export interface Product {
   originalPrice?: number
   image: string
   category: string
-  inStock: boolean
+  quantity: number
   featured: boolean
+  freeShipping: boolean
   createdAt: string
 }
 
