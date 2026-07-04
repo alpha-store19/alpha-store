@@ -87,9 +87,20 @@ export default function ProductDetailPage() {
         </div>
 
         <div className="flex flex-col justify-center">
-          <span className="text-sm text-cyber uppercase tracking-wider font-semibold mb-2">
-            {product.category}
-          </span>
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-sm text-cyber uppercase tracking-wider font-semibold">
+              {product.category}
+            </span>
+            {product.freeShipping && (
+              <span className="text-[10px] bg-green-500/15 text-green-400 px-2.5 py-0.5 rounded-full border border-green-500/30 font-semibold">Free delivery</span>
+            )}
+            {product.quantity <= 0 && (
+              <span className="text-[10px] bg-red-500/15 text-red-400 px-2.5 py-0.5 rounded-full border border-red-500/30 font-semibold">Out of stock</span>
+            )}
+            {product.quantity > 0 && product.quantity <= 5 && (
+              <span className="text-[10px] bg-yellow-500/15 text-yellow-400 px-2.5 py-0.5 rounded-full border border-yellow-500/30 font-semibold">Only {product.quantity} left</span>
+            )}
+          </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">{product.name}</h1>
           <p className="text-gray-400 leading-relaxed mb-6">{product.description}</p>
 
@@ -105,30 +116,38 @@ export default function ProductDetailPage() {
             <div className="flex items-center glass rounded-full overflow-hidden">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-lg font-medium"
+                disabled={product.quantity <= 0}
+                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-lg font-medium disabled:opacity-30"
               >
                 -
               </button>
               <span className="px-4 py-2 font-medium text-white min-w-[3rem] text-center border-x border-white/[0.06]">{quantity}</span>
               <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-lg font-medium"
+                onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}
+                disabled={product.quantity <= 0}
+                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-lg font-medium disabled:opacity-30"
               >
                 +
               </button>
             </div>
+            {product.quantity > 0 && (
+              <span className="text-xs text-gray-500">{product.quantity} available</span>
+            )}
           </div>
 
           <div className="flex gap-4">
             <button
               onClick={handleAdd}
+              disabled={added || product.quantity <= 0}
               className={`flex-1 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${
-                added
+                product.quantity <= 0
+                  ? "bg-gray-500/10 text-gray-500 border border-gray-500/20 cursor-not-allowed"
+                  : added
                   ? "bg-green-500/20 text-green-400 border border-green-500/30"
                   : "btn-cyber-solid"
               }`}
             >
-              {added ? `✓ ${t("product.added", lang)}` : t("product.addToCart", lang)}
+              {product.quantity <= 0 ? "Out of Stock" : added ? `✓ ${t("product.added", lang)}` : t("product.addToCart", lang)}
             </button>
             <button
               onClick={() => router.push("/cart")}
