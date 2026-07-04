@@ -7,7 +7,7 @@ import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
 
-interface Province { id: string; name: string; nameAr: string; nameFr: string; rate: number }
+interface Province { id: string; name: string; nameAr: string; nameFr: string; rateHome: number; rateOffice: number }
 
 const emptyForm = { firstName: "", lastName: "", phone: "", email: "", address: "", province: "" }
 
@@ -21,6 +21,7 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false)
   const [provinces, setProvinces] = useState<Province[]>([])
   const [deliveryRate, setDeliveryRate] = useState(0)
+  const [deliveryType, setDeliveryType] = useState<"home" | "office">("home")
 
   useEffect(() => {
     fetch("/api/provinces")
@@ -34,11 +35,11 @@ export default function CheckoutPage() {
   useEffect(() => {
     if (form.province && !hasFreeShippingItem) {
       const prov = provinces.find((p) => p.id === form.province)
-      setDeliveryRate(prov?.rate ?? 0)
+      setDeliveryRate(prov ? (deliveryType === "office" ? prov.rateOffice : prov.rateHome) : 0)
     } else if (hasFreeShippingItem) {
       setDeliveryRate(0)
     }
-  }, [form.province, provinces, hasFreeShippingItem])
+  }, [form.province, provinces, hasFreeShippingItem, deliveryType])
 
   const grandTotal = totalPrice + deliveryRate
 
@@ -83,6 +84,7 @@ export default function CheckoutPage() {
         ...form,
         provinceName: getProvinceName(form.province),
         deliveryRate,
+        deliveryType,
       }
 
       const orderRes = await fetch("/api/checkout", {
@@ -241,6 +243,25 @@ export default function CheckoutPage() {
                 <label className={labelClass}>{t("checkout.address", lang)}</label>
                 <input required value={form.address} onChange={(e) => updateField("address", e.target.value)} className={inputClass} />
               </div>
+              <div className="sm:col-span-2">
+                <label className={labelClass}>Delivery type</label>
+                <div className="flex gap-4">
+                  <label className={`flex items-center gap-2.5 p-3 rounded-xl cursor-pointer border transition-all flex-1 ${deliveryType === "home" ? "border-cyber/30 bg-cyber/5" : "border-white/[0.06] hover:border-white/[0.12]"}`}>
+                    <input type="radio" name="deliveryType" value="home" checked={deliveryType === "home"} onChange={() => setDeliveryType("home")} className="w-4 h-4 text-cyber focus:ring-cyber/30" />
+                    <div>
+                      <span className="text-sm text-gray-200 font-medium">Home delivery</span>
+                      <p className="text-[10px] text-gray-500">Deliver to your address</p>
+                    </div>
+                  </label>
+                  <label className={`flex items-center gap-2.5 p-3 rounded-xl cursor-pointer border transition-all flex-1 ${deliveryType === "office" ? "border-cyber/30 bg-cyber/5" : "border-white/[0.06] hover:border-white/[0.12]"}`}>
+                    <input type="radio" name="deliveryType" value="office" checked={deliveryType === "office"} onChange={() => setDeliveryType("office")} className="w-4 h-4 text-cyber focus:ring-cyber/30" />
+                    <div>
+                      <span className="text-sm text-gray-200 font-medium">Office delivery</span>
+                      <p className="text-[10px] text-gray-500">Deliver to your workplace</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -275,7 +296,7 @@ export default function CheckoutPage() {
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">{t("checkout.delivery", lang)}</span>
                 <span className={`font-medium ${form.province ? "text-white" : "text-gray-600"}`}>
-                  {hasFreeShippingItem ? "FREE" : form.province ? formatPrice(deliveryRate, lang) : "â€”"}
+                  {hasFreeShippingItem ? "FREE" : form.province ? formatPrice(deliveryRate, lang) : "—"}
                 </span>
               </div>
               <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/[0.06]">
