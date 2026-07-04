@@ -6,12 +6,11 @@ import { useLang } from "@/lib/language-context"
 import { t, getDir, Lang } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
 
-interface Zone { id: string; name: string; nameAr: string; nameFr: string; rate: number }
-interface Province { id: string; name: string; nameAr: string; nameFr: string; zone: string }
+interface Province { id: string; name: string; nameAr: string; nameFr: string; rate: number }
 
 const emptyProduct = (): Partial<Product> => ({
   name: "", description: "", price: 0, originalPrice: 0, image: "", category: "General",
-  inStock: true, featured: false,
+  quantity: 999, featured: false, freeShipping: false,
 })
 
 const STATUSES = ["confirmed", "pending", "shipped", "delivered", "cancelled"] as const
@@ -79,9 +78,8 @@ const sidebarTabs = [
 function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: string) => void; lang: Lang; dir: string }) {
   const [orders, setOrders] = useState<Order[]>([])
   const [products, setProducts] = useState<Product[]>([])
-  const [zones, setZones] = useState<Zone[]>([])
   const [provinces, setProvinces] = useState<Province[]>([])
-  const [zoneRates, setZoneRates] = useState<Record<string, number>>({})
+  const [provinceRates, setProvinceRates] = useState<Record<string, number>>({})
   const [refreshKey, setRefreshKey] = useState(0)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [creating, setCreating] = useState(false)
@@ -122,8 +120,8 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
     try {
       const [pr, pvr] = await Promise.all([fetch("/api/products"), fetch("/api/provinces")])
       if (pr.ok) { const d = await pr.json(); setProducts(Array.isArray(d) ? d : []) }
-      if (pvr.ok) { const d = await pvr.json(); setZones(d.zones || []); setProvinces(d.provinces || []);
-        const rates: Record<string, number> = {}; (d.zones || []).forEach((z: Zone) => { rates[z.id] = z.rate }); setZoneRates(rates) }
+      if (pvr.ok) { const d = await pvr.json(); setProvinces(d.provinces || []);
+        const rates: Record<string, number> = {}; (d.provinces || []).forEach((p: Province) => { rates[p.id] = p.rate }); setProvinceRates(rates) }
     } catch {}
   }, [])
 
@@ -325,8 +323,13 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
   const saveRates = async () => {
     setRateSaving(true); setRateSaved(false)
     try {
-      const res = await fetch("/api/provinces", { method: "PUT", headers: authHeaders, body: JSON.stringify({ zones: zones.map(z => ({ ...z, rate: zoneRates[z.id] ?? z.rate })) }) })
-      if (res.ok) { setRateSaved(true); showToast("Rates saved"); setTimeout(() => setRateSaved(false), 2000) }
+      for (const p of provinces) {
+        const newRate = provinceRates[p.id]
+        if (newRate !== undefined && newRate !== p.rate) {
+          await fetch("/api/provinces", { method: "PUT", headers: authHeaders, body: JSON.stringify({ provinceId: p.id, rate: newRate }) })
+        }
+      }
+      setRateSaved(true); showToast("Rates saved"); setTimeout(() => setRateSaved(false), 2000)
     } catch { showToast("Failed to save rates", "error") } finally { setRateSaving(false) }
   }
 
@@ -336,7 +339,6 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
     setTimeout(() => setHomepageSaved(false), 2000)
   }
 
-  const getZoneName = (z: Zone) => lang === "ar" ? z.nameAr : lang === "fr" ? z.nameFr : z.name
   const getProvinceName = (p: Province) => lang === "ar" ? p.nameAr : lang === "fr" ? p.nameFr : p.name
 
   const getTabLabel = (t: typeof sidebarTabs[0]) => lang === "ar" ? t.labelAr : lang === "fr" ? t.labelFr : t.label
@@ -964,8 +966,8 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                           <input type="number" value={editForm.price || 0} onChange={e => updateField("price", parseInt(e.target.value) || 0)} className={inputClass} />
                         </div>
                         <div>
-                          <label className={labelClass}>Original Price</label>
-                          <input type="number" value={editForm.originalPrice || 0} onChange={e => updateField("originalPrice", parseInt(e.target.value) || 0)} className={inputClass} />
+                          <label className={labelClass}>Quantity in Stock</label>
+                          <input type="number" value={editForm.quantity ?? 999} onChange={e => updateField("quantity", Math.max(0, parseInt(e.target.value) || 0))} className={inputClass} min="0" />
                         </div>
                       </div>
                       <div>
@@ -996,17 +998,23 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                           </div>
                         )}
                       </div>
-                      <div className="flex gap-4 pt-2">
-                        <label className="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl hover:bg-white/[0.02] transition-all">
-                          <input type="checkbox" checked={editForm.inStock ?? true} onChange={e => updateField("inStock", e.target.checked)}
-                            className="w-4 h-4 rounded text-cyber focus:ring-cyber/30 bg-white/[0.05] border-white/[0.2]" />
-                          <span className="text-sm text-gray-300">In Stock</span>
-                        </label>
-                        <label className="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl hover:bg-white/[0.02] transition-all">
-                          <input type="checkbox" checked={editForm.featured ?? false} onChange={e => updateField("featured", e.target.checked)}
-                            className="w-4 h-4 rounded text-cyber focus:ring-cyber/30 bg-white/[0.05] border-white/[0.2]" />
-                          <span className="text-sm text-gray-300">Featured</span>
-                        </label>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className={labelClass}>Original Price</label>
+                          <input type="number" value={editForm.originalPrice || 0} onChange={e => updateField("originalPrice", parseInt(e.target.value) || 0)} className={inputClass} />
+                        </div>
+                        <div className="flex items-end gap-3 pb-1">
+                          <label className="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl hover:bg-white/[0.02] transition-all border border-white/[0.06]">
+                            <input type="checkbox" checked={editForm.freeShipping ?? false} onChange={e => updateField("freeShipping", e.target.checked)}
+                              className="w-4 h-4 rounded text-cyber focus:ring-cyber/30 bg-white/[0.05] border-white/[0.2]" />
+                            <span className="text-sm text-gray-300 whitespace-nowrap">Free delivery</span>
+                          </label>
+                          <label className="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl hover:bg-white/[0.02] transition-all border border-white/[0.06]">
+                            <input type="checkbox" checked={editForm.featured ?? false} onChange={e => updateField("featured", e.target.checked)}
+                              className="w-4 h-4 rounded text-cyber focus:ring-cyber/30 bg-white/[0.05] border-white/[0.2]" />
+                            <span className="text-sm text-gray-300">Featured</span>
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div className="p-6 border-t border-white/[0.06] flex justify-end gap-3">
@@ -1090,8 +1098,11 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                             {p.featured && (
                               <div className="absolute top-2 left-2 px-2 py-0.5 bg-cyber/90 text-dark text-[9px] font-bold rounded-full">FEATURED</div>
                             )}
-                            {!p.inStock && (
-                              <div className="absolute top-2 right-2 px-2 py-0.5 bg-red-500/90 text-white text-[9px] font-bold rounded-full">OUT</div>
+                            {p.freeShipping && (
+                              <div className="absolute top-2 right-2 px-2 py-0.5 bg-cyber/90 text-dark text-[9px] font-bold rounded-full">FREE</div>
+                            )}
+                            {p.quantity <= 0 && (
+                              <div className="absolute top-2 left-2 px-2 py-0.5 bg-red-500/90 text-white text-[9px] font-bold rounded-full">OUT</div>
                             )}
                           </div>
                           <div className="p-3">
@@ -1154,8 +1165,8 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                               <td className="p-4 font-bold text-cyber">{formatPrice(p.price, lang)}</td>
                               <td className="p-4">
                                 <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full",
-                                  p.inStock ? "bg-green-500/15 text-green-400" : "bg-red-500/15 text-red-400")}>
-                                  {p.inStock ? "Active" : "Inactive"}
+                                  p.quantity > 0 ? "bg-green-500/15 text-green-400" : "bg-red-500/15 text-red-400")}>
+                                  {p.quantity > 0 ? `${p.quantity} in stock` : "Out of stock"}
                                 </span>
                               </td>
                               <td className="p-4">
@@ -1202,7 +1213,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                   { label: "Total Revenue", value: formatPrice(totalRevenue, lang), sub: `${orders.length} orders`, icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "text-cyber" },
                   { label: "Average Order", value: formatPrice(orders.length ? Math.round(totalRevenue / orders.length) : 0, lang), sub: "per order", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", color: "text-pink-400" },
                   { label: "Conversion Rate", value: orders.length > 0 ? "â€”" : "0%", sub: "visitors to orders", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", color: "text-green-400" },
-                  { label: "Active Products", value: products.filter(p => p.inStock).length, sub: `${products.length} total`, icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", color: "text-yellow-400" },
+                  { label: "In Stock", value: products.filter(p => p.quantity > 0).length, sub: `${products.length} total`, icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", color: "text-yellow-400" },
                 ].map((stat, i) => (
                   <div key={i} className="glass rounded-2xl p-5 border border-white/[0.04]">
                     <div className="flex items-start justify-between mb-3">
@@ -1365,37 +1376,37 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
               <div className="glass rounded-2xl p-6 border border-white/[0.04]">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="text-xl font-bold text-white">Delivery Rates</h2>
-                    <p className="text-xs text-gray-500 mt-0.5">Manage shipping zones and pricing</p>
+                    <h2 className="text-xl font-bold text-white">Delivery Rates by Province</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">Set per-wilaya delivery pricing</p>
                   </div>
                   <button onClick={saveRates} disabled={rateSaving} className="flex items-center gap-2 px-5 py-2.5 btn-cyber-solid text-sm disabled:opacity-50">
                     {rateSaving ? "Saving..." : rateSaved ? "Saved!" : "Save Rates"}
                   </button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {zones.map(zone => (
-                    <div key={zone.id} className="bg-white/[0.02] rounded-2xl p-5 border border-white/[0.06] hover:border-white/[0.1] transition-all">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-semibold text-gray-200">{getZoneName(zone)}</h4>
-                        <span className="text-xs text-gray-500 bg-white/[0.04] px-2.5 py-1 rounded-full">
-                          {provinces.filter(p => p.zone === zone.id).length} provinces
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="relative flex-1">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-500">DZD</span>
-                          <input type="number" value={zoneRates[zone.id] ?? zone.rate}
-                            onChange={e => setZoneRates(p => ({ ...p, [zone.id]: parseInt(e.target.value) || 0 }))}
-                            className="input-cyber w-full text-sm py-2.5 pl-10" />
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-1">
-                        {provinces.filter(p => p.zone === zone.id).map(p => (
-                          <span key={p.id} className="text-[10px] bg-white/[0.04] text-gray-400 px-2 py-0.5 rounded-full border border-white/[0.06]">{getProvinceName(p)}</span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                <p className="text-xs text-gray-500 mb-4">Showing all 58 wilayas â€” edit the DZD rate for each province.</p>
+                <div className="max-h-[500px] overflow-y-auto rounded-2xl border border-white/[0.06]">
+                  <table className="w-full text-sm">
+                    <thead className="sticky top-0 glass z-10">
+                      <tr className="text-gray-500 uppercase text-[11px] tracking-wider">
+                        <th className="text-left p-3 w-16">#</th>
+                        <th className="text-left p-3">Province</th>
+                        <th className="text-right p-3 w-40">Rate (DZD)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {provinces.map((p) => (
+                        <tr key={p.id} className="border-t border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                          <td className="p-3 text-gray-500 font-mono text-xs">{p.id}</td>
+                          <td className="p-3 text-gray-200 font-medium">{getProvinceName(p)}</td>
+                          <td className="p-3 text-right">
+                            <input type="number" value={provinceRates[p.id] ?? p.rate}
+                              onChange={e => setProvinceRates(r => ({ ...r, [p.id]: parseInt(e.target.value) || 0 }))}
+                              className="input-cyber w-28 text-sm py-1.5 text-right" />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
