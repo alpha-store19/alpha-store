@@ -16,15 +16,16 @@ export async function PUT(request: Request) {
     }
 
     const body = await request.json()
-    const { provinceId, rate } = body
+    const { provinceId, rateHome, rateOffice } = body
 
-    if (!provinceId || typeof rate !== "number") {
-      return NextResponse.json({ error: "Missing provinceId or rate" }, { status: 400 })
+    if (!provinceId || typeof rateHome !== "number" || typeof rateOffice !== "number") {
+      return NextResponse.json({ error: "Missing provinceId, rateHome, or rateOffice" }, { status: 400 })
     }
 
-    const safeRate = Math.max(0, Math.min(99999, Math.round(rate)))
+    const safeHome = Math.max(0, Math.min(99999, Math.round(rateHome)))
+    const safeOffice = Math.max(0, Math.min(99999, Math.round(rateOffice)))
 
-    const ok = await updateProvinceRate(provinceId, safeRate)
+    const ok = await updateProvinceRate(provinceId, safeHome, safeOffice)
     if (!ok) return NextResponse.json({ error: "Province not found" }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch {
