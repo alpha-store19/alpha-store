@@ -105,7 +105,7 @@ export default function CartPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">{t("cart.shipping", lang)}</span>
-              <span className="font-medium text-cyber">500 DZD</span>
+              <span className="font-medium text-cyber">{items.some(i => (i as any).freeShipping) ? "FREE" : "Calculated at checkout"}</span>
             </div>
           </div>
           <div className="flex justify-between mb-6">
