@@ -40,4 +40,5 @@ export interface CustomerInfo {
   province: string
   provinceName?: string
   deliveryRate?: number
+  deliveryType?: "home" | "office"
 }
