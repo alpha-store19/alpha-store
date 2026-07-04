@@ -6,7 +6,7 @@ import { useLang } from "@/lib/language-context"
 import { t, getDir, Lang } from "@/lib/translations"
 import { formatPrice } from "@/lib/currency"
 
-interface Province { id: string; name: string; nameAr: string; nameFr: string; rate: number }
+interface Province { id: string; name: string; nameAr: string; nameFr: string; rateHome: number; rateOffice: number }
 
 const emptyProduct = (): Partial<Product> => ({
   name: "", description: "", price: 0, originalPrice: 0, image: "", category: "General",
@@ -68,18 +68,18 @@ export default function AdzakiPage() {
 }
 
 const sidebarTabs = [
-  { key: "overview", label: "Overview", labelAr: "Ù†Ø¸Ø±Ø© Ø¹Ø§Ù…Ø©", labelFr: "AperÃ§u", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
-  { key: "orders", label: "Orders", labelAr: "Ø§Ù„Ø·Ù„Ø¨Ø§Øª", labelFr: "Commandes", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" },
-  { key: "products", label: "Products", labelAr: "Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª", labelFr: "Produits", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
-  { key: "analytics", label: "Analytics", labelAr: "Ø§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª", labelFr: "Analytique", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
-  { key: "settings", label: "Settings", labelAr: "Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª", labelFr: "ParamÃ¨tres", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
+  { key: "overview", label: "Overview", labelAr: "نظرة عامة", labelFr: "Aperçu", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
+  { key: "orders", label: "Orders", labelAr: "الطلبات", labelFr: "Commandes", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" },
+  { key: "products", label: "Products", labelAr: "المنتجات", labelFr: "Produits", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
+  { key: "analytics", label: "Analytics", labelAr: "التحليلات", labelFr: "Analytique", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
+  { key: "settings", label: "Settings", labelAr: "الإعدادات", labelFr: "Paramètres", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
 ]
 
 function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: string) => void; lang: Lang; dir: string }) {
   const [orders, setOrders] = useState<Order[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [provinces, setProvinces] = useState<Province[]>([])
-  const [provinceRates, setProvinceRates] = useState<Record<string, number>>({})
+  const [provinceRates, setProvinceRates] = useState<Record<string, { home: number; office: number }>>({})
   const [refreshKey, setRefreshKey] = useState(0)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [creating, setCreating] = useState(false)
@@ -121,7 +121,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
       const [pr, pvr] = await Promise.all([fetch("/api/products"), fetch("/api/provinces")])
       if (pr.ok) { const d = await pr.json(); setProducts(Array.isArray(d) ? d : []) }
       if (pvr.ok) { const d = await pvr.json(); setProvinces(d.provinces || []);
-        const rates: Record<string, number> = {}; (d.provinces || []).forEach((p: Province) => { rates[p.id] = p.rate }); setProvinceRates(rates) }
+        const rates: Record<string, { home: number; office: number }> = {}; (d.provinces || []).forEach((p: Province) => { rates[p.id] = { home: p.rateHome, office: p.rateOffice } }); setProvinceRates(rates) }
     } catch {}
   }, [])
 
@@ -324,9 +324,9 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
     setRateSaving(true); setRateSaved(false)
     try {
       for (const p of provinces) {
-        const newRate = provinceRates[p.id]
-        if (newRate !== undefined && newRate !== p.rate) {
-          await fetch("/api/provinces", { method: "PUT", headers: authHeaders, body: JSON.stringify({ provinceId: p.id, rate: newRate }) })
+        const r = provinceRates[p.id]
+        if (r !== undefined && (r.home !== p.rateHome || r.office !== p.rateOffice)) {
+          await fetch("/api/provinces", { method: "PUT", headers: authHeaders, body: JSON.stringify({ provinceId: p.id, rateHome: r.home, rateOffice: r.office }) })
         }
       }
       setRateSaved(true); showToast("Rates saved"); setTimeout(() => setRateSaved(false), 2000)
@@ -1212,7 +1212,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                 {[
                   { label: "Total Revenue", value: formatPrice(totalRevenue, lang), sub: `${orders.length} orders`, icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "text-cyber" },
                   { label: "Average Order", value: formatPrice(orders.length ? Math.round(totalRevenue / orders.length) : 0, lang), sub: "per order", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", color: "text-pink-400" },
-                  { label: "Conversion Rate", value: orders.length > 0 ? "â€”" : "0%", sub: "visitors to orders", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", color: "text-green-400" },
+                  { label: "Conversion Rate", value: orders.length > 0 ? "—" : "0%", sub: "visitors to orders", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", color: "text-green-400" },
                   { label: "In Stock", value: products.filter(p => p.quantity > 0).length, sub: `${products.length} total`, icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", color: "text-yellow-400" },
                 ].map((stat, i) => (
                   <div key={i} className="glass rounded-2xl p-5 border border-white/[0.04]">
@@ -1383,28 +1383,37 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                     {rateSaving ? "Saving..." : rateSaved ? "Saved!" : "Save Rates"}
                   </button>
                 </div>
-                <p className="text-xs text-gray-500 mb-4">Showing all 58 wilayas â€” edit the DZD rate for each province.</p>
+                <p className="text-xs text-gray-500 mb-4">Set delivery prices for each wilaya — separate rates for home delivery and office delivery.</p>
                 <div className="max-h-[500px] overflow-y-auto rounded-2xl border border-white/[0.06]">
                   <table className="w-full text-sm">
                     <thead className="sticky top-0 glass z-10">
                       <tr className="text-gray-500 uppercase text-[11px] tracking-wider">
-                        <th className="text-left p-3 w-16">#</th>
+                        <th className="text-left p-3 w-12">#</th>
                         <th className="text-left p-3">Province</th>
-                        <th className="text-right p-3 w-40">Rate (DZD)</th>
+                        <th className="text-right p-3 w-32">Home (DZD)</th>
+                        <th className="text-right p-3 w-32">Office (DZD)</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {provinces.map((p) => (
-                        <tr key={p.id} className="border-t border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                          <td className="p-3 text-gray-500 font-mono text-xs">{p.id}</td>
-                          <td className="p-3 text-gray-200 font-medium">{getProvinceName(p)}</td>
-                          <td className="p-3 text-right">
-                            <input type="number" value={provinceRates[p.id] ?? p.rate}
-                              onChange={e => setProvinceRates(r => ({ ...r, [p.id]: parseInt(e.target.value) || 0 }))}
-                              className="input-cyber w-28 text-sm py-1.5 text-right" />
-                          </td>
-                        </tr>
-                      ))}
+                      {provinces.map((p) => {
+                        const r = provinceRates[p.id] || { home: p.rateHome, office: p.rateOffice }
+                        return (
+                          <tr key={p.id} className="border-t border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                            <td className="p-3 text-gray-500 font-mono text-xs">{p.id}</td>
+                            <td className="p-3 text-gray-200 font-medium">{getProvinceName(p)}</td>
+                            <td className="p-3 text-right">
+                              <input type="number" value={r.home}
+                                onChange={e => setProvinceRates(prev => ({ ...prev, [p.id]: { ...(prev[p.id] || r), home: parseInt(e.target.value) || 0 } }))}
+                                className="input-cyber w-24 text-sm py-1.5 text-right" />
+                            </td>
+                            <td className="p-3 text-right">
+                              <input type="number" value={r.office}
+                                onChange={e => setProvinceRates(prev => ({ ...prev, [p.id]: { ...(prev[p.id] || r), office: parseInt(e.target.value) || 0 } }))}
+                                className="input-cyber w-24 text-sm py-1.5 text-right" />
+                            </td>
+                          </tr>
+                        )
+                      })}
                     </tbody>
                   </table>
                 </div>
