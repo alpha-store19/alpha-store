@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { addOrder } from "@/lib/orders-store"
+import { getProductById, updateProduct, getProducts } from "@/lib/store"
 import { rateLimitIP } from "@/lib/rate-limit"
 import nodemailer from "nodemailer"
 
@@ -51,7 +52,7 @@ function buildEmailHtml(order: any, customer: any) {
           <span style="font-size:13px;color:#666">Delivery: DZD ${Math.round(customer.deliveryRate).toLocaleString()}</span><br/>
           <span style="font-size:20px;color:#00f0ff">Total: DZD ${Math.round(order.total).toLocaleString()}</span>
         </div>
-        <p style="margin-top:20px;font-size:11px;color:#999;text-align:center">Alpha Store — Order Notification</p>
+        <p style="margin-top:20px;font-size:11px;color:#999;text-align:center">Alpha Store â€” Order Notification</p>
       </div>
     </body>
     </html>`
@@ -63,7 +64,6 @@ function sanitize(str: string): string {
 
 export async function POST(request: Request) {
   try {
-    // Rate limit
     const rl = rateLimitIP(request, 10, 60000)
     if (!rl.allowed) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 })
@@ -76,7 +76,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing items or customer" }, { status: 400 })
     }
 
-    // Validate items
     for (const item of items) {
       if (!item.productId || !item.name || typeof item.price !== "number" || !item.quantity || item.quantity < 1 || item.quantity > 99) {
         return NextResponse.json({ error: "Invalid item data" }, { status: 400 })
@@ -86,7 +85,20 @@ export async function POST(request: Request) {
       }
     }
 
-    // Validate and sanitize customer data
+    // Validate stock for all items
+    for (const item of items) {
+      const product = await getProductById(item.productId)
+      if (!product) {
+        return NextResponse.json({ error: `Product "${item.name}" not found` }, { status: 400 })
+      }
+      if (product.quantity <= 0) {
+        return NextResponse.json({ error: `"${product.name}" is out of stock` }, { status: 400 })
+      }
+      if (item.quantity > product.quantity) {
+        return NextResponse.json({ error: `Not enough "${product.name}" in stock. Available: ${product.quantity}` }, { status: 400 })
+      }
+    }
+
     if (!customer.firstName || !customer.lastName || !customer.phone || !customer.email || !customer.address) {
       return NextResponse.json({ error: "Missing required customer fields" }, { status: 400 })
     }
@@ -102,7 +114,6 @@ export async function POST(request: Request) {
       deliveryRate: Math.max(0, Math.min(99999, deliveryRate || 0)),
     }
 
-    // Validate total
     const calculatedTotal = items.reduce((s: number, i: { price: number; quantity: number }) => s + i.price * i.quantity, 0)
     if (Math.abs((total || calculatedTotal) - calculatedTotal) > 10000) {
       return NextResponse.json({ error: "Invalid total" }, { status: 400 })
@@ -119,6 +130,14 @@ export async function POST(request: Request) {
       createdAt: "",
     })
 
+    // Deduct stock
+    for (const item of items) {
+      const product = await getProductById(item.productId)
+      if (product) {
+        await updateProduct(item.productId, { quantity: Math.max(0, product.quantity - item.quantity) })
+      }
+    }
+
     try {
       if (process.env.GMAIL_APP_PASSWORD) {
         const transporter = nodemailer.createTransport({
@@ -134,7 +153,7 @@ export async function POST(request: Request) {
         await transporter.sendMail({
           from: `"Alpha Store" <${process.env.GMAIL_USER || ADMIN_EMAIL}>`,
           to: ADMIN_EMAIL,
-          subject: `New Order #${order.id.slice(0, 8)} — ${safeCustomer.firstName} ${safeCustomer.lastName}`,
+          subject: `New Order #${order.id.slice(0, 8)} â€” ${safeCustomer.firstName} ${safeCustomer.lastName}`,
           html: buildEmailHtml({ ...order, items, subtotal: calculatedTotal, total: calculatedTotal + safeCustomer.deliveryRate }, safeCustomer),
         })
       }
