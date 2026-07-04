@@ -26,8 +26,9 @@ function validateProduct(body: any): { valid: boolean; error?: string; data?: Pa
       originalPrice: body.originalPrice ? Math.round(Math.max(0, body.originalPrice)) : undefined,
       image: typeof body.image === "string" ? body.image.slice(0, 500000) : "",
       category: sanitize(body.category || "General").slice(0, 50),
-      inStock: body.inStock !== false,
+      quantity: typeof body.quantity === "number" ? Math.max(0, Math.round(body.quantity)) : 999,
       featured: body.featured === true,
+      freeShipping: body.freeShipping === true,
     },
   }
 }
