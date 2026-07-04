@@ -47,6 +47,18 @@ export default function ProductCard({ product }: { product: Product }) {
             {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
           </span>
         )}
+        {product.freeShipping && (
+          <span className="absolute top-3 right-3 bg-green-500/20 backdrop-blur-md text-green-400 text-xs font-bold px-2.5 py-1 rounded-full border border-green-500/30">
+            Free delivery
+          </span>
+        )}
+        {product.quantity <= 0 && (
+          <div className="absolute inset-0 bg-dark/70 backdrop-blur-[1px] flex items-center justify-center z-10">
+            <span className="bg-red-500/20 text-red-400 text-sm font-bold px-4 py-2 rounded-full border border-red-500/30">
+              Out of Stock
+            </span>
+          </div>
+        )}
         {isAdded && (
           <div className="absolute inset-0 bg-cyber/10 backdrop-blur-[1px] flex items-center justify-center animate-fade-in-up">
             <div className="w-16 h-16 rounded-full bg-cyber/20 border-2 border-cyber flex items-center justify-center animate-scale-in">
@@ -75,13 +87,15 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
           <button
             onClick={handleAdd}
-            disabled={isAdded}
+            disabled={isAdded || product.quantity <= 0}
             className={`p-2.5 rounded-full transition-all duration-300 ${
               isAdded
                 ? "bg-green-500/20 text-green-400 border border-green-500/30 scale-110"
+                : product.quantity <= 0
+                ? "bg-gray-500/10 text-gray-600 border border-gray-500/20 cursor-not-allowed"
                 : "bg-cyber/10 hover:bg-cyber/20 text-cyber hover:shadow-lg hover:shadow-cyber/10 border border-cyber/20 hover:border-cyber/40 hover:scale-105 active:scale-95"
             }`}
-            title="Add to cart"
+            title={product.quantity <= 0 ? "Out of stock" : "Add to cart"}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isAdded ? (
