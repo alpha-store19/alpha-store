@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "name": "Test product",
+    "description": "Test",
+    "price": 999,
+    "originalPrice": 9999,
+    "image": "",
+    "category": "Electronics",
+    "inStock": true,
+    "featured": false,
+    "id": "6e12e510-bd87-4ec6-80cd-94cd0395dbeb"
+  }
+]
