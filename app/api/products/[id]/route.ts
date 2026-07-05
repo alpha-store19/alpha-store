@@ -35,7 +35,7 @@ export async function PUT(
       safe.description = sanitize(String(body.description)).slice(0, 2000)
     }
     if (body.image !== undefined) {
-      if (typeof body.image !== "string" || body.image.length > 500000) {
+      if (typeof body.image !== "string" || body.image.length > 3000000) {
         return NextResponse.json({ error: "Invalid image" }, { status: 400 })
       }
       safe.image = body.image
@@ -44,7 +44,7 @@ export async function PUT(
       if (!Array.isArray(body.images) || body.images.length > 20) {
         return NextResponse.json({ error: "Invalid images array" }, { status: 400 })
       }
-      safe.images = body.images.filter((s: any) => typeof s === "string" && s.length <= 500000)
+      safe.images = body.images.filter((s: any) => typeof s === "string" && s.length <= 3000000)
     }
     if (body.category !== undefined) {
       safe.category = sanitize(String(body.category)).slice(0, 50)
