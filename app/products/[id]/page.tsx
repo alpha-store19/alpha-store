@@ -19,6 +19,7 @@ export default function ProductDetailPage() {
   const [added, setAdded] = useState(false)
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
+  const [activeImage, setActiveImage] = useState(0)
 
   useEffect(() => {
     fetch(`/api/products?id=${params.id}`)
@@ -78,12 +79,26 @@ export default function ProductDetailPage() {
       </nav>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-fade-in-up">
-        <div className="glass rounded-2xl overflow-hidden cyber-border">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
+        <div className="space-y-3">
+          <div className="glass rounded-2xl overflow-hidden cyber-border">
+            <img
+              src={product.images?.[activeImage] || product.image}
+              alt={product.name}
+              className="w-full h-full object-cover aspect-square"
+            />
+          </div>
+          {(product.images && product.images.length > 1) && (
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {product.images.map((img, idx) => (
+                <button key={idx} onClick={() => setActiveImage(idx)}
+                  className={`w-16 h-16 rounded-xl overflow-hidden border-2 flex-shrink-0 transition-all ${
+                    activeImage === idx ? "border-cyber" : "border-white/[0.06] hover:border-white/[0.2]"
+                  }`}>
+                  <img src={img} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col justify-center">
