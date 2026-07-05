@@ -17,6 +17,8 @@ function validateProduct(body: any): { valid: boolean; error?: string; data?: Pa
     return { valid: false, error: "Image too large" }
   }
 
+  const images = Array.isArray(body.images) ? body.images.filter((s: any) => typeof s === "string" && s.length <= 500000).slice(0, 20) : undefined
+
   return {
     valid: true,
     data: {
@@ -24,7 +26,8 @@ function validateProduct(body: any): { valid: boolean; error?: string; data?: Pa
       description: sanitize(body.description || "").slice(0, 2000),
       price: Math.round(body.price),
       originalPrice: body.originalPrice ? Math.round(Math.max(0, body.originalPrice)) : undefined,
-      image: typeof body.image === "string" ? body.image.slice(0, 500000) : "",
+      image: typeof body.image === "string" ? body.image.slice(0, 500000) : (images?.[0] || ""),
+      images: images?.length ? images : undefined,
       category: sanitize(body.category || "General").slice(0, 50),
       quantity: typeof body.quantity === "number" ? Math.max(0, Math.round(body.quantity)) : 999,
       featured: body.featured === true,
