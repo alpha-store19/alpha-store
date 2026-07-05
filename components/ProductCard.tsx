@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { Product } from "@/lib/types"
 import { useCart } from "./CartContext"
@@ -12,7 +12,11 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
   const { lang } = useLang()
   const [justAdded, setJustAdded] = useState(false)
   const [imgLoaded, setImgLoaded] = useState(false)
+  const [hoverImgIdx, setHoverImgIdx] = useState(-1)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isAdded = recentlyAdded === product.id || justAdded
+  const images = product.images?.length ? product.images : [product.image]
+  const hasMulti = images.length > 1
 
   useEffect(() => {
     if (recentlyAdded === product.id) {
@@ -21,6 +25,30 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
       return () => clearTimeout(t)
     }
   }, [recentlyAdded, product.id])
+
+  const startRotation = () => {
+    if (!hasMulti || product.quantity <= 0) return
+    let i = 0
+    intervalRef.current = setInterval(() => {
+      i = (i + 1) % images.length
+      setHoverImgIdx(i)
+    }, 1200)
+  }
+
+  const stopRotation = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+    setHoverImgIdx(-1)
+  }
+
+  useEffect(() => {
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
+  }, [])
+
+  const displayImage = hoverImgIdx >= 0 ? images[hoverImgIdx] : product.image
+  const showIndicators = hasMulti && (hoverImgIdx >= 0 || false)
 
   const handleAdd = () => {
     addItem({
@@ -40,24 +68,36 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
         isAdded ? "!border-cyber/40 !shadow-cyber/10" : "glass-hover"
       }`}
       style={{ animationDelay: `${index * 80}ms` }}
+      onMouseEnter={startRotation}
+      onMouseLeave={stopRotation}
     >
       <Link href={`/products/${product.id}`} className="relative overflow-hidden aspect-square bg-dark-card">
         {!imgLoaded && <div className="absolute inset-0 skeleton" />}
         <img
-          src={product.image}
+          src={displayImage}
           alt={product.name}
           loading="lazy"
           onLoad={() => setImgLoaded(true)}
-          className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+          className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${
+            imgLoaded ? "opacity-100" : "opacity-0"
+          }`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {discount > 0 && (
-          <span className="absolute top-3 left-3 badge-cyber animate-fade-in">
+          <span className="absolute top-3 left-3 badge-cyber animate-fade-in z-20">
             -{discount}%
           </span>
         )}
-        {product.freeShipping && (
-          <span className="absolute top-3 right-3 badge-green animate-fade-in">
+        {product.freeShipping && !product.originalPrice && (
+          <span className="absolute top-3 right-3 badge-green animate-fade-in z-20">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+            </svg>
+            Free
+          </span>
+        )}
+        {product.freeShipping && discount > 0 && (
+          <span className="absolute top-3 right-3 badge-green animate-fade-in z-20">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
             </svg>
@@ -66,13 +106,11 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
         )}
         {product.quantity <= 0 && (
           <div className="absolute inset-0 bg-dark/80 backdrop-blur-[2px] flex items-center justify-center z-10">
-            <span className="badge-red text-sm px-4 py-2">
-              Out of Stock
-            </span>
+            <span className="badge-red text-sm px-4 py-2">Out of Stock</span>
           </div>
         )}
         {isAdded && (
-          <div className="absolute inset-0 bg-cyber/10 backdrop-blur-[1px] flex items-center justify-center animate-fade-in">
+          <div className="absolute inset-0 bg-cyber/10 backdrop-blur-[1px] flex items-center justify-center animate-fade-in z-20">
             <div className="w-14 h-14 rounded-full bg-cyber/20 border-2 border-cyber flex items-center justify-center animate-scale-in">
               <svg className="w-7 h-7 text-cyber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -80,8 +118,9 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
             </div>
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-          <div className="flex items-center justify-center gap-1.5 text-xs text-white/70">
+
+        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
+          <div className="flex items-center justify-center gap-1.5 text-xs text-white/70 bg-dark/40 backdrop-blur-sm rounded-full py-1.5">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -89,6 +128,21 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
             Quick view
           </div>
         </div>
+
+        {hasMulti && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+            {images.slice(0, 5).map((_, i) => (
+              <span
+                key={i}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  hoverImgIdx === i || (hoverImgIdx < 0 && i === 0)
+                    ? "bg-cyber w-3"
+                    : "bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </Link>
 
       <div className="p-4 flex flex-col flex-1">
