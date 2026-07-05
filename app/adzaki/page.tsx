@@ -9,7 +9,7 @@ import { formatPrice } from "@/lib/currency"
 interface Province { id: string; name: string; nameAr: string; nameFr: string; rateHome: number; rateOffice: number }
 
 const emptyProduct = (): Partial<Product> => ({
-  name: "", description: "", price: 0, originalPrice: 0, image: "", category: "General",
+  name: "", description: "", price: 0, originalPrice: 0, image: "", images: [], category: "General",
   quantity: 999, featured: false, freeShipping: false,
 })
 
@@ -68,11 +68,11 @@ export default function AdzakiPage() {
 }
 
 const sidebarTabs = [
-  { key: "overview", label: "Overview", labelAr: "نظرة عامة", labelFr: "Aperçu", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
-  { key: "orders", label: "Orders", labelAr: "الطلبات", labelFr: "Commandes", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" },
-  { key: "products", label: "Products", labelAr: "المنتجات", labelFr: "Produits", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
-  { key: "analytics", label: "Analytics", labelAr: "التحليلات", labelFr: "Analytique", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
-  { key: "settings", label: "Settings", labelAr: "الإعدادات", labelFr: "Paramètres", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
+  { key: "overview", label: "Overview", labelAr: "Ù†Ø¸Ø±Ø© Ø¹Ø§Ù…Ø©", labelFr: "AperÃ§u", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
+  { key: "orders", label: "Orders", labelAr: "Ø§Ù„Ø·Ù„Ø¨Ø§Øª", labelFr: "Commandes", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" },
+  { key: "products", label: "Products", labelAr: "Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª", labelFr: "Produits", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
+  { key: "analytics", label: "Analytics", labelAr: "Ø§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª", labelFr: "Analytique", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
+  { key: "settings", label: "Settings", labelAr: "Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª", labelFr: "ParamÃ¨tres", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
 ]
 
 function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: string) => void; lang: Lang; dir: string }) {
@@ -94,6 +94,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
   const [productSearch, setProductSearch] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("all")
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [imagePreviews, setImagePreviews] = useState<string[]>([])
   const [orderSort, setOrderSort] = useState<{ key: string; dir: "asc" | "desc" }>({ key: "createdAt", dir: "desc" })
   const [orderPage, setOrderPage] = useState(1)
   const [productPage, setProductPage] = useState(1)
@@ -290,6 +291,10 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
     setSaving(true)
     try {
       const payload = { ...editForm }
+      if (imagePreviews.length > 0) {
+        const newImages = imagePreviews.filter(s => s.startsWith("data:"))
+        if (newImages.length > 0) payload.images = [...(editForm.images?.filter(s => !s.startsWith("data:")) || []), ...newImages]
+      }
       if (imagePreview?.startsWith("data:")) payload.image = imagePreview
       const url = creating ? "/api/products" : `/api/products/${editingProduct?.id}`
       const res = await fetch(url, { method: creating ? "POST" : "PUT", headers: authHeaders, body: JSON.stringify(payload) })
@@ -306,18 +311,26 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
     } catch { showToast("Failed to delete", "error") }
   }
 
-  const cancelEdit = () => { setEditingProduct(null); setCreating(false); setEditForm(emptyProduct()); setImagePreview(null) }
-  const startEdit = (p: Product) => { setEditingProduct(p); setEditForm({ ...p }); setCreating(false); setImagePreview(p.image) }
-  const startCreate = () => { setCreating(true); setEditingProduct(null); setEditForm(emptyProduct()); setImagePreview(null) }
+  const cancelEdit = () => { setEditingProduct(null); setCreating(false); setEditForm(emptyProduct()); setImagePreview(null); setImagePreviews([]) }
+  const startEdit = (p: Product) => { setEditingProduct(p); setEditForm({ ...p }); setCreating(false); setImagePreview(p.image); setImagePreviews(p.images || []) }
+  const startCreate = () => { setCreating(true); setEditingProduct(null); setEditForm(emptyProduct()); setImagePreview(null); setImagePreviews([]) }
   const updateField = (field: string, value: any) => setEditForm(p => ({ ...p, [field]: value }))
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    if (file.size > 2 * 1024 * 1024) { showToast("Max 2MB", "error"); return }
-    const reader = new FileReader()
-    reader.onload = () => setImagePreview(reader.result as string)
-    reader.readAsDataURL(file)
+    const files = Array.from(e.target.files || [])
+    if (!files.length) return
+    const validFiles = files.filter(f => f.size <= 2 * 1024 * 1024)
+    if (validFiles.length !== files.length) { showToast("Some files exceed 2MB limit", "error") }
+    if (!validFiles.length) return
+    const readers = validFiles.map(file => new Promise<string>((resolve) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.readAsDataURL(file)
+    }))
+    Promise.all(readers).then((results) => {
+      setImagePreviews(prev => [...prev, ...results])
+      setImagePreview(results[0])
+    })
   }
 
   const saveRates = async () => {
@@ -975,26 +988,40 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                         <input value={editForm.category || ""} onChange={e => updateField("category", e.target.value)} className={inputClass} placeholder="e.g. Electronics, Fashion" />
                       </div>
                       <div>
-                        <label className={labelClass}>Image</label>
+                        <label className={labelClass}>Images (upload multiple)</label>
                         <div className="flex items-center gap-3">
                           <label className="flex items-center gap-2 px-5 py-2.5 glass glass-hover rounded-xl text-sm font-medium text-gray-300 cursor-pointer border border-white/[0.06] hover:border-cyber/20 transition-all">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                            Upload
-                            <input type="file" accept="image/*" onChange={handleImageSelect} className="hidden" />
+                            Upload Images
+                            <input type="file" accept="image/*" multiple onChange={handleImageSelect} className="hidden" />
                           </label>
                           <span className="text-xs text-gray-500">or</span>
                           <input value={editForm.image || ""} onChange={e => updateField("image", e.target.value)} className={`${inputClass} text-xs flex-1`} placeholder="Paste image URL..." />
                         </div>
-                        {imagePreview && (
-                          <div className="mt-3 flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                            <img src={imagePreview} alt="" className="w-16 h-16 object-cover rounded-xl border border-white/[0.06]" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-xs text-gray-400 truncate">{editForm.name || "Product image"}</p>
-                              <p className="text-[10px] text-gray-600">Preview</p>
+                        {(imagePreviews.length > 0 || (editForm.images && editForm.images.length > 0)) && (
+                          <div className="mt-3">
+                            <p className="text-xs text-gray-500 mb-2">Gallery ({imagePreviews.length + (editForm.images?.filter(s => !s.startsWith("data:")).length || 0)} images)</p>
+                            <div className="flex flex-wrap gap-2">
+                              {[...(editForm.images?.filter(s => !s.startsWith("data:")) || []), ...imagePreviews].map((src, idx) => (
+                                <div key={idx} className="relative group">
+                                  <img src={src} alt="" className="w-16 h-16 object-cover rounded-xl border border-white/[0.06]" />
+                                  <button onClick={() => {
+                                    if (idx < (editForm.images?.filter(s => !s.startsWith("data:")).length || 0)) {
+                                      const filtered = (editForm.images || []).filter(s => !s.startsWith("data:"))
+                                      const newImgs = filtered.filter((_, i) => i !== idx)
+                                      updateField("images", newImgs)
+                                    } else {
+                                      const localIdx = idx - (editForm.images?.filter(s => !s.startsWith("data:")).length || 0)
+                                      setImagePreviews(prev => prev.filter((_, i) => i !== localIdx))
+                                    }
+                                  }} className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold">Ã—</button>
+                                  <button onClick={() => {
+                                    const allImgs = [...(editForm.images?.filter(s => !s.startsWith("data:")) || []), ...imagePreviews]
+                                    setImagePreview(allImgs[idx])
+                                  }} className="absolute bottom-1 right-1 w-4 h-4 bg-cyber/80 text-dark rounded-full flex items-center justify-center text-[8px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">â˜…</button>
+                                </div>
+                              ))}
                             </div>
-                            <button onClick={() => setImagePreview(null)} className="text-gray-500 hover:text-red-400 transition-colors">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                            </button>
                           </div>
                         )}
                       </div>
@@ -1212,7 +1239,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                 {[
                   { label: "Total Revenue", value: formatPrice(totalRevenue, lang), sub: `${orders.length} orders`, icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "text-cyber" },
                   { label: "Average Order", value: formatPrice(orders.length ? Math.round(totalRevenue / orders.length) : 0, lang), sub: "per order", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", color: "text-pink-400" },
-                  { label: "Conversion Rate", value: orders.length > 0 ? "—" : "0%", sub: "visitors to orders", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", color: "text-green-400" },
+                  { label: "Conversion Rate", value: orders.length > 0 ? "â€”" : "0%", sub: "visitors to orders", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", color: "text-green-400" },
                   { label: "In Stock", value: products.filter(p => p.quantity > 0).length, sub: `${products.length} total`, icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", color: "text-yellow-400" },
                 ].map((stat, i) => (
                   <div key={i} className="glass rounded-2xl p-5 border border-white/[0.04]">
@@ -1383,7 +1410,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
                     {rateSaving ? "Saving..." : rateSaved ? "Saved!" : "Save Rates"}
                   </button>
                 </div>
-                <p className="text-xs text-gray-500 mb-4">Set delivery prices for each wilaya — separate rates for home delivery and office delivery.</p>
+                <p className="text-xs text-gray-500 mb-4">Set delivery prices for each wilaya â€” separate rates for home delivery and office delivery.</p>
                 <div className="max-h-[500px] overflow-y-auto rounded-2xl border border-white/[0.06]">
                   <table className="w-full text-sm">
                     <thead className="sticky top-0 glass z-10">
