@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Store Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    background-image: radial-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: #e5e7eb;
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .bg-glow {
+    position: absolute;
+    top: 80px;
+    left: 10%;
+    width: 450px;
+    height: 450px;
+    background: rgba(0, 240, 255, 0.05);
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+  .bg-glow-2 {
+    position: absolute;
+    bottom: 80px;
+    right: 10%;
+    width: 500px;
+    height: 500px;
+    background: rgba(124, 58, 237, 0.04);
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+  }
+  .container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(0,240,255,0.1);
+    border-radius: 999px;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: rgba(0, 240, 255, 0.8);
+  }
+  .dot {
+    width: 8px; height: 8px;
+    background: #00f0ff;
+    border-radius: 50%;
+    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    position: relative;
+  }
+  .dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #00f0ff;
+    animation: ping-ring 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes ping {
+    75%, 100% { transform: scale(2); opacity: 0; }
+  }
+  @keyframes ping-ring {
+    75%, 100% { transform: scale(2.5); opacity: 0; }
+  }
+  h1 {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: 24px;
+    text-wrap: balance;
+  }
+  h1 .gradient {
+    background: linear-gradient(135deg, #00f0ff, #66f7ff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  p.sub {
+    font-size: 20px;
+    color: #9ca3af;
+    max-width: 480px;
+    line-height: 1.625;
+    margin-bottom: 32px;
+  }
+  .btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #00f0ff;
+    color: #0a0a0f;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+  }
+  .btn-primary:hover { box-shadow: 0 6px 30px rgba(0, 240, 255, 0.4); transform: scale(1.01); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 240, 255, 0.1);
+    color: #00f0ff;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: rgba(0, 240, 255, 0.2); border-color: rgba(0, 240, 255, 0.6); }
+  .arrow { transition: transform 0.3s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .logo-box {
+    aspect-ratio: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+  }
+  .logo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(124,58,237,0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-text {
+    text-align: center;
+  }
+  .logo-text h2 {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #00f0ff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .logo-text p {
+    font-size: 14px;
+    color: #6b7280;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-weight: 300;
+  }
+  .float-card {
+    position: absolute;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 12px 16px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .float-card p.label { font-size: 12px; color: #6b7280; }
+  .float-card p.value { font-size: 14px; font-weight: 700; color: #00f0ff; }
+  .float-card-1 { top: -16px; right: -16px; animation-delay: 0.5s; }
+  .float-card-2 { bottom: -16px; left: -16px; animation-delay: 1s; }
+  .float-card-2 .value { color: #22c55e; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; text-align: center; }
+    .logo-box { display: none; }
+    h1 { font-size: 48px; }
+    p.sub { max-width: 100%; }
+    .btns { justify-content: center; }
+  }
+  .note {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: #4b5563;
+    background: rgba(10,10,15,0.9);
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.06);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="bg-glow-2"></div>
+
+  <div class="container">
+    <div>
+      <div class="badge">
+        <span class="dot"></span>
+        <span>Premium Selection</span>
+      </div>
+      <h1>Welcome to <span class="gradient">Alpha</span></h1>
+      <p class="sub">Discover premium products at unbeatable prices. Quality you can trust, delivered to your door.</p>
+      <div class="btns">
+        <a href="#" class="btn-primary">
+          Shop Now
+          <svg class="arrow" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <a href="#" class="btn-secondary">Featured</a>
+      </div>
+    </div>
+
+    <div style="position:relative">
+      <div class="logo-box">
+        <div class="logo-inner">
+          <div class="logo-text">
+            <h2>ALPHA</h2>
+            <p>Premium Store</p>
+          </div>
+        </div>
+      </div>
+      <div class="float-card float-card-1">
+        <p class="label">Free delivery</p>
+        <p class="value">On all orders</p>
+      </div>
+      <div class="float-card float-card-2">
+        <p class="label">100% secure</p>
+        <p class="value">Payment</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">ALPHA STORE â€” Preview of updated hero section</div>
+</body>
+</html>
