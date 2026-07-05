@@ -7,6 +7,7 @@ import { useCart } from "./CartContext"
 import { useLang } from "@/lib/language-context"
 import { t, getDir } from "@/lib/translations"
 import LanguageSwitcher from "./LanguageSwitcher"
+import SlideDrawer from "./SlideDrawer"
 import { Product } from "@/lib/types"
 
 export default function Header() {
@@ -20,6 +21,7 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState<Product[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [showCatMenu, setShowCatMenu] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
   const catRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -82,6 +84,7 @@ export default function Header() {
   }
 
   return (
+    <>
     <header className="sticky top-4 z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4" dir={dir}>
       <div className="glass rounded-2xl px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between gap-4">
@@ -132,7 +135,17 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-3">
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="btn-ghost p-2.5 md:hidden"
+              title="Menu"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
             <div ref={searchRef} className="relative">
               {searchOpen ? (
                 <form onSubmit={handleSearchSubmit} className="flex items-center">
@@ -203,6 +216,8 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </header>
+      </header>
+      <SlideDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+    </>
   )
 }
