@@ -40,6 +40,12 @@ export async function PUT(
       }
       safe.image = body.image
     }
+    if (body.images !== undefined) {
+      if (!Array.isArray(body.images) || body.images.length > 20) {
+        return NextResponse.json({ error: "Invalid images array" }, { status: 400 })
+      }
+      safe.images = body.images.filter((s: any) => typeof s === "string" && s.length <= 500000)
+    }
     if (body.category !== undefined) {
       safe.category = sanitize(String(body.category)).slice(0, 50)
     }
