@@ -51,18 +51,16 @@ export default function SlideDrawer({ open, onClose }: SlideDrawerProps) {
     { key: "products", label: "Products", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
   ]
 
+  if (!open) return null
+
   return (
     <>
-      {open && (
-        <div
-          className="fixed inset-0 z-[60] bg-dark/80 backdrop-blur-sm animate-fade-in"
-          onClick={onClose}
-        />
-      )}
       <div
-        className={`fixed top-0 ${isRtl ? "left-0" : "right-0"} h-full w-full sm:w-[420px] z-[70] glass border-l border-white/[0.06] shadow-2xl transition-transform duration-500 ease-out ${
-          open ? "translate-x-0" : isRtl ? "-translate-x-full" : "translate-x-full"
-        }`}
+        className="fixed inset-0 z-[60] bg-dark/80 backdrop-blur-sm animate-fade-in"
+        onClick={onClose}
+      />
+      <div
+        className={`fixed top-0 ${isRtl ? "left-0" : "right-0"} h-full w-full sm:w-[420px] z-[70] glass border-l border-white/[0.06] shadow-2xl animate-slide-up`}
         dir={dir}
       >
         <div className="flex flex-col h-full">
