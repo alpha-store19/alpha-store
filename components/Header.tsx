@@ -94,6 +94,16 @@ export default function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="px-3 py-2 text-gray-500 hover:text-cyber transition-colors rounded-full hover:bg-white/[0.04] inline-flex items-center gap-1.5"
+              title="Menu"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <span className="sr-only">Menu</span>
+            </button>
             <Link href="/" className="px-4 py-2 text-gray-400 hover:text-cyber transition-colors rounded-full hover:bg-white/[0.04]">
               {t("nav.home", lang)}
             </Link>
@@ -135,10 +145,10 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-1 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={() => setDrawerOpen(true)}
-              className="btn-ghost p-2.5 md:hidden"
+              className="flex md:hidden btn-ghost p-2.5"
               title="Menu"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +156,7 @@ export default function Header() {
               </svg>
             </button>
 
-            <div ref={searchRef} className="relative">
+            <div ref={searchRef} className="relative hidden sm:block">
               {searchOpen ? (
                 <form onSubmit={handleSearchSubmit} className="flex items-center">
                   <input
