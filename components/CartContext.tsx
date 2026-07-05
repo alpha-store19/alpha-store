@@ -3,6 +3,11 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react"
 import { CartItem } from "@/lib/types"
 
+interface CartDialogState {
+  open: boolean
+  itemName: string
+}
+
 interface CartContextType {
   items: CartItem[]
   addItem: (item: CartItem) => void
@@ -12,6 +17,8 @@ interface CartContextType {
   totalItems: number
   totalPrice: number
   recentlyAdded: string | null
+  cartDialog: CartDialogState
+  closeCartDialog: () => void
 }
 
 const defaultContext: CartContextType = {
@@ -23,6 +30,8 @@ const defaultContext: CartContextType = {
   totalItems: 0,
   totalPrice: 0,
   recentlyAdded: null,
+  cartDialog: { open: false, itemName: "" },
+  closeCartDialog: () => {},
 }
 
 const CartContext = createContext<CartContextType>(defaultContext)
@@ -31,6 +40,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [mounted, setMounted] = useState(false)
   const [recentlyAdded, setRecentlyAdded] = useState<string | null>(null)
+  const [cartDialog, setCartDialog] = useState<CartDialogState>({ open: false, itemName: "" })
 
   useEffect(() => {
     setMounted(true)
@@ -59,7 +69,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return [...prev, item]
     })
     setRecentlyAdded(item.productId)
+    setCartDialog({ open: true, itemName: item.name })
     setTimeout(() => setRecentlyAdded(null), 1500)
+  }, [])
+
+  const closeCartDialog = useCallback(() => {
+    setCartDialog({ open: false, itemName: "" })
   }, [])
 
   const removeItem = (productId: string) => {
@@ -83,7 +98,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, clearCart, totalItems, totalPrice, recentlyAdded }}
+      value={{ items, addItem, removeItem, updateQuantity, clearCart, totalItems, totalPrice, recentlyAdded, cartDialog, closeCartDialog }}
     >
       {children}
     </CartContext.Provider>
