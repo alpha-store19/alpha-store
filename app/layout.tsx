@@ -4,7 +4,7 @@ import "./globals.css"
 import { CartProvider } from "@/components/CartContext"
 import { LanguageProvider } from "@/lib/language-context"
 import Header from "@/components/Header"
-import WhatsAppButton from "@/components/WhatsAppButton"
+import SocialButtons from "@/components/SocialButtons"
 import TrackingPixels from "@/components/TrackingPixels"
 
 export const dynamic = "force-dynamic"
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Header />
               <main className="flex-1">{children}</main>
               <TrackingPixels />
-              <WhatsAppButton />
+              <SocialButtons />
               <footer className="relative glass border-t border-white/[0.04] py-12 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 to-transparent pointer-events-none" />
                 <div className="relative max-w-7xl mx-auto px-4">
@@ -48,6 +48,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <p>Phone: 0697029434</p>
                         <a href="https://wa.me/213697029434" target="_blank" rel="noopener noreferrer" className="block hover:text-cyber transition-colors">
                           WhatsApp: 0697029434
+                        </a>
+                        <a href="https://www.instagram.com/alpha._store19?igsh=MW04bXRuYXN4MWtrcQ==" target="_blank" rel="noopener noreferrer" className="block hover:text-cyber transition-colors">
+                          Instagram: @alpha._store19
+                        </a>
+                        <a href="https://www.facebook.com/share/18FZyBXGje/" target="_blank" rel="noopener noreferrer" className="block hover:text-cyber transition-colors">
+                          Facebook: Alpha Store
                         </a>
                       </div>
                     </div>
