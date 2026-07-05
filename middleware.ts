@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
   response.headers.set("Cross-Origin-Resource-Policy", "same-origin")
 
   // Strict CSP for admin panel
-  if (url.startsWith("/adzaki")) {
+  if (url.startsWith("/adalpha")) {
     response.headers.set(
       "Content-Security-Policy",
       "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https:; font-src 'self' data:;"
@@ -42,7 +42,7 @@ export function middleware(request: NextRequest) {
   if (url.startsWith("/api/") && ["POST", "PUT", "PATCH", "DELETE"].includes(request.method)) {
     if (url.includes("/products") || url.includes("/provinces")) {
       const auth = request.headers.get("authorization")
-      if (!auth || auth !== "Bearer alpha123") {
+      if (!auth || auth !== "Bearer adminzaki") {
         // Allow checkout and orders API without auth (they have their own validation)
         if (!url.includes("/checkout") && !url.includes("/orders/lookup")) {
           return new NextResponse(JSON.stringify({ error: "Unauthorized" }), {
