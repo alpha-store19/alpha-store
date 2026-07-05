@@ -67,3 +67,4 @@
 .animate-scale-in { animation: scale-in 0.25s ease-out; }
 .animate-float { animation: float 3s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
