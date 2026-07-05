@@ -7,10 +7,11 @@ import { useCart } from "./CartContext"
 import { useLang } from "@/lib/language-context"
 import { formatPrice } from "@/lib/currency"
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   const { addItem, recentlyAdded } = useCart()
   const { lang } = useLang()
   const [justAdded, setJustAdded] = useState(false)
+  const [imgLoaded, setImgLoaded] = useState(false)
   const isAdded = recentlyAdded === product.id || justAdded
 
   useEffect(() => {
@@ -31,58 +32,92 @@ export default function ProductCard({ product }: { product: Product }) {
     })
   }
 
+  const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0
+
   return (
-    <div className={`group glass rounded-2xl overflow-hidden flex flex-col transition-all duration-500 ${
-      isAdded ? "animate-pulse-glow cyber-border" : "glass-hover"
-    }`}>
-      <Link href={`/products/${product.id}`} className="relative overflow-hidden aspect-square">
+    <div
+      className={`group glass rounded-2xl overflow-hidden flex flex-col transition-all duration-500 animate-slide-up ${
+        isAdded ? "!border-cyber/40 !shadow-cyber/10" : "glass-hover"
+      }`}
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
+      <Link href={`/products/${product.id}`} className="relative overflow-hidden aspect-square bg-dark-card">
+        {!imgLoaded && <div className="absolute inset-0 skeleton" />}
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          loading="lazy"
+          onLoad={() => setImgLoaded(true)}
+          className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        {product.originalPrice && (
-          <span className="absolute top-3 left-3 bg-cyber/20 backdrop-blur-md text-cyber text-xs font-bold px-2.5 py-1 rounded-full border border-cyber/30">
-            {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {discount > 0 && (
+          <span className="absolute top-3 left-3 badge-cyber animate-fade-in">
+            -{discount}%
           </span>
         )}
         {product.freeShipping && (
-          <span className="absolute top-3 right-3 bg-green-500/20 backdrop-blur-md text-green-400 text-xs font-bold px-2.5 py-1 rounded-full border border-green-500/30">
-            Free delivery
+          <span className="absolute top-3 right-3 badge-green animate-fade-in">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+            </svg>
+            Free
           </span>
         )}
         {product.quantity <= 0 && (
-          <div className="absolute inset-0 bg-dark/70 backdrop-blur-[1px] flex items-center justify-center z-10">
-            <span className="bg-red-500/20 text-red-400 text-sm font-bold px-4 py-2 rounded-full border border-red-500/30">
+          <div className="absolute inset-0 bg-dark/80 backdrop-blur-[2px] flex items-center justify-center z-10">
+            <span className="badge-red text-sm px-4 py-2">
               Out of Stock
             </span>
           </div>
         )}
         {isAdded && (
-          <div className="absolute inset-0 bg-cyber/10 backdrop-blur-[1px] flex items-center justify-center animate-fade-in-up">
-            <div className="w-16 h-16 rounded-full bg-cyber/20 border-2 border-cyber flex items-center justify-center animate-scale-in">
-              <svg className="w-8 h-8 text-cyber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="absolute inset-0 bg-cyber/10 backdrop-blur-[1px] flex items-center justify-center animate-fade-in">
+            <div className="w-14 h-14 rounded-full bg-cyber/20 border-2 border-cyber flex items-center justify-center animate-scale-in">
+              <svg className="w-7 h-7 text-cyber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
             </div>
           </div>
         )}
+        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <div className="flex items-center justify-center gap-1.5 text-xs text-white/70">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            Quick view
+          </div>
+        </div>
       </Link>
 
       <div className="p-4 flex flex-col flex-1">
-        <span className="text-xs text-gray-500 uppercase tracking-wider mb-1">{product.category}</span>
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-[11px] text-gray-600 uppercase tracking-wider font-medium">{product.category}</span>
+          {product.quantity > 0 && product.quantity <= 3 && (
+            <span className="text-[10px] text-yellow-500/80 font-medium">{product.quantity} left</span>
+          )}
+        </div>
         <Link href={`/products/${product.id}`}>
-          <h3 className="font-semibold text-gray-200 hover:text-cyber transition-colors mb-2 line-clamp-2">
+          <h3 className="font-semibold text-gray-200 hover:text-cyber transition-colors mb-2 line-clamp-2 leading-snug">
             {product.name}
           </h3>
         </Link>
 
+        <div className="flex items-center gap-1.5 mb-2">
+          {[...Array(5)].map((_, i) => (
+            <svg key={i} className="w-3 h-3 text-yellow-500/60" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          ))}
+          <span className="text-[10px] text-gray-600 ml-1">(0)</span>
+        </div>
+
         <div className="mt-auto flex items-center justify-between pt-3 border-t border-white/[0.04]">
-          <div>
+          <div className="flex items-baseline gap-2">
             <span className="text-lg font-bold text-cyber">{formatPrice(product.price, lang)}</span>
             {product.originalPrice && (
-              <span className="ml-2 text-sm text-gray-600 line-through">{formatPrice(product.originalPrice, lang)}</span>
+              <span className="text-sm text-gray-600 line-through">{formatPrice(product.originalPrice, lang)}</span>
             )}
           </div>
           <button
