@@ -81,9 +81,16 @@ export default function HomePage() {
               <div className="relative">
                 <div className="aspect-square max-w-md mx-auto glass rounded-3xl p-8 cyber-border">
                   <div className="w-full h-full rounded-2xl bg-gradient-to-br from-cyber/20 to-accent/20 flex items-center justify-center">
-                    <svg className="w-32 h-32 text-cyber/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                    </svg>
+                    <div className="text-center">
+                      <p className="text-6xl md:text-7xl font-bold tracking-[0.2em] uppercase">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber to-accent-light">
+                          ALPHA
+                        </span>
+                      </p>
+                      <p className="text-sm text-gray-500 tracking-[0.3em] uppercase mt-3 font-light">
+                        Premium Store
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="absolute -top-4 -right-4 glass rounded-2xl px-4 py-3 animate-float" style={{ animationDelay: "0.5s" }}>
