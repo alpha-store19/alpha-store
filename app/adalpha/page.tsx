@@ -115,7 +115,7 @@ function AdminDashboard({ tab, setTab, lang, dir }: { tab: string; setTab: (t: s
     setTimeout(() => setToast(null), 3000)
   }
 
-  const authHeaders = useMemo(() => ({ "Content-Type": "application/json", authorization: "Bearer alpha123" }), [])
+  const authHeaders = useMemo(() => ({ "Content-Type": "application/json", authorization: "Bearer adminzaki" }), [])
 
   const loadData = useCallback(async () => {
     try {
