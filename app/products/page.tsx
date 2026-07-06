@@ -15,10 +15,24 @@ export default function ProductsPage() {
   const dir = getDir(lang)
 
   useEffect(() => {
+    const cached = sessionStorage.getItem("alpha-products")
+    if (cached) {
+      try {
+        const data = JSON.parse(cached)
+        if (Array.isArray(data)) {
+          setProducts(data)
+          const cats: string[] = Array.from(new Set(data.map((p) => p.category)))
+          setCategories(cats)
+          setLoaded(true)
+          return
+        }
+      } catch {}
+    }
     fetch("/api/products")
       .then((r) => r.json())
       .then((data) => {
         const prods: Product[] = Array.isArray(data) ? data : []
+        sessionStorage.setItem("alpha-products", JSON.stringify(prods))
         setProducts(prods)
         const cats: string[] = Array.from(new Set(prods.map((p) => p.category)))
         setCategories(cats)
