@@ -17,10 +17,25 @@ export default function HomePage() {
   const dir = getDir(lang)
 
   useEffect(() => {
+    const cached = sessionStorage.getItem("alpha-products")
+    if (cached) {
+      try {
+        const data = JSON.parse(cached)
+        if (Array.isArray(data)) {
+          setAll(data)
+          setFeatured(data.filter((p) => p.featured))
+          const cats = Array.from(new Set(data.map((p) => p.category).filter(Boolean))) as string[]
+          setCategories(cats.slice(0, 6))
+          setLoaded(true)
+          return
+        }
+      } catch {}
+    }
     fetch("/api/products")
       .then((r) => r.json())
       .then((data) => {
         const products: Product[] = Array.isArray(data) ? data : []
+        sessionStorage.setItem("alpha-products", JSON.stringify(products))
         setAll(products)
         setFeatured(products.filter((p) => p.featured))
         const cats = Array.from(new Set(products.map((p) => p.category).filter(Boolean))) as string[]
