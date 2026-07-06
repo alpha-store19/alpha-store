@@ -208,20 +208,20 @@ export default function CheckoutPage() {
                 </div>
                 <div className="sm:col-span-2">
                   <label className={labelClass}>{t("checkout.deliveryType", lang)}</label>
-                  <div className="flex gap-4">
-                    <label className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer border transition-all flex-1 ${
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <label className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl cursor-pointer border transition-all flex-1 ${
                       deliveryType === "home" ? "border-cyber/40 bg-cyber/5 shadow-sm shadow-cyber/5" : "border-white/[0.06] hover:border-white/[0.12]"
                     }`}>
-                      <input type="radio" name="deliveryType" value="home" checked={deliveryType === "home"} onChange={() => setDeliveryType("home")} className="w-4 h-4 text-cyber focus:ring-cyber/30" />
+                      <input type="radio" name="deliveryType" value="home" checked={deliveryType === "home"} onChange={() => setDeliveryType("home")} className="w-4 h-4 text-cyber focus:ring-cyber/30 flex-shrink-0" />
                       <div>
                         <span className="text-sm text-gray-200 font-medium">{t("checkout.homeDelivery", lang)}</span>
                         <p className="text-[11px] text-gray-500 mt-0.5">{t("checkout.homeDelivery.desc", lang)}</p>
                       </div>
                     </label>
-                    <label className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer border transition-all flex-1 ${
+                    <label className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl cursor-pointer border transition-all flex-1 ${
                       deliveryType === "office" ? "border-cyber/40 bg-cyber/5 shadow-sm shadow-cyber/5" : "border-white/[0.06] hover:border-white/[0.12]"
                     }`}>
-                      <input type="radio" name="deliveryType" value="office" checked={deliveryType === "office"} onChange={() => setDeliveryType("office")} className="w-4 h-4 text-cyber focus:ring-cyber/30" />
+                      <input type="radio" name="deliveryType" value="office" checked={deliveryType === "office"} onChange={() => setDeliveryType("office")} className="w-4 h-4 text-cyber focus:ring-cyber/30 flex-shrink-0" />
                       <div>
                         <span className="text-sm text-gray-200 font-medium">{t("checkout.officeDelivery", lang)}</span>
                         <p className="text-[11px] text-gray-500 mt-0.5">{t("checkout.officeDelivery.desc", lang)}</p>
@@ -263,7 +263,7 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">{t("checkout.delivery", lang)}</span>
                   <span className={`font-medium ${form.province ? "text-white" : "text-gray-600"}`}>
-                    {hasFreeShippingItem ? "FREE" : form.province ? formatPrice(deliveryRate, lang) : "—"}
+                    {hasFreeShippingItem ? "FREE" : form.province ? formatPrice(deliveryRate, lang) : "â€”"}
                   </span>
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/[0.06]">
@@ -322,7 +322,7 @@ export default function CheckoutPage() {
                     <img src={item.image} alt="" className="w-14 h-14 object-cover rounded-xl flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-200 line-clamp-1">{item.name}</p>
-                      <p className="text-xs text-gray-500">Qty: {item.quantity} × {formatPrice(item.price, lang)}</p>
+                      <p className="text-xs text-gray-500">Qty: {item.quantity} Ã— {formatPrice(item.price, lang)}</p>
                     </div>
                     <p className="text-sm font-bold text-cyber">{formatPrice(item.price * item.quantity, lang)}</p>
                   </div>
