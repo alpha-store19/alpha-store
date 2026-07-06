@@ -7,6 +7,7 @@ import Header from "@/components/Header"
 import SocialButtons from "@/components/SocialButtons"
 import BackToTop from "@/components/BackToTop"
 import CartDialog from "@/components/CartDialog"
+import MobileBottomNav from "@/components/MobileBottomNav"
 import TrackingPixels from "@/components/TrackingPixels"
 
 export const dynamic = "force-dynamic"
@@ -31,10 +32,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CartProvider>
             <div className="min-h-screen flex flex-col">
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 pb-16 md:pb-0">{children}</main>
               <TrackingPixels />
+              <MobileBottomNav />
               <SocialButtons />
-              <CartDialog />
               <BackToTop />
               <footer className="relative glass border-t border-white/[0.04] py-12 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 to-transparent pointer-events-none" />
