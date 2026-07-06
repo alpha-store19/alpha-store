@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, Tajawal } from "next/font/google"
 import "./globals.css"
 import { CartProvider } from "@/components/CartContext"
@@ -12,11 +12,12 @@ import TrackingPixels from "@/components/TrackingPixels"
 
 export const dynamic = "force-dynamic"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
 const tajawal = Tajawal({
   subsets: ["arabic"],
   weight: ["400", "500", "700"],
   variable: "--font-tajawal",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -24,9 +25,20 @@ export const metadata: Metadata = {
   description: "Discover amazing products at Alpha Store. Quality items at unbeatable prices.",
 }
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${tajawal.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="font-sans">
         <LanguageProvider>
           <CartProvider>
