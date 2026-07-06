@@ -56,19 +56,19 @@ export default function CartPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
         <div className="lg:col-span-2 space-y-3">
           {items.map((item, i) => (
             <div
               key={item.productId}
-              className="glass rounded-2xl p-4 sm:p-5 flex items-center gap-4 glass-hover animate-slide-up"
+              className="glass rounded-xl sm:rounded-2xl p-3 sm:p-5 flex items-center gap-3 sm:gap-4 glass-hover animate-slide-up"
               style={{ animationDelay: `${i * 60}ms` }}
             >
               <Link href={`/products/${item.productId}`} className="flex-shrink-0">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-xl"
+                  className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-lg sm:rounded-xl"
                 />
               </Link>
               <div className="flex-1 min-w-0">
@@ -78,9 +78,29 @@ export default function CartPage() {
                 >
                   {item.name}
                 </Link>
-                <p className="text-cyber font-bold mt-1 text-sm">{formatPrice(item.price, lang)}</p>
+                <p className="text-cyber font-bold mt-0.5 sm:mt-1 text-xs sm:text-sm">{formatPrice(item.price, lang)}</p>
+                <div className="flex items-center gap-1.5 mt-2 sm:hidden">
+                  <button
+                    onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                    className="w-7 h-7 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white"
+                  >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M20 12H4" />
+                    </svg>
+                  </button>
+                  <span className="w-6 text-center font-semibold text-white text-sm tabular-nums">{item.quantity}</span>
+                  <button
+                    onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                    className="w-7 h-7 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white"
+                  >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </button>
+                  <span className="ml-auto text-xs font-bold text-cyber">{formatPrice(item.price * item.quantity, lang)}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="hidden sm:flex items-center gap-2">
                 <button
                   onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                   className="w-8 h-8 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
@@ -101,12 +121,12 @@ export default function CartPage() {
                   </svg>
                 </button>
               </div>
-              <div className="text-right min-w-[80px]">
+              <div className="hidden sm:block text-right min-w-[80px]">
                 <p className="font-bold text-cyber">{formatPrice(item.price * item.quantity, lang)}</p>
               </div>
               <button
                 onClick={() => removeItem(item.productId)}
-                className="text-gray-600 hover:text-red-400 transition-colors ml-1 p-1.5 rounded-full hover:bg-red-500/10"
+                className="text-gray-600 hover:text-red-400 transition-colors p-1.5 sm:ml-1 rounded-full hover:bg-red-500/10"
                 title="Remove"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
