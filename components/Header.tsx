@@ -27,10 +27,22 @@ export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    const cached = sessionStorage.getItem("alpha-products")
+    if (cached) {
+      try {
+        const data = JSON.parse(cached)
+        if (Array.isArray(data)) {
+          const cats = Array.from(new Set(data.map((p: Product) => p.category).filter(Boolean))) as string[]
+          setCategories(cats.sort())
+          return
+        }
+      } catch {}
+    }
     fetch("/api/products")
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) {
+          sessionStorage.setItem("alpha-products", JSON.stringify(data))
           const cats = Array.from(new Set(data.map((p: Product) => p.category).filter(Boolean))) as string[]
           setCategories(cats.sort())
         }
@@ -41,19 +53,39 @@ export default function Header() {
   useEffect(() => {
     if (searchQuery.length < 2) { setSearchResults([]); return }
     const t = setTimeout(() => {
-      fetch("/api/products")
-        .then((r) => r.json())
-        .then((data) => {
-          if (Array.isArray(data)) {
-            setSearchResults(
-              data.filter((p: Product) =>
-                p.name.toLowerCase().includes(searchQuery.toLowerCase())
-              ).slice(0, 6)
-            )
-          }
-        })
-        .catch(() => {})
-    }, 300)
+      const filterLocal = () => {
+        const cached = sessionStorage.getItem("alpha-products")
+        if (cached) {
+          try {
+            const data = JSON.parse(cached)
+            if (Array.isArray(data)) {
+              setSearchResults(
+                data.filter((p: Product) =>
+                  p.name.toLowerCase().includes(searchQuery.toLowerCase())
+                ).slice(0, 6)
+              )
+              return true
+            }
+          } catch {}
+        }
+        return false
+      }
+      if (!filterLocal()) {
+        fetch("/api/products")
+          .then((r) => r.json())
+          .then((data) => {
+            if (Array.isArray(data)) {
+              sessionStorage.setItem("alpha-products", JSON.stringify(data))
+              setSearchResults(
+                data.filter((p: Product) =>
+                  p.name.toLowerCase().includes(searchQuery.toLowerCase())
+                ).slice(0, 6)
+              )
+            }
+          })
+          .catch(() => {})
+      }
+    }, 200)
     return () => clearTimeout(t)
   }, [searchQuery])
 
