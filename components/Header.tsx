@@ -85,12 +85,12 @@ export default function Header() {
 
   return (
     <>
-    <header className="sticky top-4 z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4" dir={dir}>
-      <div className="glass rounded-2xl px-4 sm:px-6 py-3">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" className="text-xl font-bold tracking-[0.15em] uppercase flex-shrink-0">
+    <header className="sticky top-2 sm:top-4 z-50 max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 pt-2 sm:pt-4" dir={dir}>
+      <div className="glass rounded-xl sm:rounded-2xl px-3 sm:px-6 py-2 sm:py-3">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
+          <Link href="/" className="text-base sm:text-xl font-bold tracking-[0.15em] uppercase flex-shrink-0">
             <span className="text-cyber">ALPHA</span>
-            <span className="text-white/70"> STORE</span>
+            <span className="text-white/70 hidden xs:inline"> STORE</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
@@ -145,10 +145,10 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-1 sm:gap-3">
             <button
               onClick={() => setDrawerOpen(true)}
-              className="flex md:hidden btn-ghost p-2.5"
+              className="flex md:hidden btn-ghost p-2 touch-target"
               title="Menu"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,23 +208,76 @@ export default function Header() {
               )}
             </div>
 
+            <div className="sm:hidden">
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="btn-ghost p-2 touch-target"
+                title="Search"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+
             <LanguageSwitcher />
             <Link
               href="/cart"
-              className="relative flex items-center gap-2 glass glass-hover px-3 sm:px-4 py-2 rounded-full text-sm font-medium"
+              className="relative flex items-center gap-1 sm:gap-2 glass glass-hover px-2.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium touch-target"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
               </svg>
               <span className="hidden sm:inline">{t("nav.cart", lang)}</span>
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-cyber text-dark text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold animate-scale-in">
-                  {totalItems}
+                <span className="absolute -top-1.5 -right-1.5 bg-cyber text-dark text-[10px] w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center font-bold animate-scale-in">
+                  {totalItems > 9 ? "9+" : totalItems}
                 </span>
               )}
             </Link>
           </div>
         </div>
+        {searchOpen && (
+          <div className="sm:hidden mt-2 animate-slide-down" ref={searchRef}>
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                ref={inputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={`${t("nav.search", lang) || "Search..."}`}
+                className="w-full bg-white/[0.06] border border-white/[0.1] rounded-full px-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:border-cyber/30 focus:ring-1 focus:ring-cyber/20 outline-none transition-all"
+              />
+              <button
+                type="button"
+                onClick={() => { setSearchOpen(false); setSearchQuery(""); setSearchResults([]) }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              {searchResults.length > 0 && (
+                <div className="absolute top-full mt-2 left-0 right-0 glass rounded-2xl p-2 cyber-border animate-slide-down shadow-2xl overflow-hidden z-50">
+                  {searchResults.map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/products/${p.id}`}
+                      onClick={() => { setSearchOpen(false); setSearchQuery(""); setSearchResults([]) }}
+                      className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/[0.04] rounded-xl transition-all"
+                    >
+                      <img src={p.image} alt="" className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-medium text-gray-200 truncate">{p.name}</p>
+                        <p className="text-xs text-cyber">{p.price.toLocaleString()} DZD</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </form>
+          </div>
+        )}
       </div>
       </header>
       <SlideDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
