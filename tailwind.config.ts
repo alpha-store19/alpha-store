@@ -27,6 +27,7 @@ const config: Config = {
         "float": "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         "spin-slow": "spin 3s linear infinite",
+        "slide-up-nav": "slide-up-nav 0.3s ease-out",
       },
       keyframes: {
         shimmer: {
@@ -56,6 +57,10 @@ const config: Config = {
         "pulse-glow": {
           "0%, 100%": { boxShadow: "0 0 20px rgba(0, 240, 255, 0.1)" },
           "50%": { boxShadow: "0 0 30px rgba(0, 240, 255, 0.25)" },
+        },
+        "slide-up-nav": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
         },
       },
     },
