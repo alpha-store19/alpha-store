@@ -24,10 +24,23 @@ export default function SlideDrawer({ open, onClose }: SlideDrawerProps) {
 
   useEffect(() => {
     if (!open) return
+    const cached = sessionStorage.getItem("alpha-products")
+    if (cached) {
+      try {
+        const data = JSON.parse(cached)
+        if (Array.isArray(data)) {
+          setProducts(data.slice(0, 6))
+          const cats = Array.from(new Set(data.map((p: Product) => p.category).filter(Boolean))) as string[]
+          setCategories(cats.sort())
+          return
+        }
+      } catch {}
+    }
     fetch("/api/products")
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) {
+          sessionStorage.setItem("alpha-products", JSON.stringify(data))
           setProducts(data.slice(0, 6))
           const cats = Array.from(new Set(data.map((p: Product) => p.category).filter(Boolean))) as string[]
           setCategories(cats.sort())
