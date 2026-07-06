@@ -39,12 +39,12 @@ export default function ProductsPage() {
         <p className="text-gray-500 mt-2">{t("products.subtitle", lang)}</p>
       </div>
 
-      <div className="flex flex-wrap gap-3 mb-10">
+      <div className="mobile-scroll-x flex gap-2 mb-10 pb-2 px-1 -mx-4 sm:mx-0 sm:flex-wrap sm:pb-0 sm:px-0">
         {["All", ...categories].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`flex-shrink-0 px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               activeCategory === cat
                 ? "bg-cyber text-dark shadow-lg shadow-cyber/20"
                 : "glass glass-hover text-gray-400"
