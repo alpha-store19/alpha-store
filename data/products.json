@@ -1,26 +1,14 @@
 [
   {
-    "id": "demo-1",
-    "name": "Premium Wireless Headphones",
-    "description": "High-quality wireless headphones with noise cancellation and 30-hour battery life.",
-    "price": 8900,
-    "originalPrice": 12000,
-    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
-    "images": ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80", "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&q=80"],
-    "category": "Electronics",
-    "quantity": 25,
-    "featured": true,
-    "freeShipping": false,
-    "createdAt": "2025-01-01T00:00:00.000Z"
-  },
-  {
     "id": "demo-2",
     "name": "Classic Leather Watch",
     "description": "Elegant leather strap watch with stainless steel case and mineral glass.",
     "price": 5500,
     "originalPrice": null,
     "image": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=80",
-    "images": ["https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=80"],
+    "images": [
+      "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=80"
+    ],
     "category": "Accessories",
     "quantity": 15,
     "featured": true,
@@ -34,7 +22,9 @@
     "price": 12000,
     "originalPrice": 16000,
     "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
-    "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"],
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
+    ],
     "category": "Sports",
     "quantity": 30,
     "featured": true,
@@ -48,7 +38,9 @@
     "price": 6500,
     "originalPrice": null,
     "image": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&q=80",
-    "images": ["https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&q=80"],
+    "images": [
+      "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&q=80"
+    ],
     "category": "Electronics",
     "quantity": 20,
     "featured": false,
@@ -62,7 +54,9 @@
     "price": 4200,
     "originalPrice": 6500,
     "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80",
-    "images": ["https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80"],
+    "images": [
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80"
+    ],
     "category": "Accessories",
     "quantity": 40,
     "featured": false,
@@ -76,7 +70,9 @@
     "price": 3800,
     "originalPrice": null,
     "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80",
-    "images": ["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80"],
+    "images": [
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80"
+    ],
     "category": "Beauty",
     "quantity": 18,
     "featured": false,
