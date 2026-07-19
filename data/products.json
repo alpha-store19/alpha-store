@@ -19,7 +19,7 @@
     "category": "Pc portable",
     "quantity": 3,
     "featured": false,
-    "freeShipping": false,
+    "freeShipping": true,
     "id": "240ee305-df31-4ef9-8b0d-fee0bd486809"
   }
 ]
