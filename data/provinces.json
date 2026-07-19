@@ -1,468 +1,62 @@
 {
-    "provinces":  [
-                      {
-                          "id":  "16",
-                          "name":  "Alger",
-                          "nameAr":  "Ø§ÙØ¬Ø²Ø§Ø¦Ø±",
-                          "nameFr":  "Alger",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "1",
-                          "name":  "Adrar",
-                          "nameAr":  "Ø£Ø¯Ø±Ø§Ø±",
-                          "nameFr":  "Adrar",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "44",
-                          "name":  "AÃ¯n Defla",
-                          "nameAr":  "Ø¹ÙÙ Ø§ÙØ¯ÙÙÙ",
-                          "nameFr":  "AÃ¯n Defla",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "46",
-                          "name":  "AÃ¯n TÃ©mouchent",
-                          "nameAr":  "Ø¹ÙÙ ØªÙ\u0085ÙØ´ÙØª",
-                          "nameFr":  "AÃ¯n TÃ©mouchent",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "5",
-                          "name":  "Batna",
-                          "nameAr":  "Ø¨Ø§ØªÙØ©",
-                          "nameFr":  "Batna",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "7",
-                          "name":  "Biskra",
-                          "nameAr":  "Ø¨Ø³ÙØ±Ø©",
-                          "nameFr":  "Biskra",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "9",
-                          "name":  "Blida",
-                          "nameAr":  "Ø§ÙØ¨ÙÙØ¯Ø©",
-                          "nameFr":  "Blida",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "34",
-                          "name":  "Bordj Bou Arreridj",
-                          "nameAr":  "Ø¨Ø±Ø¬ Ø¨ÙØ¹Ø±ÙØ±ÙØ¬",
-                          "nameFr":  "Bordj Bou Arreridj",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "10",
-                          "name":  "Bouira",
-                          "nameAr":  "Ø§ÙØ¨ÙÙØ±Ø©",
-                          "nameFr":  "Bouira",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "35",
-                          "name":  "BoumerdÃ¨s",
-                          "nameAr":  "Ø¨ÙÙ\u0085Ø±Ø¯Ø§Ø³",
-                          "nameFr":  "BoumerdÃ¨s",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "8",
-                          "name":  "BÃ©char",
-                          "nameAr":  "Ø¨Ø´Ø§Ø±",
-                          "nameFr":  "BÃ©char",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "6",
-                          "name":  "BÃ©jaÃ¯a",
-                          "nameAr":  "Ø¨Ø¬Ø§ÙØ©",
-                          "nameFr":  "BÃ©jaÃ¯a",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "12",
-                          "name":  "TÃ©bessa",
-                          "nameAr":  "ØªØ¨Ø³Ø©",
-                          "nameFr":  "TÃ©bessa",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "14",
-                          "name":  "Tizi Ouzou",
-                          "nameAr":  "ØªÙØ²Ù ÙØ²Ù",
-                          "nameFr":  "Tizi Ouzou",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "15",
-                          "name":  "Tlemcen",
-                          "nameAr":  "ØªÙÙ\u0085Ø³Ø§Ù",
-                          "nameFr":  "Tlemcen",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "42",
-                          "name":  "Tiaret",
-                          "nameAr":  "ØªÙØ§Ø±Øª",
-                          "nameFr":  "Tiaret",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "38",
-                          "name":  "Tindouf",
-                          "nameAr":  "ØªÙØ¯ÙÙ",
-                          "nameFr":  "Tindouf",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "37",
-                          "name":  "Tissemsilt",
-                          "nameAr":  "ØªØ³Ù\u0085Ø³ÙÙØª",
-                          "nameFr":  "Tissemsilt",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "41",
-                          "name":  "Tizi-Ouzou",
-                          "nameAr":  "ØªÙØ²Ù ÙØ²Ù",
-                          "nameFr":  "Tizi-Ouzou",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "11",
-                          "name":  "Tamanrasset",
-                          "nameAr":  "ØªÙ\u0085ÙØ±Ø§Ø³Øª",
-                          "nameFr":  "Tamanrasset",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "13",
-                          "name":  "TÃ©bessa",
-                          "nameAr":  "ØªØ¨Ø³Ø©",
-                          "nameFr":  "TÃ©bessa",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "23",
-                          "name":  "Annaba",
-                          "nameAr":  "Ø¹ÙØ§Ø¨Ø©",
-                          "nameFr":  "Annaba",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "4",
-                          "name":  "Oum El Bouaghi",
-                          "nameAr":  "Ø£Ù\u0085 Ø§ÙØ¨ÙØ§ÙÙ",
-                          "nameFr":  "Oum El Bouaghi",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "29",
-                          "name":  "GhardaÃ¯a",
-                          "nameAr":  "ØºØ±Ø¯Ø§ÙØ©",
-                          "nameFr":  "GhardaÃ¯a",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "47",
-                          "name":  "Guelma",
-                          "nameAr":  "ÙØ§ÙÙ\u0085Ø©",
-                          "nameFr":  "Guelma",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "25",
-                          "name":  "Jijel",
-                          "nameAr":  "Ø¬ÙØ¬Ù",
-                          "nameFr":  "Jijel",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "18",
-                          "name":  "Djelfa",
-                          "nameAr":  "Ø§ÙØ¬ÙÙØ©",
-                          "nameFr":  "Djelfa",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "19",
-                          "name":  "SÃ©tif",
-                          "nameAr":  "Ø³Ø·ÙÙ",
-                          "nameFr":  "SÃ©tif",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "20",
-                          "name":  "SaÃ¯da",
-                          "nameAr":  "Ø³Ø¹ÙØ¯Ø©",
-                          "nameFr":  "SaÃ¯da",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "21",
-                          "name":  "Skikda",
-                          "nameAr":  "Ø³ÙÙÙØ¯Ø©",
-                          "nameFr":  "Skikda",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "22",
-                          "name":  "Sidi Bel AbbÃ¨s",
-                          "nameAr":  "Ø³ÙØ¯Ù Ø¨ÙØ¹Ø¨Ø§Ø³",
-                          "nameFr":  "Sidi Bel AbbÃ¨s",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "24",
-                          "name":  "Annaba",
-                          "nameAr":  "Ø¹ÙØ§Ø¨Ø©",
-                          "nameFr":  "Annaba",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "26",
-                          "name":  "MÃ©dÃ©a",
-                          "nameAr":  "Ø§ÙÙ\u0085Ø¯ÙØ©",
-                          "nameFr":  "MÃ©dÃ©a",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "27",
-                          "name":  "Mostaganem",
-                          "nameAr":  "Ù\u0085Ø³ØªØºØ§ÙÙ\u0085",
-                          "nameFr":  "Mostaganem",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "28",
-                          "name":  "Msila",
-                          "nameAr":  "Ø§ÙÙ\u0085Ø³ÙÙØ©",
-                          "nameFr":  "Msila",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "29",
-                          "name":  "Mascara",
-                          "nameAr":  "Ù\u0085Ø¹Ø³ÙØ±",
-                          "nameFr":  "Mascara",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "30",
-                          "name":  "Ouargla",
-                          "nameAr":  "ÙØ±ÙÙØ©",
-                          "nameFr":  "Ouargla",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "31",
-                          "name":  "Oran",
-                          "nameAr":  "ÙÙØ±Ø§Ù",
-                          "nameFr":  "Oran",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "32",
-                          "name":  "El Bayadh",
-                          "nameAr":  "Ø§ÙØ¨ÙØ¶",
-                          "nameFr":  "El Bayadh",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "33",
-                          "name":  "Illizi",
-                          "nameAr":  "Ø¥ÙÙØ²Ù",
-                          "nameFr":  "Illizi",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "34",
-                          "name":  "Bordj Bou Arreridj",
-                          "nameAr":  "Ø¨Ø±Ø¬ Ø¨ÙØ¹Ø±ÙØ±ÙØ¬",
-                          "nameFr":  "Bordj Bou Arreridj",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "35",
-                          "name":  "BoumerdÃ¨s",
-                          "nameAr":  "Ø¨ÙÙ\u0085Ø±Ø¯Ø§Ø³",
-                          "nameFr":  "BoumerdÃ¨s",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "36",
-                          "name":  "El Tarf",
-                          "nameAr":  "Ø§ÙØ·Ø§Ø±Ù",
-                          "nameFr":  "El Tarf",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "37",
-                          "name":  "Tindouf",
-                          "nameAr":  "ØªÙØ¯ÙÙ",
-                          "nameFr":  "Tindouf",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "38",
-                          "name":  "Tissemsilt",
-                          "nameAr":  "ØªØ³Ù\u0085Ø³ÙÙØª",
-                          "nameFr":  "Tissemsilt",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "39",
-                          "name":  "El Oued",
-                          "nameAr":  "Ø§ÙÙØ§Ø¯Ù",
-                          "nameFr":  "El Oued",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "40",
-                          "name":  "Khenchela",
-                          "nameAr":  "Ø®ÙØ´ÙØ©",
-                          "nameFr":  "Khenchela",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "41",
-                          "name":  "Souk Ahras",
-                          "nameAr":  "Ø³ÙÙ Ø£ÙØ±Ø§Ø³",
-                          "nameFr":  "Souk Ahras",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "42",
-                          "name":  "Tipaza",
-                          "nameAr":  "ØªÙØ¨Ø§Ø²Ø©",
-                          "nameFr":  "Tipaza",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "43",
-                          "name":  "Mila",
-                          "nameAr":  "Ù\u0085ÙÙØ©",
-                          "nameFr":  "Mila",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "44",
-                          "name":  "AÃ¯n Defla",
-                          "nameAr":  "Ø¹ÙÙ Ø§ÙØ¯ÙÙÙ",
-                          "nameFr":  "AÃ¯n Defla",
-                          "rateHome":  300,
-                          "rateOffice":  300
-                      },
-                      {
-                          "id":  "45",
-                          "name":  "Naama",
-                          "nameAr":  "Ø§ÙÙØ¹Ø§Ù\u0085Ø©",
-                          "nameFr":  "Naama",
-                          "rateHome":  700,
-                          "rateOffice":  700
-                      },
-                      {
-                          "id":  "46",
-                          "name":  "AÃ¯n TÃ©mouchent",
-                          "nameAr":  "Ø¹ÙÙ ØªÙ\u0085ÙØ´ÙØª",
-                          "nameFr":  "AÃ¯n TÃ©mouchent",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "47",
-                          "name":  "Guelma",
-                          "nameAr":  "ÙØ§ÙÙ\u0085Ø©",
-                          "nameFr":  "Guelma",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "48",
-                          "name":  "Relizane",
-                          "nameAr":  "ØºÙÙØ²Ø§Ù",
-                          "nameFr":  "Relizane",
-                          "rateHome":  500,
-                          "rateOffice":  500
-                      },
-                      {
-                          "id":  "49",
-                          "name":  "Timimoun",
-                          "nameAr":  "ØªÙÙ\u0085ÙÙ\u0085ÙÙ",
-                          "nameFr":  "Timimoun",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "50",
-                          "name":  "Bordj Badji Mokhtar",
-                          "nameAr":  "Ø¨Ø±Ø¬ Ø¨Ø§Ø¬Ù Ù\u0085Ø®ØªØ§Ø±",
-                          "nameFr":  "Bordj Badji Mokhtar",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      },
-                      {
-                          "id":  "51",
-                          "name":  "Beni Abbes",
-                          "nameAr":  "Ø¨ÙÙ Ø¹Ø¨Ø§Ø³",
-                          "nameFr":  "Beni AbbÃ¨s",
-                          "rateHome":  1000,
-                          "rateOffice":  1000
-                      }
-                  ]
+  "provinces": [
+    { "id": "1", "name": "Adrar", "nameAr": "أدرار", "nameFr": "Adrar", "rateHome": 1200, "rateOffice": 1000 },
+    { "id": "2", "name": "Chlef", "nameAr": "الشلف", "nameFr": "Chlef", "rateHome": 500, "rateOffice": 500 },
+    { "id": "3", "name": "Laghouat", "nameAr": "الأغواط", "nameFr": "Laghouat", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "4", "name": "Oum El Bouaghi", "nameAr": "أم البواقي", "nameFr": "Oum El Bouaghi", "rateHome": 700, "rateOffice": 700 },
+    { "id": "5", "name": "Batna", "nameAr": "باتنة", "nameFr": "Batna", "rateHome": 700, "rateOffice": 700 },
+    { "id": "6", "name": "Béjaïa", "nameAr": "بجاية", "nameFr": "Béjaïa", "rateHome": 500, "rateOffice": 500 },
+    { "id": "7", "name": "Biskra", "nameAr": "بسكرة", "nameFr": "Biskra", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "8", "name": "Béchar", "nameAr": "بشار", "nameFr": "Béchar", "rateHome": 1200, "rateOffice": 1000 },
+    { "id": "9", "name": "Blida", "nameAr": "البليدة", "nameFr": "Blida", "rateHome": 300, "rateOffice": 300 },
+    { "id": "10", "name": "Bouira", "nameAr": "البويرة", "nameFr": "Bouira", "rateHome": 300, "rateOffice": 300 },
+    { "id": "11", "name": "Tamanrasset", "nameAr": "تمنراست", "nameFr": "Tamanrasset", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "12", "name": "Tébessa", "nameAr": "تبسة", "nameFr": "Tébessa", "rateHome": 700, "rateOffice": 700 },
+    { "id": "13", "name": "Tlemcen", "nameAr": "تلمسان", "nameFr": "Tlemcen", "rateHome": 500, "rateOffice": 500 },
+    { "id": "14", "name": "Tiaret", "nameAr": "تيارت", "nameFr": "Tiaret", "rateHome": 700, "rateOffice": 700 },
+    { "id": "15", "name": "Tizi Ouzou", "nameAr": "تيزي وزو", "nameFr": "Tizi Ouzou", "rateHome": 300, "rateOffice": 300 },
+    { "id": "16", "name": "Alger", "nameAr": "الجزائر", "nameFr": "Alger", "rateHome": 300, "rateOffice": 300 },
+    { "id": "17", "name": "Djelfa", "nameAr": "الجلفة", "nameFr": "Djelfa", "rateHome": 700, "rateOffice": 700 },
+    { "id": "18", "name": "Jijel", "nameAr": "جيجل", "nameFr": "Jijel", "rateHome": 500, "rateOffice": 500 },
+    { "id": "19", "name": "Sétif", "nameAr": "سطيف", "nameFr": "Sétif", "rateHome": 700, "rateOffice": 700 },
+    { "id": "20", "name": "Saïda", "nameAr": "سعيدة", "nameFr": "Saïda", "rateHome": 700, "rateOffice": 700 },
+    { "id": "21", "name": "Skikda", "nameAr": "سكيكدة", "nameFr": "Skikda", "rateHome": 500, "rateOffice": 500 },
+    { "id": "22", "name": "Sidi Bel Abbès", "nameAr": "سيدي بلعباس", "nameFr": "Sidi Bel Abbès", "rateHome": 500, "rateOffice": 500 },
+    { "id": "23", "name": "Annaba", "nameAr": "عنابة", "nameFr": "Annaba", "rateHome": 500, "rateOffice": 500 },
+    { "id": "24", "name": "Guelma", "nameAr": "قالمة", "nameFr": "Guelma", "rateHome": 700, "rateOffice": 500 },
+    { "id": "25", "name": "Constantine", "nameAr": "قسنطينة", "nameFr": "Constantine", "rateHome": 500, "rateOffice": 500 },
+    { "id": "26", "name": "Médéa", "nameAr": "المدية", "nameFr": "Médéa", "rateHome": 300, "rateOffice": 300 },
+    { "id": "27", "name": "Mostaganem", "nameAr": "مستغانم", "nameFr": "Mostaganem", "rateHome": 500, "rateOffice": 500 },
+    { "id": "28", "name": "M'Sila", "nameAr": "المسيلة", "nameFr": "M'Sila", "rateHome": 700, "rateOffice": 700 },
+    { "id": "29", "name": "Mascara", "nameAr": "معسكر", "nameFr": "Mascara", "rateHome": 500, "rateOffice": 500 },
+    { "id": "30", "name": "Ouargla", "nameAr": "ورقلة", "nameFr": "Ouargla", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "31", "name": "Oran", "nameAr": "وهران", "nameFr": "Oran", "rateHome": 500, "rateOffice": 500 },
+    { "id": "32", "name": "El Bayadh", "nameAr": "البيض", "nameFr": "El Bayadh", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "33", "name": "Illizi", "nameAr": "إليزي", "nameFr": "Illizi", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "34", "name": "Bordj Bou Arreridj", "nameAr": "برج بوعريريج", "nameFr": "Bordj Bou Arreridj", "rateHome": 700, "rateOffice": 700 },
+    { "id": "35", "name": "Boumerdès", "nameAr": "بومرداس", "nameFr": "Boumerdès", "rateHome": 300, "rateOffice": 300 },
+    { "id": "36", "name": "El Tarf", "nameAr": "الطارف", "nameFr": "El Tarf", "rateHome": 500, "rateOffice": 500 },
+    { "id": "37", "name": "Tindouf", "nameAr": "تندوف", "nameFr": "Tindouf", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "38", "name": "Tissemsilt", "nameAr": "تسمسيلت", "nameFr": "Tissemsilt", "rateHome": 500, "rateOffice": 500 },
+    { "id": "39", "name": "El Oued", "nameAr": "الوادي", "nameFr": "El Oued", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "40", "name": "Khenchela", "nameAr": "خنشلة", "nameFr": "Khenchela", "rateHome": 700, "rateOffice": 700 },
+    { "id": "41", "name": "Souk Ahras", "nameAr": "سوق أهراس", "nameFr": "Souk Ahras", "rateHome": 700, "rateOffice": 700 },
+    { "id": "42", "name": "Tipaza", "nameAr": "تيبازة", "nameFr": "Tipaza", "rateHome": 300, "rateOffice": 300 },
+    { "id": "43", "name": "Mila", "nameAr": "ميلة", "nameFr": "Mila", "rateHome": 700, "rateOffice": 700 },
+    { "id": "44", "name": "Aïn Defla", "nameAr": "عين الدفلى", "nameFr": "Aïn Defla", "rateHome": 300, "rateOffice": 300 },
+    { "id": "45", "name": "Naâma", "nameAr": "النعامة", "nameFr": "Naâma", "rateHome": 700, "rateOffice": 700 },
+    { "id": "46", "name": "Aïn Témouchent", "nameAr": "عين تموشنت", "nameFr": "Aïn Témouchent", "rateHome": 500, "rateOffice": 500 },
+    { "id": "47", "name": "Ghardaïa", "nameAr": "غرداية", "nameFr": "Ghardaïa", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "48", "name": "Relizane", "nameAr": "غليزان", "nameFr": "Relizane", "rateHome": 500, "rateOffice": 500 },
+    { "id": "49", "name": "Timimoun", "nameAr": "تيميمون", "nameFr": "Timimoun", "rateHome": 1200, "rateOffice": 1000 },
+    { "id": "50", "name": "Bordj Badji Mokhtar", "nameAr": "برج باجي مختار", "nameFr": "Bordj Badji Mokhtar", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "51", "name": "Béni Abbès", "nameAr": "بني عباس", "nameFr": "Béni Abbès", "rateHome": 1200, "rateOffice": 1000 },
+    { "id": "52", "name": "Ouled Djellal", "nameAr": "أولاد جلال", "nameFr": "Ouled Djellal", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "53", "name": "In Salah", "nameAr": "عين صالح", "nameFr": "In Salah", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "54", "name": "In Guezzam", "nameAr": "عين قزام", "nameFr": "In Guezzam", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "55", "name": "Touggourt", "nameAr": "تقرت", "nameFr": "Touggourt", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "56", "name": "Djanet", "nameAr": "جانت", "nameFr": "Djanet", "rateHome": 1500, "rateOffice": 1200 },
+    { "id": "57", "name": "El M'Ghair", "nameAr": "المغير", "nameFr": "El M'Ghair", "rateHome": 1000, "rateOffice": 800 },
+    { "id": "58", "name": "El Meniaa", "nameAr": "المنيعة", "nameFr": "El Meniaa", "rateHome": 1000, "rateOffice": 800 }
+  ]
 }
