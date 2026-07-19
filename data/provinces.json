@@ -3,7 +3,7 @@
                       {
                           "id":  "16",
                           "name":  "Alger",
-                          "nameAr":  "الجزائر",
+                          "nameAr":  "Ø§ÙØ¬Ø²Ø§Ø¦Ø±",
                           "nameFr":  "Alger",
                           "rateHome":  300,
                           "rateOffice":  300
@@ -11,31 +11,31 @@
                       {
                           "id":  "1",
                           "name":  "Adrar",
-                          "nameAr":  "أدرار",
+                          "nameAr":  "Ø£Ø¯Ø±Ø§Ø±",
                           "nameFr":  "Adrar",
                           "rateHome":  1000,
                           "rateOffice":  1000
                       },
                       {
                           "id":  "44",
-                          "name":  "Aïn Defla",
-                          "nameAr":  "عين الدفلى",
-                          "nameFr":  "Aïn Defla",
+                          "name":  "AÃ¯n Defla",
+                          "nameAr":  "Ø¹ÙÙ Ø§ÙØ¯ÙÙÙ",
+                          "nameFr":  "AÃ¯n Defla",
                           "rateHome":  300,
                           "rateOffice":  300
                       },
                       {
                           "id":  "46",
-                          "name":  "Aïn Témouchent",
-                          "nameAr":  "عين تموشنت",
-                          "nameFr":  "Aïn Témouchent",
+                          "name":  "AÃ¯n TÃ©mouchent",
+                          "nameAr":  "Ø¹ÙÙ ØªÙ\u0085ÙØ´ÙØª",
+                          "nameFr":  "AÃ¯n TÃ©mouchent",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "5",
                           "name":  "Batna",
-                          "nameAr":  "باتنة",
+                          "nameAr":  "Ø¨Ø§ØªÙØ©",
                           "nameFr":  "Batna",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -43,7 +43,7 @@
                       {
                           "id":  "7",
                           "name":  "Biskra",
-                          "nameAr":  "بسكرة",
+                          "nameAr":  "Ø¨Ø³ÙØ±Ø©",
                           "nameFr":  "Biskra",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -51,7 +51,7 @@
                       {
                           "id":  "9",
                           "name":  "Blida",
-                          "nameAr":  "البليدة",
+                          "nameAr":  "Ø§ÙØ¨ÙÙØ¯Ø©",
                           "nameFr":  "Blida",
                           "rateHome":  300,
                           "rateOffice":  300
@@ -59,7 +59,7 @@
                       {
                           "id":  "34",
                           "name":  "Bordj Bou Arreridj",
-                          "nameAr":  "برج بوعريريج",
+                          "nameAr":  "Ø¨Ø±Ø¬ Ø¨ÙØ¹Ø±ÙØ±ÙØ¬",
                           "nameFr":  "Bordj Bou Arreridj",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -67,47 +67,47 @@
                       {
                           "id":  "10",
                           "name":  "Bouira",
-                          "nameAr":  "البويرة",
+                          "nameAr":  "Ø§ÙØ¨ÙÙØ±Ø©",
                           "nameFr":  "Bouira",
                           "rateHome":  300,
                           "rateOffice":  300
                       },
                       {
                           "id":  "35",
-                          "name":  "Boumerdès",
-                          "nameAr":  "بومرداس",
-                          "nameFr":  "Boumerdès",
+                          "name":  "BoumerdÃ¨s",
+                          "nameAr":  "Ø¨ÙÙ\u0085Ø±Ø¯Ø§Ø³",
+                          "nameFr":  "BoumerdÃ¨s",
                           "rateHome":  300,
                           "rateOffice":  300
                       },
                       {
                           "id":  "8",
-                          "name":  "Béchar",
-                          "nameAr":  "بشار",
-                          "nameFr":  "Béchar",
+                          "name":  "BÃ©char",
+                          "nameAr":  "Ø¨Ø´Ø§Ø±",
+                          "nameFr":  "BÃ©char",
                           "rateHome":  1000,
                           "rateOffice":  1000
                       },
                       {
                           "id":  "6",
-                          "name":  "Béjaïa",
-                          "nameAr":  "بجاية",
-                          "nameFr":  "Béjaïa",
+                          "name":  "BÃ©jaÃ¯a",
+                          "nameAr":  "Ø¨Ø¬Ø§ÙØ©",
+                          "nameFr":  "BÃ©jaÃ¯a",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "12",
-                          "name":  "Tébessa",
-                          "nameAr":  "تبسة",
-                          "nameFr":  "Tébessa",
+                          "name":  "TÃ©bessa",
+                          "nameAr":  "ØªØ¨Ø³Ø©",
+                          "nameFr":  "TÃ©bessa",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "14",
                           "name":  "Tizi Ouzou",
-                          "nameAr":  "تيزي وزو",
+                          "nameAr":  "ØªÙØ²Ù ÙØ²Ù",
                           "nameFr":  "Tizi Ouzou",
                           "rateHome":  300,
                           "rateOffice":  300
@@ -115,7 +115,7 @@
                       {
                           "id":  "15",
                           "name":  "Tlemcen",
-                          "nameAr":  "تلمسان",
+                          "nameAr":  "ØªÙÙ\u0085Ø³Ø§Ù",
                           "nameFr":  "Tlemcen",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -123,7 +123,7 @@
                       {
                           "id":  "42",
                           "name":  "Tiaret",
-                          "nameAr":  "تيارت",
+                          "nameAr":  "ØªÙØ§Ø±Øª",
                           "nameFr":  "Tiaret",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -131,7 +131,7 @@
                       {
                           "id":  "38",
                           "name":  "Tindouf",
-                          "nameAr":  "تندوف",
+                          "nameAr":  "ØªÙØ¯ÙÙ",
                           "nameFr":  "Tindouf",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -139,7 +139,7 @@
                       {
                           "id":  "37",
                           "name":  "Tissemsilt",
-                          "nameAr":  "تسمسيلت",
+                          "nameAr":  "ØªØ³Ù\u0085Ø³ÙÙØª",
                           "nameFr":  "Tissemsilt",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -147,7 +147,7 @@
                       {
                           "id":  "41",
                           "name":  "Tizi-Ouzou",
-                          "nameAr":  "تيزي وزو",
+                          "nameAr":  "ØªÙØ²Ù ÙØ²Ù",
                           "nameFr":  "Tizi-Ouzou",
                           "rateHome":  300,
                           "rateOffice":  300
@@ -155,23 +155,23 @@
                       {
                           "id":  "11",
                           "name":  "Tamanrasset",
-                          "nameAr":  "تمنراست",
+                          "nameAr":  "ØªÙ\u0085ÙØ±Ø§Ø³Øª",
                           "nameFr":  "Tamanrasset",
                           "rateHome":  1000,
                           "rateOffice":  1000
                       },
                       {
                           "id":  "13",
-                          "name":  "Tébessa",
-                          "nameAr":  "تبسة",
-                          "nameFr":  "Tébessa",
+                          "name":  "TÃ©bessa",
+                          "nameAr":  "ØªØ¨Ø³Ø©",
+                          "nameFr":  "TÃ©bessa",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "23",
                           "name":  "Annaba",
-                          "nameAr":  "عنابة",
+                          "nameAr":  "Ø¹ÙØ§Ø¨Ø©",
                           "nameFr":  "Annaba",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -179,23 +179,23 @@
                       {
                           "id":  "4",
                           "name":  "Oum El Bouaghi",
-                          "nameAr":  "أم البواقي",
+                          "nameAr":  "Ø£Ù\u0085 Ø§ÙØ¨ÙØ§ÙÙ",
                           "nameFr":  "Oum El Bouaghi",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "29",
-                          "name":  "Ghardaïa",
-                          "nameAr":  "غرداية",
-                          "nameFr":  "Ghardaïa",
+                          "name":  "GhardaÃ¯a",
+                          "nameAr":  "ØºØ±Ø¯Ø§ÙØ©",
+                          "nameFr":  "GhardaÃ¯a",
                           "rateHome":  1000,
                           "rateOffice":  1000
                       },
                       {
                           "id":  "47",
                           "name":  "Guelma",
-                          "nameAr":  "قالمة",
+                          "nameAr":  "ÙØ§ÙÙ\u0085Ø©",
                           "nameFr":  "Guelma",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -203,7 +203,7 @@
                       {
                           "id":  "25",
                           "name":  "Jijel",
-                          "nameAr":  "جيجل",
+                          "nameAr":  "Ø¬ÙØ¬Ù",
                           "nameFr":  "Jijel",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -211,63 +211,63 @@
                       {
                           "id":  "18",
                           "name":  "Djelfa",
-                          "nameAr":  "الجلفة",
+                          "nameAr":  "Ø§ÙØ¬ÙÙØ©",
                           "nameFr":  "Djelfa",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "19",
-                          "name":  "Sétif",
-                          "nameAr":  "سطيف",
-                          "nameFr":  "Sétif",
+                          "name":  "SÃ©tif",
+                          "nameAr":  "Ø³Ø·ÙÙ",
+                          "nameFr":  "SÃ©tif",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "20",
-                          "name":  "Saïda",
-                          "nameAr":  "سعيدة",
-                          "nameFr":  "Saïda",
+                          "name":  "SaÃ¯da",
+                          "nameAr":  "Ø³Ø¹ÙØ¯Ø©",
+                          "nameFr":  "SaÃ¯da",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "21",
                           "name":  "Skikda",
-                          "nameAr":  "سكيكدة",
+                          "nameAr":  "Ø³ÙÙÙØ¯Ø©",
                           "nameFr":  "Skikda",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "22",
-                          "name":  "Sidi Bel Abbès",
-                          "nameAr":  "سيدي بلعباس",
-                          "nameFr":  "Sidi Bel Abbès",
+                          "name":  "Sidi Bel AbbÃ¨s",
+                          "nameAr":  "Ø³ÙØ¯Ù Ø¨ÙØ¹Ø¨Ø§Ø³",
+                          "nameFr":  "Sidi Bel AbbÃ¨s",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "24",
                           "name":  "Annaba",
-                          "nameAr":  "عنابة",
+                          "nameAr":  "Ø¹ÙØ§Ø¨Ø©",
                           "nameFr":  "Annaba",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "26",
-                          "name":  "Médéa",
-                          "nameAr":  "المدية",
-                          "nameFr":  "Médéa",
+                          "name":  "MÃ©dÃ©a",
+                          "nameAr":  "Ø§ÙÙ\u0085Ø¯ÙØ©",
+                          "nameFr":  "MÃ©dÃ©a",
                           "rateHome":  300,
                           "rateOffice":  300
                       },
                       {
                           "id":  "27",
                           "name":  "Mostaganem",
-                          "nameAr":  "مستغانم",
+                          "nameAr":  "Ù\u0085Ø³ØªØºØ§ÙÙ\u0085",
                           "nameFr":  "Mostaganem",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -275,7 +275,7 @@
                       {
                           "id":  "28",
                           "name":  "Msila",
-                          "nameAr":  "المسيلة",
+                          "nameAr":  "Ø§ÙÙ\u0085Ø³ÙÙØ©",
                           "nameFr":  "Msila",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -283,7 +283,7 @@
                       {
                           "id":  "29",
                           "name":  "Mascara",
-                          "nameAr":  "معسكر",
+                          "nameAr":  "Ù\u0085Ø¹Ø³ÙØ±",
                           "nameFr":  "Mascara",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -291,7 +291,7 @@
                       {
                           "id":  "30",
                           "name":  "Ouargla",
-                          "nameAr":  "ورقلة",
+                          "nameAr":  "ÙØ±ÙÙØ©",
                           "nameFr":  "Ouargla",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -299,7 +299,7 @@
                       {
                           "id":  "31",
                           "name":  "Oran",
-                          "nameAr":  "وهران",
+                          "nameAr":  "ÙÙØ±Ø§Ù",
                           "nameFr":  "Oran",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -307,7 +307,7 @@
                       {
                           "id":  "32",
                           "name":  "El Bayadh",
-                          "nameAr":  "البيض",
+                          "nameAr":  "Ø§ÙØ¨ÙØ¶",
                           "nameFr":  "El Bayadh",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -315,7 +315,7 @@
                       {
                           "id":  "33",
                           "name":  "Illizi",
-                          "nameAr":  "إليزي",
+                          "nameAr":  "Ø¥ÙÙØ²Ù",
                           "nameFr":  "Illizi",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -323,23 +323,23 @@
                       {
                           "id":  "34",
                           "name":  "Bordj Bou Arreridj",
-                          "nameAr":  "برج بوعريريج",
+                          "nameAr":  "Ø¨Ø±Ø¬ Ø¨ÙØ¹Ø±ÙØ±ÙØ¬",
                           "nameFr":  "Bordj Bou Arreridj",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "35",
-                          "name":  "Boumerdès",
-                          "nameAr":  "بومرداس",
-                          "nameFr":  "Boumerdès",
+                          "name":  "BoumerdÃ¨s",
+                          "nameAr":  "Ø¨ÙÙ\u0085Ø±Ø¯Ø§Ø³",
+                          "nameFr":  "BoumerdÃ¨s",
                           "rateHome":  300,
                           "rateOffice":  300
                       },
                       {
                           "id":  "36",
                           "name":  "El Tarf",
-                          "nameAr":  "الطارف",
+                          "nameAr":  "Ø§ÙØ·Ø§Ø±Ù",
                           "nameFr":  "El Tarf",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -347,7 +347,7 @@
                       {
                           "id":  "37",
                           "name":  "Tindouf",
-                          "nameAr":  "تندوف",
+                          "nameAr":  "ØªÙØ¯ÙÙ",
                           "nameFr":  "Tindouf",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -355,7 +355,7 @@
                       {
                           "id":  "38",
                           "name":  "Tissemsilt",
-                          "nameAr":  "تسمسيلت",
+                          "nameAr":  "ØªØ³Ù\u0085Ø³ÙÙØª",
                           "nameFr":  "Tissemsilt",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -363,7 +363,7 @@
                       {
                           "id":  "39",
                           "name":  "El Oued",
-                          "nameAr":  "الوادي",
+                          "nameAr":  "Ø§ÙÙØ§Ø¯Ù",
                           "nameFr":  "El Oued",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -371,7 +371,7 @@
                       {
                           "id":  "40",
                           "name":  "Khenchela",
-                          "nameAr":  "خنشلة",
+                          "nameAr":  "Ø®ÙØ´ÙØ©",
                           "nameFr":  "Khenchela",
                           "rateHome":  700,
                           "rateOffice":  700
@@ -379,7 +379,7 @@
                       {
                           "id":  "41",
                           "name":  "Souk Ahras",
-                          "nameAr":  "سوق أهراس",
+                          "nameAr":  "Ø³ÙÙ Ø£ÙØ±Ø§Ø³",
                           "nameFr":  "Souk Ahras",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -387,7 +387,7 @@
                       {
                           "id":  "42",
                           "name":  "Tipaza",
-                          "nameAr":  "تيبازة",
+                          "nameAr":  "ØªÙØ¨Ø§Ø²Ø©",
                           "nameFr":  "Tipaza",
                           "rateHome":  300,
                           "rateOffice":  300
@@ -395,39 +395,39 @@
                       {
                           "id":  "43",
                           "name":  "Mila",
-                          "nameAr":  "ميلة",
+                          "nameAr":  "Ù\u0085ÙÙØ©",
                           "nameFr":  "Mila",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "44",
-                          "name":  "Aïn Defla",
-                          "nameAr":  "عين الدفلى",
-                          "nameFr":  "Aïn Defla",
+                          "name":  "AÃ¯n Defla",
+                          "nameAr":  "Ø¹ÙÙ Ø§ÙØ¯ÙÙÙ",
+                          "nameFr":  "AÃ¯n Defla",
                           "rateHome":  300,
                           "rateOffice":  300
                       },
                       {
                           "id":  "45",
                           "name":  "Naama",
-                          "nameAr":  "النعامة",
+                          "nameAr":  "Ø§ÙÙØ¹Ø§Ù\u0085Ø©",
                           "nameFr":  "Naama",
                           "rateHome":  700,
                           "rateOffice":  700
                       },
                       {
                           "id":  "46",
-                          "name":  "Aïn Témouchent",
-                          "nameAr":  "عين تموشنت",
-                          "nameFr":  "Aïn Témouchent",
+                          "name":  "AÃ¯n TÃ©mouchent",
+                          "nameAr":  "Ø¹ÙÙ ØªÙ\u0085ÙØ´ÙØª",
+                          "nameFr":  "AÃ¯n TÃ©mouchent",
                           "rateHome":  500,
                           "rateOffice":  500
                       },
                       {
                           "id":  "47",
                           "name":  "Guelma",
-                          "nameAr":  "قالمة",
+                          "nameAr":  "ÙØ§ÙÙ\u0085Ø©",
                           "nameFr":  "Guelma",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -435,7 +435,7 @@
                       {
                           "id":  "48",
                           "name":  "Relizane",
-                          "nameAr":  "غليزان",
+                          "nameAr":  "ØºÙÙØ²Ø§Ù",
                           "nameFr":  "Relizane",
                           "rateHome":  500,
                           "rateOffice":  500
@@ -443,7 +443,7 @@
                       {
                           "id":  "49",
                           "name":  "Timimoun",
-                          "nameAr":  "تيميمون",
+                          "nameAr":  "ØªÙÙ\u0085ÙÙ\u0085ÙÙ",
                           "nameFr":  "Timimoun",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -451,7 +451,7 @@
                       {
                           "id":  "50",
                           "name":  "Bordj Badji Mokhtar",
-                          "nameAr":  "برج باجي مختار",
+                          "nameAr":  "Ø¨Ø±Ø¬ Ø¨Ø§Ø¬Ù Ù\u0085Ø®ØªØ§Ø±",
                           "nameFr":  "Bordj Badji Mokhtar",
                           "rateHome":  1000,
                           "rateOffice":  1000
@@ -459,8 +459,8 @@
                       {
                           "id":  "51",
                           "name":  "Beni Abbes",
-                          "nameAr":  "بني عباس",
-                          "nameFr":  "Beni Abbès",
+                          "nameAr":  "Ø¨ÙÙ Ø¹Ø¨Ø§Ø³",
+                          "nameFr":  "Beni AbbÃ¨s",
                           "rateHome":  1000,
                           "rateOffice":  1000
                       }
