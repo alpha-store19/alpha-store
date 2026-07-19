@@ -1,5 +1,16 @@
 [
   {
+    "name": "uoçh",
+    "description": "kjui",
+    "price": 0,
+    "image": "",
+    "category": "General",
+    "quantity": 999,
+    "featured": false,
+    "freeShipping": false,
+    "id": "50a0bbaa-0bfc-46b7-98a1-8419f00c7762"
+  },
+  {
     "name": "Wireless Mouse",
     "description": "Test product",
     "price": 2500,
