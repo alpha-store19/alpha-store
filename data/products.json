@@ -1,14 +1,1 @@
-[
-  {
-    "name": "Test Product",
-    "description": "Test",
-    "price": 5000,
-    "image": "",
-    "category": "Electronics",
-    "quantity": 10,
-    "featured": false,
-    "freeShipping": false,
-    "id": "10dd5901-8927-4842-ad17-86b2c6a2c820",
-    "createdAt": "2026-07-19T23:27:39.790Z"
-  }
-]
+[]
